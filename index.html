@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nashi Argan | Pracownia B8</title>
+    <!-- Optymalizacja pod kątem wyszukiwarek -->
+    <meta name="description" content="Autoryzowany salon partnerski Nashi Argan. Pracownia B8, ul. Bernardyńska 8, Rzeszów. Zarezerwuj luksusowe kosmetyki do włosów.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Nawigacja główna nawiązująca do głównej strony -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>PRACOWNIA B8</h1>
+            <span>FRYZJERSTWO</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">O NAS</a></li>
+            <li><a href="#">USŁUGI</a></li>
+            <li><a href="#">ZESPÓŁ</a></li>
+            <li><a href="#" class="active">NASHI</a></li>
+            <li><a href="#">GALERIA</a></li>
+            <li><a href="#">KONTAKT</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <!-- Header Hero z efektem Premium -->
+    <header class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h2>Ekskluzywna Pielęgnacja Nashi</h2>
+            <p>Włoska linia luksusowych kosmetyków na bazie organicznego oleju arganowego.<br>Dostępna wyłącznie w wybranych salonach, teraz również w Pracowni B8.</p>
+            <a href="#katalog" class="btn-primary">Odkryj kolekcję Nashi</a>
+        </div>
+    </header>
+
+    <!-- Sekcja Katalogu Produktów -->
+    <section id="katalog" class="catalog-section">
+        <div class="section-header">
+            <h3>Katalog Produktów</h3>
+            <p>Wybierz ulubione kosmetyki, zarezerwuj online i odbierz podczas najbliższej wizyty.</p>
+        </div>
+
+        <!-- Filtry kategorii -->
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">Wszystkie</button>
+            <button class="filter-btn" data-filter="szampony">Szampony i Maski</button>
+            <button class="filter-btn" data-filter="olejki">Olejki i Stylizacja</button>
+            <button class="filter-btn" data-filter="cialo">Pielęgnacja Ciała</button>
+        </div>
+
+        <!-- Siatka Produktów (Generowana z JS) -->
+        <div class="product-grid" id="product-grid">
+            <!-- Tutaj JS wstrzykuje karty produktów -->
+        </div>
+    </section>
+
+    <!-- Modal Formularza Rezerwacji -->
+    <div class="modal-overlay" id="reservation-modal">
+        <div class="modal">
+            <button class="close-modal" id="close-modal">&times;</button>
+            <div class="modal-header">
+                <h4>Zarezerwuj Produkt</h4>
+                <p id="modal-product-name">Nashi Argan Oil</p>
+            </div>
+            <!-- Używamy darmowego Web3Forms do wysyłki maili bez backendu -->
+            <form class="reservation-form" action="https://api.web3forms.com/submit" method="POST">
+                <!-- ZMIEŃ PONIŻSZY KLUCZ NA SWÓJ Z WEB3FORMS.COM -->
+                <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                <input type="hidden" name="zarezerwowany_produkt" id="hidden-product-name" value="">
+                <!-- Opcjonalne przekierowanie po sukcesie -->
+                <input type="hidden" name="redirect" value="https://web3forms.com/success">
+                
+                <div class="input-group">
+                    <label for="name">Imię i Nazwisko</label>
+                    <input type="text" id="name" name="name" required placeholder="np. Anna Kowalska">
+                </div>
+                <div class="input-group">
+                    <label for="phone">Numer telefonu</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="np. 123 456 789">
+                </div>
+                <div class="input-group">
+                    <label for="date">Kiedy planujesz odbiór?</label>
+                    <input type="text" id="date" name="date" required placeholder="np. podczas wizyty 15.10">
+                </div>
+                <button type="submit" class="btn-submit">Wyślij Rezerwację</button>
+                <p class="modal-note">Rezerwacja jest darmowa. Płatność następuje przy odbiorze w salonie Pracownia B8.</p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 Pracownia B8. Autoryzowany Salon Nashi Argan.</p>
+            <p>ul. Bernardyńska 8, Rzeszów</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
