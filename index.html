@@ -106,7 +106,7 @@
         .logo { display: flex; align-items: center; text-decoration: none; cursor: pointer; }
         .logo .bebas-text { font-size: 2.2rem; color: #fff; line-height: 1; margin-top: 4px; }
         .logo span.separator { font-weight: 300; font-size: 1.5rem; color: #fff; margin: 0 12px; }
-        .logo img { height: 46px; object-fit: contain; }
+        .logo img { height: 58px; object-fit: contain; }
         
         .nav-links { display: flex; align-items: center; }
         .nav-links a { color: var(--text-main); text-decoration: none; margin-left: 30px; font-size: 0.95rem; transition: color 0.3s ease; cursor: pointer; }
@@ -132,7 +132,7 @@
         }
 
         /* ================= HERO ================= */
-        .hero { height: 100vh; display: flex; align-items: center; position: relative; padding-top: 80px; }
+        .hero { height: 100vh; height: 100dvh; display: flex; align-items: center; position: relative; padding-top: 80px; box-sizing: border-box; }
         .hero-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('hero-bg.jpg'); background-size: cover; background-position: center;
@@ -286,7 +286,7 @@
         .preloader-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1; }
         
         .preloader-content { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: -50px; }
-        .preloader-logo { height: 80px; object-fit: contain; margin-bottom: 5px; }
+        .preloader-logo { height: 120px; object-fit: contain; margin-bottom: 5px; }
         .preloader-line { width: 60px; height: 2px; background: var(--accent-gold); margin: 5px 0 10px; border-radius: 2px; }
         .preloader-text { font-size: 3.5rem; color: #fff; letter-spacing: 2px; line-height: 1; margin: 0; }
         
@@ -296,7 +296,7 @@
         .loader-bar { height: 100%; width: 0%; background: var(--accent-gold); border-radius: 2px; }
 
         @media (max-width: 600px) {
-            .preloader-logo { height: 60px; }
+            .preloader-logo { height: 95px; }
             .preloader-text { font-size: 2.8rem; }
         }
     </style>
@@ -359,9 +359,9 @@
         <div class="hero-bg"></div>
         <div class="container">
             <div class="hero-content fade-up">
-                <p style="color: var(--accent-gold); font-size: 1.2rem; font-weight: 600; margin-bottom: 15px; letter-spacing: 2px;">SALON PARTNERSKI NASHI ARGAN</p>
-                <h1>Ekskluzywna pielęgnacja<br>stworzona dla <span class="highlight">Twoich włosów</span>.</h1>
-                <p style="font-size: 1.2rem; max-width: 600px; margin-top: 20px;">Odkryj włoską markę premium stworzoną z poszanowaniem natury. Poczuj natychmiastowe nawilżenie, regenerację i luksus organicznego olejku arganowego.</p>
+                <p style="color: var(--accent-gold); font-size: 1.2rem; font-weight: 600; margin-bottom: 15px; letter-spacing: 2px;">SALON PARTNERSKI NASHI</p>
+                <h1>Ekskluzywna<br>pielęgnacja<br>stworzona dla<br><span class="highlight">Twoich włosów.</span></h1>
+                <p style="font-size: 1.2rem; max-width: 600px; margin-top: 20px;">Odkryj włoską markę premium stworzoną z poszanowaniem natury.</p>
                 
                 <div class="hero-buttons">
                     <a href="https://booksy.com/pl-pl/268448_fryzjerstwo-pracowniab8_fryzjer_10729_rzeszow" target="_blank" class="btn btn-primary">Umów wizytę w salonie</a>
