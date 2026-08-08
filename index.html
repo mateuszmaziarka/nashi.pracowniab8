@@ -104,10 +104,18 @@
         }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
         .logo { display: flex; align-items: center; text-decoration: none; cursor: pointer; }
-        /* Równomiernie pomniejszone elementy logo */
-        .logo .bebas-text { font-size: 1.8rem; color: #fff; line-height: 1; margin-top: 4px; }
-        .logo span.separator { font-weight: 300; font-size: 1.2rem; color: #fff; margin: 0 10px; }
-        .logo img { height: 46px; object-fit: contain; }
+        
+        /* Rozmiar PC (Przywrócony duży) */
+        .logo .bebas-text { font-size: 2.2rem; color: #fff; line-height: 1; margin-top: 4px; }
+        .logo span.separator { font-weight: 300; font-size: 1.5rem; color: #fff; margin: 0 12px; }
+        .logo img { height: 58px; object-fit: contain; }
+        
+        /* Rozmiar TELEFON (Idealnie pośrodku - krakowski targ) */
+        @media (max-width: 768px) {
+            .logo .bebas-text { font-size: 2.0rem; }
+            .logo span.separator { font-size: 1.35rem; margin: 0 10px; }
+            .logo img { height: 52px; }
+        }
         
         .nav-links { display: flex; align-items: center; }
         .nav-links a { color: var(--text-main); text-decoration: none; margin-left: 30px; font-size: 0.95rem; transition: color 0.3s ease; cursor: pointer; }
