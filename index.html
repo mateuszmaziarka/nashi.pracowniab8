@@ -176,9 +176,9 @@
         }
         
         .treatment-card { padding: 30px; } 
-        /* Nowa sztywna ramka z wyśrodkowaniem dla ZABIEGÓW */
-        .treatment-img-frame { width: 100%; height: 280px; border-radius: 16px; margin-bottom: 20px; background: rgba(255,255,255,0.02); overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        .treatment-img-frame img { width: 100%; height: auto; display: block; }
+        /* Inteligentna ramka dla ZABIEGÓW (bez pustych przestrzeni, auto-kadrowanie) */
+        .treatment-img-frame { width: 100%; height: 280px; border-radius: 16px; margin-bottom: 20px; background: rgba(255,255,255,0.02); overflow: hidden; }
+        .treatment-img-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
         .treatment-header { margin-bottom: 15px; }
         .treatment-title { font-size: 1.4rem; color: #fff; margin-bottom: 5px; }
         
@@ -197,11 +197,11 @@
         .treatment-desc { flex-grow: 1; font-size: 0.95rem; margin-bottom: 25px; }
         .treatment-btn { width: 100%; text-align: center; }
 
-        /* Nowa sztywna ramka dla LINII PRODUKTÓW */
+        /* Inteligentna ramka dla LINII PRODUKTÓW (bez ciemnego filtru) */
         .product-line-card { cursor: pointer; position: relative; overflow: hidden; border-radius: 24px; }
-        .product-line-frame { width: 100%; height: 350px; background: rgba(255,255,255,0.02); overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        .product-line-frame img { width: 100%; height: auto; opacity: 0.6; transition: opacity 0.3s ease; display: block; }
-        .product-line-card:hover .product-line-frame img { opacity: 0.8; }
+        .product-line-frame { width: 100%; height: 350px; background: rgba(255,255,255,0.02); overflow: hidden; }
+        .product-line-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0.8; display: block; }
+        /* Usunięto ściemnianie zdjęcia na hover - zostaje sam ruch i podświetlenie ramki karty */
         .product-line-info {
             position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px;
             background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
@@ -243,9 +243,9 @@
         }
         
         .product-item { display: flex; gap: 25px; margin-bottom: 40px; align-items: flex-start; }
-        /* Sztywna ramka z wyśrodkowaniem w oknie */
-        .product-item-frame { width: 140px; height: 180px; flex-shrink: 0; border-radius: 12px; background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        .product-item-frame img { width: 100%; height: auto; display: block; }
+        /* Inteligentna ramka dla produktów w oknie */
+        .product-item-frame { width: 140px; height: 180px; flex-shrink: 0; border-radius: 12px; background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); overflow: hidden; }
+        .product-item-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
         .product-item-content { flex-grow: 1; }
         .product-item-title { font-size: 1.4rem; color: #fff; margin-bottom: 8px; }
         
