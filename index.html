@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nashi Argan - Pracownia B8 | Ekskluzywna Pielęgnacja Włosów</title>
-    <!-- Czcionki: Outfit dla całości oraz Bebas Neue wyłącznie dla nazwy salonu -->
+    <!-- Czcionki -->
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
@@ -16,7 +16,6 @@
             --text-main: #f0e9e1;
             --text-muted: #a39c95;
             --accent-gold: #c39a6b;
-            --accent-glow: rgba(195, 154, 107, 0.4);
         }
 
         * {
@@ -26,6 +25,10 @@
             font-family: 'Outfit', sans-serif;
         }
 
+        /* Ukrycie standardowego suwaka na czas ładowania gładkiego scrolla */
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
@@ -34,25 +37,15 @@
             position: relative;
         }
 
-        /* Czcionka Bebas Neue dla nazwy salonu */
-        .bebas-text {
-            font-family: 'Bebas Neue', sans-serif;
-            letter-spacing: 1.5px;
-        }
+        .bebas-text { font-family: 'Bebas Neue', sans-serif; letter-spacing: 1.5px; }
 
         /* Płynne, ruszające się gradienty w tle */
         .ambient-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -1;
-            overflow: hidden;
-            background: #050505;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1; overflow: hidden; background: #050505;
         }
         .blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.5;
+            position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.5;
             animation: float 20s infinite ease-in-out alternate;
         }
         .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(195,154,107,0.15) 0%, rgba(0,0,0,0) 70%); }
@@ -64,322 +57,226 @@
             100% { transform: translate(5%, 10%) scale(1.1); }
         }
 
-        /* ================= TYPOGRAFIA I WSPÓLNE KLASY ================= */
+        /* ================= TYPOGRAFIA ================= */
         h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
         h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1; margin-bottom: 20px; font-weight: 800;}
         h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 40px; text-align: center; }
         p { color: var(--text-muted); font-weight: 300; }
         
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
         .section-padding { padding: 100px 0; }
-        
         .highlight { color: var(--accent-gold); }
 
-        /* ================= EFEKTY SZKŁA (GLASSMORPHISM) ================= */
+        /* ================= EFEKTY SZKŁA ================= */
         .glass-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s ease;
-            overflow: hidden;
+            background: var(--glass-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border); border-radius: 24px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s ease; overflow: hidden;
         }
-
-        .glass-panel-hoverable:hover {
-            transform: translateY(-8px);
-            border-color: rgba(195, 154, 107, 0.3);
-        }
+        .glass-panel-hoverable:hover { transform: translateY(-8px); border-color: rgba(195, 154, 107, 0.3); }
 
         /* Przyciski */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px 32px;
-            border-radius: 100px;
-            font-size: 1.1rem;
-            font-weight: 400;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 16px 32px; border-radius: 100px; font-size: 1.1rem;
+            font-weight: 400; text-decoration: none; transition: all 0.3s ease;
+            cursor: pointer; border: none; text-align: center;
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
         }
-        .btn-primary {
-            background: rgba(195, 154, 107, 0.15);
-            color: var(--accent-gold);
-            border: 1px solid rgba(195, 154, 107, 0.3);
-            box-shadow: 0 0 20px rgba(195, 154, 107, 0);
-        }
-        .btn-primary:hover {
-            background: rgba(195, 154, 107, 0.25);
-            box-shadow: 0 0 30px rgba(195, 154, 107, 0.2);
-            transform: scale(1.02);
-        }
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-main);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .btn-primary { background: rgba(195, 154, 107, 0.15); color: var(--accent-gold); border: 1px solid rgba(195, 154, 107, 0.3); box-shadow: 0 0 20px rgba(195, 154, 107, 0); }
+        .btn-primary:hover { background: rgba(195, 154, 107, 0.25); box-shadow: 0 0 30px rgba(195, 154, 107, 0.2); transform: scale(1.02); }
+        .btn-secondary { background: rgba(255, 255, 255, 0.05); color: var(--text-main); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); }
+
+        /* Napisy na przyciskach */
+        .btn-text-desktop { display: inline; }
+        .btn-text-mobile { display: none; }
+        @media (max-width: 600px) {
+            .btn-text-desktop { display: none; }
+            .btn-text-mobile { display: inline; }
         }
 
         /* ================= NAV ================= */
         nav {
-            position: fixed;
-            top: 0; width: 100%;
-            padding: 20px 0;
-            z-index: 100;
-            background: rgba(5, 5, 5, 0.5);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
+            position: fixed; top: 0; width: 100%; padding: 20px 0; z-index: 100;
+            background: rgba(5, 5, 5, 0.7); backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border);
         }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo { display: flex; align-items: center; text-decoration: none; }
-        .logo .bebas-text { font-size: 2.2rem; color: #fff; line-height: 1; }
-        .logo span.separator { font-weight: 300; font-size: 1.5rem; color: #fff; margin: 0 10px; }
-        .logo img { height: 26px; } /* Tu kontrolujesz wielkość logo Nashi */
+        .logo { display: flex; align-items: center; text-decoration: none; cursor: pointer; }
+        .logo .bebas-text { font-size: 2.2rem; color: #fff; line-height: 1; margin-top: 4px; }
+        .logo span.separator { font-weight: 300; font-size: 1.5rem; color: #fff; margin: 0 12px; }
+        .logo img { height: 46px; object-fit: contain; }
         
-        .nav-links a {
-            color: var(--text-main);
-            text-decoration: none;
-            margin-left: 30px;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-        }
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a { color: var(--text-main); text-decoration: none; margin-left: 30px; font-size: 0.95rem; transition: color 0.3s ease; cursor: pointer; }
         .nav-links a:hover { color: var(--accent-gold); }
+
+        /* Menu Hamburger */
+        .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; z-index: 1001; }
+        .hamburger span { width: 25px; height: 2px; background: #fff; transition: all 0.3s ease; }
         
         @media (max-width: 768px) {
-            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .nav-links {
+                position: fixed; top: 0; right: -100%; width: 250px; height: 100vh;
+                background: rgba(10,10,10,0.95); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+                border-left: 1px solid var(--glass-border); flex-direction: column; justify-content: center; align-items: center;
+                gap: 40px; transition: right 0.4s ease; z-index: 1000;
+            }
+            .nav-links.active { right: 0; }
+            .nav-links a { margin: 0; font-size: 1.2rem; }
+            .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
         }
 
         /* ================= HERO ================= */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            padding-top: 80px;
-        }
+        .hero { height: 100vh; display: flex; align-items: center; position: relative; padding-top: 80px; }
         .hero-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('hero-bg.jpg'); 
-            background-size: cover;
-            background-position: center;
-            opacity: 0.3;
-            z-index: -1;
-            mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('hero-bg.jpg'); background-size: cover; background-position: center;
+            opacity: 0.3; z-index: -1; mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
             -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
         }
-        .hero-content {
-            max-width: 800px;
-            text-align: left;
-        }
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 40px;
-        }
-        @media (max-width: 600px) {
-            .hero-buttons { flex-direction: column; }
-        }
+        .hero-content { max-width: 800px; text-align: left; }
+        .hero-buttons { display: flex; gap: 15px; margin-top: 40px; }
+        @media (max-width: 600px) { .hero-buttons { flex-direction: column; } }
 
         /* ================= ABOUT ================= */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        .about-img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            border-radius: 30px;
-            border: 1px solid var(--glass-border);
-        }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .about-img { width: 100%; height: 500px; object-fit: cover; border-radius: 30px; border: 1px solid var(--glass-border); }
         .about-text h3 { font-size: 2rem; margin-bottom: 20px; color: #fff; }
         .about-text p { margin-bottom: 20px; font-size: 1.1rem; }
-        
-        @media (max-width: 900px) {
-            .about-grid { grid-template-columns: 1fr; }
-            .about-img { height: 350px; }
-        }
+        @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } .about-img { height: 350px; } }
 
-        /* ================= ZABIEGI ================= */
-        .treatments-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        /* ================= ZABIEGI & PRODUKTY ================= */
+        .treatments-grid, .products-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 30px;
         }
-        .treatment-card {
-            padding: 30px;
+        .treatment-card, .product-line-card {
+            width: 100%;
+            max-width: 400px; 
+            flex: 1 1 320px; 
             display: flex;
             flex-direction: column;
-            height: 100%;
+            padding: 0; 
         }
-        .treatment-img {
-            width: 100%;
-            height: 200px;
-            border-radius: 16px;
-            object-fit: cover;
-            margin-bottom: 20px;
-            background: rgba(255,255,255,0.02);
-        }
+        
+        .treatment-card { padding: 30px; } 
+        /* Zwiększona wysokość tylko dla obrazków ZABIEGÓW (z 200px na 280px) */
+        .treatment-img { width: 100%; height: 280px; border-radius: 16px; object-fit: cover; margin-bottom: 20px; background: rgba(255,255,255,0.02); }
         .treatment-header { margin-bottom: 15px; }
         .treatment-title { font-size: 1.4rem; color: #fff; margin-bottom: 5px; }
+        
+        /* Naprawa zawijania czasu i ceny w ZABIEGACH */
         .treatment-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            color: var(--accent-gold);
-            font-weight: 600;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex; 
+            flex-wrap: wrap; /* Zezwolenie na przełamanie linii */
+            justify-content: space-between; 
+            gap: 12px; /* Dystans, gdy cena spadnie pod czas */
+            align-items: flex-start;
+            font-size: 0.9rem; color: var(--accent-gold); font-weight: 600; 
+            margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);
         }
+        .treatment-meta span { display: flex; align-items: center; }
+        
         .treatment-desc { flex-grow: 1; font-size: 0.95rem; margin-bottom: 25px; }
         .treatment-btn { width: 100%; text-align: center; }
 
-        /* ================= PRODUKTY (Kafelki) ================= */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-        .product-line-card {
-            cursor: pointer;
-            padding: 0;
-            position: relative;
-        }
-        .product-line-img {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            opacity: 0.6;
-            transition: opacity 0.3s ease;
-        }
+        .product-line-card { cursor: pointer; position: relative; }
+        .product-line-img { width: 100%; height: 350px; object-fit: cover; opacity: 0.6; transition: opacity 0.3s ease; }
         .product-line-card:hover .product-line-img { opacity: 0.8; }
         .product-line-info {
-            position: absolute;
-            bottom: 0; left: 0; width: 100%;
-            padding: 30px;
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px;
             background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
         }
         .product-line-title { font-size: 1.8rem; color: #fff; }
-        .product-line-subtitle { color: var(--accent-gold); font-size: 0.9rem; margin-top: 5px; }
+        .product-line-subtitle { color: var(--accent-gold); font-size: 0.9rem; margin-top: 5px; line-height: 1.5; }
+        
+        .phone-link { color: #ffffff; text-decoration: none; font-weight: 600; transition: none; }
 
         /* ================= MODAL Z PRODUKTAMI ================= */
         .modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            z-index: 1000;
-            display: none; justify-content: center; align-items: center;
-            opacity: 0; transition: opacity 0.3s ease;
-            padding: 20px;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 1000;
+            display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; padding: 20px;
         }
         .modal.active { display: flex; opacity: 1; }
         
-        .modal-content {
-            background: var(--bg-color);
-            width: 100%; max-width: 900px;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            padding: 40px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            /* Usunięcie pasków przewijania (scrollbars) */
-            -ms-overflow-style: none;  /* IE oraz Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
-        .modal-content::-webkit-scrollbar { 
-            display: none; /* Chrome, Safari, Opera */
-        }
+        .modal-wrapper { position: relative; width: 100%; max-width: 900px; }
         
-        .modal-content.no-hover:hover {
-            /* Nadpisanie zjawiska podskakiwania (hover) z glass-panel */
-            transform: none !important;
-            border-color: var(--glass-border) !important;
+        .modal-content {
+            background: var(--bg-color); width: 100%; max-height: 90vh;
+            overflow-y: auto; padding: 50px 40px 40px; 
+            border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            -ms-overflow-style: none; scrollbar-width: none;
         }
+        .modal-content::-webkit-scrollbar { display: none; }
+        .modal-content.no-hover:hover { transform: none !important; border-color: var(--glass-border) !important; }
 
-        /* Sztywny przycisk zamknij */
         .close-modal {
-            position: absolute; 
-            top: 25px; right: 25px;
-            background: rgba(255,255,255,0.1);
-            border: none; color: #fff; width: 45px; height: 45px;
-            border-radius: 50%; font-size: 1.5rem; cursor: pointer;
-            transition: 0.3s;
-            z-index: 1100; /* Zawsze nad przewijaną zawartością */
+            position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none;
+            color: #fff; width: 45px; height: 45px; border-radius: 50%; font-size: 1.5rem; cursor: pointer;
+            transition: 0.3s; z-index: 100; display: flex; justify-content: center; align-items: center;
         }
         .close-modal:hover { background: rgba(255,255,255,0.3); transform: scale(1.1); }
         
-        .modal-line-title { font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 30px; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; padding-right: 50px; }
+        .modal-line-title {
+            text-align: center; font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 30px;
+            border-bottom: 1px solid var(--glass-border); padding-bottom: 15px; 
+        }
         
-        /* Wygląd pojedynczego produktu w modalu ze zdjęciem */
-        .product-item {
-            display: flex;
-            gap: 25px;
-            margin-bottom: 40px;
-            align-items: flex-start;
-        }
-        .product-item-img {
-            width: 140px;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 12px;
-            background: rgba(255,255,255,0.02);
-            flex-shrink: 0;
-            border: 1px solid var(--glass-border);
-        }
-        .product-item-content {
-            flex-grow: 1;
-        }
+        .product-item { display: flex; gap: 25px; margin-bottom: 40px; align-items: flex-start; }
+        .product-item-img { width: 140px; height: 180px; object-fit: cover; border-radius: 12px; background: rgba(255,255,255,0.02); flex-shrink: 0; border: 1px solid var(--glass-border); }
+        .product-item-content { flex-grow: 1; }
         .product-item-title { font-size: 1.4rem; color: #fff; margin-bottom: 5px; }
         .product-item-size { font-size: 0.85rem; color: var(--accent-gold); margin-bottom: 15px; font-weight: 600;}
         .product-item-desc { margin-bottom: 15px; font-size: 0.95rem; }
         .product-item-usage { font-size: 0.9rem; background: rgba(255,255,255,0.02); padding: 15px; border-radius: 12px; border-left: 2px solid var(--accent-gold);}
 
         @media (max-width: 600px) {
-            .product-item { flex-direction: column; align-items: center; text-align: center; }
-            .product-item-img { width: 100%; height: 250px; }
-            .product-item-usage { text-align: left; }
+            .modal-content { padding: 50px 20px 30px; max-height: 85vh; }
+            .modal-line-title { font-size: 1.8rem; margin-bottom: 20px; text-align: center; } 
+            .close-modal { top: 12px; right: 12px; width: 36px; height: 36px; font-size: 1.3rem; }
+            
+            .product-item { display: flex; flex-direction: column; padding-bottom: 30px; }
+            .product-item-content { display: contents; }
+            .product-item-title { order: 1; margin-bottom: 15px; width: 100%; text-align: left; }
+            .product-item-img { order: 2; width: 100%; height: auto; aspect-ratio: 4/5; margin-bottom: 15px; }
+            .product-item-size { order: 3; margin-bottom: 10px; width: 100%; text-align: left;}
+            .product-item-desc { order: 4; width: 100%; }
+            .product-item-usage { order: 5; text-align: left; width: 100%; }
+            
+            .product-item::after { content: ''; display: block; width: 100%; height: 1px; background: rgba(255, 255, 255, 0.1); order: 6; margin-top: 30px; }
+            .product-item:last-child::after { display: none; }
         }
 
         /* ================= FOOTER ================= */
-        footer {
-            border-top: 1px solid var(--glass-border);
-            padding: 80px 0 40px;
-            background: rgba(5,5,5,0.8);
-            margin-top: 50px;
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 60px;
-        }
+        footer { border-top: 1px solid var(--glass-border); padding: 80px 0 40px; background: rgba(5,5,5,0.8); margin-top: 50px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 60px; }
         .footer-col h4 { color: #fff; font-size: 1.2rem; margin-bottom: 20px; }
         .footer-col p, .footer-col a { color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 10px; transition: 0.3s; }
         .footer-col a:hover { color: var(--accent-gold); }
-        .copyright { text-align: center; border-top: 1px solid var(--glass-border); padding-top: 30px; font-size: 0.85rem; }
+        .footer-logo-img { height: 130px; max-width: 100%; object-fit: contain; }
+        .copyright { text-align: center; border-top: 1px solid var(--glass-border); padding-top: 30px; font-size: 0.85rem; color: var(--text-muted); }
 
-        /* ================= ANIMACJE SCROLLA ================= */
+        /* Wyrównanie do środka na telefonach w stopce */
+        @media (max-width: 768px) {
+            .footer-col { text-align: center; }
+            .footer-col a, .footer-col p { margin-left: auto; margin-right: auto; }
+        }
+
+        /* ================= ANIMACJE ================= */
         .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .fade-up.visible { opacity: 1; transform: translateY(0); }
     </style>
+    
+    <!-- Biblioteka Lenis do smooth scrollingu -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
 </head>
 <body>
 
@@ -393,16 +290,21 @@
     <!-- Nawigacja -->
     <nav>
         <div class="container nav-content">
-            <a href="#" class="logo">
+            <a href="https://pracowniab8.pl" class="logo">
                 <span class="bebas-text">Pracownia B8</span>
                 <span class="separator">|</span>
                 <img src="nashi_logo.png" alt="Nashi">
             </a>
-            <div class="nav-links">
-                <a href="#o-marce">O marce</a>
-                <a href="#zabiegi">Zabiegi w salonie</a>
-                <a href="#produkty">Produkty domowe</a>
-                <a href="#kontakt">Kontakt</a>
+            
+            <button class="hamburger" id="hamburger-btn">
+                <span></span><span></span><span></span>
+            </button>
+
+            <div class="nav-links" id="nav-links">
+                <a onclick="scrollToSection('#o-marce')">O marce</a>
+                <a onclick="scrollToSection('#zabiegi')">Zabiegi w salonie</a>
+                <a onclick="scrollToSection('#produkty')">Produkty domowe</a>
+                <a onclick="scrollToSection('#kontakt')">Kontakt</a>
             </div>
         </div>
     </nav>
@@ -418,7 +320,10 @@
                 
                 <div class="hero-buttons">
                     <a href="https://booksy.com/pl-pl/268448_fryzjerstwo-pracowniab8_fryzjer_10729_rzeszow" target="_blank" class="btn btn-primary">Umów wizytę w salonie</a>
-                    <a href="tel:+48888520223" class="btn btn-secondary">Kup produkty (Zadzwoń)</a>
+                    <a href="tel:+48888520223" class="btn btn-secondary">
+                        <span class="btn-text-desktop">Kup produkty - Zadzwoń +48 888 520 223</span>
+                        <span class="btn-text-mobile">Kup produkty - Zadzwoń</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -443,8 +348,7 @@
     <section id="zabiegi" class="section-padding">
         <div class="container">
             <h2 class="fade-up">Zabiegi Nashi w salonie</h2>
-            <div class="treatments-grid" id="treatments-container">
-            </div>
+            <div class="treatments-grid" id="treatments-container"></div>
         </div>
     </section>
 
@@ -452,19 +356,18 @@
     <section id="produkty" class="section-padding">
         <div class="container">
             <h2 class="fade-up">Kosmetyki do pielęgnacji domowej</h2>
-            <p class="fade-up" style="text-align: center; margin-top: -20px; margin-bottom: 50px;">Kliknij linię produktów, aby sprawdzić detale. Aby zakupić produkt z odbiorem w salonie, zadzwoń: <strong>888 520 223</strong>.</p>
-            <div class="products-grid" id="products-lines-container">
-            </div>
+            <p class="fade-up" style="text-align: center; margin-top: -20px; margin-bottom: 50px;">Kliknij linię produktów, aby sprawdzić detale. Aby zakupić produkt, zadzwoń: <a href="tel:+48888520223" class="phone-link">+48 888 520 223</a>.</p>
+            <div class="products-grid" id="products-lines-container"></div>
         </div>
     </section>
 
     <!-- Modal Produktów -->
     <div class="modal" id="product-modal">
-        <!-- Przycisk zamknięcia wyciągnięty na zewnątrz, przypięty na stałe (fixed) -->
-        <button class="close-modal" onclick="closeModal()">&times;</button>
-        <!-- Dodano klasę no-hover by uniknąć podskakiwania -->
-        <div class="modal-content glass-panel no-hover" id="modal-content-body">
-            <!-- Zawartość wstrzykiwana przez JS -->
+        <div class="modal-wrapper">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <div class="modal-content glass-panel no-hover" id="modal-content-body" data-lenis-prevent="true">
+                <!-- Zawartość JS wstrzykiwana poniżej -->
+            </div>
         </div>
     </div>
 
@@ -473,10 +376,8 @@
         <div class="container">
             <div class="footer-grid fade-up">
                 <div class="footer-col">
-                    <a href="#" class="logo" style="margin-bottom: 20px; display: inline-flex;">
-                        <span class="bebas-text">Pracownia B8</span>
-                        <span class="separator">|</span>
-                        <img src="nashi_logo.png" alt="Nashi">
+                    <a href="https://pracowniab8.pl" style="display: inline-block; margin-bottom: 20px;">
+                        <img src="logo.png" alt="Pracownia B8" class="footer-logo-img" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAiIGhlaWdodD0iMTAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZpbGw9IiNmZmYiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+QnJhayBsb2dvLnBuZzwvdGV4dD48L3N2Zz4='">
                     </a>
                     <p>Zaufaj profesjonalistom. Zadbamy o zdrowie i blask Twoich włosów w oparciu o ekskluzywne kosmetyki Nashi Argan.</p>
                 </div>
@@ -488,7 +389,7 @@
                 </div>
                 <div class="footer-col">
                     <h4>Kontakt & Rezerwacja</h4>
-                    <a href="tel:+48888520223">Tel: 888 520 223</a>
+                    <a href="tel:+48888520223">Tel: +48 888 520 223</a>
                     <a href="mailto:fryzjerstwo@pracowniab8.pl">E-mail: fryzjerstwo@pracowniab8.pl</a>
                     <a href="https://booksy.com/pl-pl/268448_fryzjerstwo-pracowniab8_fryzjer_10729_rzeszow" target="_blank" style="color: var(--accent-gold); font-weight: 600; margin-top: 10px;">Zarezerwuj przez Booksy</a>
                 </div>
@@ -499,90 +400,128 @@
                 </div>
             </div>
             <div class="copyright">
-                &copy; 2026 <span class="bebas-text" style="font-size: 1.1rem; letter-spacing: 1px;">Pracownia B8</span>. Autoryzowany salon partnerski Nashi Argan.
+                &copy; <span id="current-year"></span> Pracownia B8. Autoryzowany salon partnerski Nashi Argan.
             </div>
         </div>
     </footer>
 
     <script>
+        // Automatyczny aktualny rok w stopce
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // ================= SMOOTH SCROLLING (LENIS) =================
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+            smooth: true,
+            smoothTouch: false 
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        function scrollToSection(id) {
+            lenis.scrollTo(id, { offset: -80 }); 
+        }
+
+        // ================= MENU HAMBURGER =================
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const navLinks = document.getElementById('nav-links');
+        const navItems = navLinks.querySelectorAll('a');
+
+        hamburgerBtn.addEventListener('click', () => {
+            hamburgerBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                hamburgerBtn.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
         // ================= DANE: ZABIEGI =================
         const treatments = [
             {
                 title: "Rytuał Piękna NASHI (SPA Pielęgnacyjne)",
                 time: "Włosy Krótkie 1h / Włosy Długie 1h 30min",
                 price: "110 zł / 160 zł",
-                desc: "Pielęgnacja Classic Podstawowa z użyciem naturalnego olejku arganowego, lnianego i makadamia. Zabieg silnie nawilża, przywraca prawidłowy poziom nawodnienia, odżywia, regeneruje oraz zabezpiecza włosy. Doskonały do każdego rodzaju włosów.",
+                desc: "Pielęgnacja Classic Podstawowa z użyciem naturalnego olejku arganowego, lnianego i makadamia. Zabieg silnie nawilża, przywraca prawidłowy poziom nawodnienia, odżywia, regeneruje oraz zabezpiecza włosy.",
                 img: "zabieg-rytual.jpg"
             },
             {
                 title: "Pielęgnacja Bankietowa (Lifting Express)",
                 time: "1h",
                 price: "120 zł",
-                desc: "Ekspresowa rekonstrukcja ampułką Lifting Express. Intensywny zabieg nawilżająco-regenerujący. Idealny dla włosów uwrażliwionych, farbowanych. Gwarantuje niesamowity blask, miękkość i wygładzenie – idealny efekt przed ważnym wyjściem.",
+                desc: "Ekspresowa rekonstrukcja ampułką Lifting Express. Intensywny zabieg nawilżająco-regenerujący. Idealny dla włosów uwrażliwionych, farbowanych. Gwarantuje niesamowity blask, miękkość i wygładzenie.",
                 img: "zabieg-bankietowa.jpg"
             },
             {
-                title: "Uszczelnienie łuski włosa (Laminacja Lifting Mask)",
+                title: "Uszczelnienie łuski włosa (Laminacja)",
                 time: "1h 30min",
                 price: "250 zł",
-                desc: "Laminacja włosów z wykorzystaniem zaawansowanej technologii. Głęboko odbudowujący zabieg dla włosów mocno uwrażliwionych, kruszących się. Wypełnia strukturę włosa substancjami odżywczymi (kolagen, elastyna, keratyna) i całkowicie zamyka łuskę, dając efekt gładkiej tafli.",
+                desc: "Laminacja włosów z wykorzystaniem zaawansowanej technologii. Głęboko odbudowujący zabieg dla włosów mocno uwrażliwionych. Wypełnia strukturę włosa i całkowicie zamyka łuskę, dając efekt gładkiej tafli.",
                 img: "zabieg-uszczelnienie.jpg"
             },
             {
-                title: "3 etapowa rekonstrukcja włosów FILLER THERAPY",
+                title: "3 etapowa rekonstrukcja FILLER THERAPY",
                 time: "1h 30min",
                 price: "250 zł",
-                desc: "Zaawansowana linia przeznaczona do odbudowy, rekonstrukcji i regeneracji uszkodzonej struktury włosów. Oparta na naturalnej keratynie, roślinnych komórkach macierzystych Budlei, kolagenie i elastynie. Linia idealna dla klientek, których włosy łamią się i kruszą w wyniku zabiegów chemicznych.",
+                desc: "Oparta na naturalnej keratynie, komórkach macierzystych Budlei, kolagenie i elastynie. Linia idealna dla klientek, których włosy łamią się i kruszą w wyniku zabiegów chemicznych.",
                 img: "zabieg-filler.jpg"
             },
             {
                 title: "Intensywna kuracja stymulująca (Essential Energy)",
                 time: "1h 30min",
                 price: "120 zł",
-                desc: "Niezwykle bogata seria stymulująca, energetyzująca i wzmacniająca włosy – przeciwdziałająca wypadaniu. Bogata w ekstrakty eteryczne i aminokwasy, które pobudzają mikrokrążenie w skórze głowy i poprawiają zakotwiczenie cebulki włosa.",
+                desc: "Seria stymulująca, energetyzująca i wzmacniająca włosy – przeciwdziałająca wypadaniu. Bogata w ekstrakty eteryczne, które pobudzają mikrokrążenie w skórze głowy i poprawiają zakotwiczenie cebulki.",
                 img: "zabieg-essential.jpg"
             },
             {
                 title: "Pielęgnacja dermatologiczna Armonia",
                 time: "1h",
                 price: "120 zł",
-                desc: "Dermatologiczna linia przeznaczona do problematycznej skóry głowy ze skłonnością do łupieżu, łojotoku i stanów zapalnych. Z użyciem dogłębnie oczyszczającego peelingu, przywraca naturalną równowagę hydrolipidową skóry głowy.",
+                desc: "Dermatologiczna linia przeznaczona do problematycznej skóry głowy ze skłonnością do łupieżu i łojotoku. Z użyciem dogłębnie oczyszczającego peelingu, przywraca naturalną równowagę hydrolipidową.",
                 img: "zabieg-armonia.jpg"
             },
             {
-                title: "Molekularna odbudowa włosów (Keratynowe wygładzanie)",
+                title: "Molekularna odbudowa włosów (Keratynowe)",
                 time: "2h",
                 price: "200 zł",
-                desc: "Odbudowujący zabieg wygładzający dla włosów średnio i wysoko porowatych, z tendencją do kręcenia się i puszenia. Wzbogacony o hydrolizowaną, naturalną keratynę, aloes oraz kwas glioksalowy. Głęboka, długotrwała regeneracja na poziomie molekularnym.",
+                desc: "Odbudowujący zabieg wygładzający dla włosów średnio i wysoko porowatych, z tendencją do puszenia. Wzbogacony o hydrolizowaną keratynę i aloes. Głęboka, długotrwała regeneracja.",
                 img: "zabieg-molekularna.jpg"
             }
         ];
 
-        // ================= DANE: PRODUKTY Z ZDJĘCIAMI DLA KAŻDEGO =================
+        // ================= DANE: PRODUKTY =================
         const productsCatalog = [
             {
                 id: "classic",
-                name: "Linia Classic (Argan & Makadamia)",
+                name: "Linia Classic",
                 subtitle: "Codzienna pielęgnacja i wygładzenie",
                 image: "prod-argan.jpg",
                 items: [
-                    { name: "Olej Arganowy", img: "item-classic-oil.jpg", size: "30 ml / 100 ml", desc: "Organiczny olej arganowy wzbogacony lnianym. Idealne uzupełnienie codziennej pielęgnacji każdego rodzaju włosów. Doskonały w walce z rozdwajającymi się końcówkami. Nadaje elastyczność i sprężystość.", usage: "Nakładaj na wilgotne włosy po umyciu (niskoporowate) lub jako wykończenie stylizacji na suche włosy." },
-                    { name: "Szampon Classic", img: "item-classic-shampoo.jpg", size: "200 ml / 500 ml / 1000 ml", desc: "Posiada delikatne właściwości oczyszczające z wszelkich zanieczyszczeń tj. sebum oraz silikony z produktów do stylizacji. Przygotowuje włosy do przyjęcia odżywki lub maski.", usage: "Zalecane podwójne mycie. Wykonuj delikatny masaż głowy." },
-                    { name: "Odżywka Classic", img: "item-classic-conditioner.jpg", size: "200 ml / 500 ml / 1000 ml", desc: "Klasyczna odżywka ułatwiająca rozczesywanie do stosowania po każdym myciu. Wygładza, ułatwia rozczesywanie i chroni kolor. Nie obciąża włosów. Idealna do włosów średnio uwrażliwionych.", usage: "Nakładaj na umyte, odsączone ręcznikiem włosy, omijając nasadę." },
-                    { name: "Instant Mask", img: "item-classic-instant.jpg", size: "150 ml", desc: "Błyskawiczna maska bez spłukiwania w sprayu. Doskonale nawilża, wygładza, przeciwdziała puszeniu i posiada termoochronę. Osobom z cienkimi włosami może zastąpić tradycyjną odżywkę.", usage: "Rozpyl na wilgotne, odsączone włosy przed modelowaniem." },
-                    { name: "Maska Deep Infusion", img: "item-classic-deep.jpg", size: "150 ml / 500 ml", desc: "Głęboko nawilżająca i odżywiająca maska do rytuałów pielęgnacyjnych. Walczy z bardzo suchymi, kruszącymi się końcówkami. Nadaje sprężystość i chroni kolor.", usage: "Stosuj raz w tygodniu, nakładaj na 5-10 minut po umyciu, dokładnie spłucz." }
+                    { name: "Olej Arganowy", img: "item-classic-oil.jpg", size: "30 ml / 100 ml", desc: "Organiczny olej arganowy wzbogacony lnianym. Idealne uzupełnienie codziennej pielęgnacji każdego rodzaju włosów. Doskonały w walce z rozdwajającymi się końcówkami.", usage: "Nakładaj na wilgotne włosy po umyciu lub na suche." },
+                    { name: "Szampon Classic", img: "item-classic-shampoo.jpg", size: "200 ml / 500 ml / 1000 ml", desc: "Posiada delikatne właściwości oczyszczające z wszelkich zanieczyszczeń tj. sebum oraz silikony.", usage: "Zalecane podwójne mycie. Wykonuj delikatny masaż głowy." },
+                    { name: "Odżywka Classic", img: "item-classic-conditioner.jpg", size: "200 ml / 500 ml / 1000 ml", desc: "Klasyczna odżywka ułatwiająca rozczesywanie do stosowania po każdym myciu. Wygładza i chroni kolor.", usage: "Nakładaj na umyte, odsączone ręcznikiem włosy, omijając nasadę." },
+                    { name: "Instant Mask", img: "item-classic-instant.jpg", size: "150 ml", desc: "Błyskawiczna maska bez spłukiwania w sprayu. Doskonale nawilża, wygładza, przeciwdziała puszeniu i posiada termoochronę.", usage: "Rozpyl na wilgotne, odsączone włosy przed modelowaniem." },
+                    { name: "Maska Deep Infusion", img: "item-classic-deep.jpg", size: "150 ml / 500 ml", desc: "Głęboko nawilżająca i odżywiająca maska do rytuałów pielęgnacyjnych. Walczy z kruszącymi się końcówkami.", usage: "Stosuj raz w tygodniu, nakładaj na 5-10 minut po umyciu." }
                 ]
             },
             {
                 id: "sun",
-                name: "Linia Sun (Ochrona przed słońcem)",
+                name: "Linia Sun",
                 subtitle: "Nawilżenie i filtry UV",
                 image: "prod-sun.jpg",
                 items: [
-                    { name: "Szampon Sun Defence", img: "item-sun-shampoo.jpg", size: "200 ml", desc: "Szampon nawilżająco-odżywiający z organicznymi składnikami, filtrami UV, witaminą A, C i E. Oczyszcza włosy i chroni przed promieniami słonecznymi, chlorem oraz solą morską.", usage: "Idealny na wakacje oraz po wyjściu z basenu." },
-                    { name: "Olej Arganowy Sun", img: "item-sun-oil.jpg", size: "50 ml", desc: "Kompleks olejków pielęgnacyjnych, specjalnie zoptymalizowany pod kątem ochrony przed promieniowaniem słonecznym. Zapobiega utracie wilgoci i przesuszeniu włosów.", usage: "Aplikuj kilkukrotnie w ciągu dnia podczas ekspozycji na słońce." },
-                    { name: "Beach Defence Fluid", img: "item-sun-fluid.jpg", size: "150 ml", desc: "Fluid w spray'u chroniący włosy przed negatywnym działaniem słońca, soli oraz chloru. Wspaniale ułatwia rozczesywanie włosów splątanych przez wiatr.", usage: "Rozpylać na włosy wilgotne lub suche wielokrotnie w ciągu dnia." },
-                    { name: "Beach Defence Mask", img: "item-sun-mask.jpg", size: "150 ml", desc: "Odbudowująco-nawadniająca maska naprawcza. Leczy uszkodzenia wyrządzone przez słońce, regeneruje przesuszone pasma.", usage: "Nałożyć obficie na umyte szamponem Sun włosy, pozostawić na 3-5 minut." }
+                    { name: "Szampon Sun Defence", img: "item-sun-shampoo.jpg", size: "200 ml", desc: "Szampon z filtrami UV. Oczyszcza włosy i chroni przed promieniami słonecznymi, chlorem oraz solą morską.", usage: "Idealny na wakacje oraz po wyjściu z basenu." },
+                    { name: "Olej Arganowy Sun", img: "item-sun-oil.jpg", size: "50 ml", desc: "Specjalnie zoptymalizowany pod kątem ochrony przed promieniowaniem słonecznym. Zapobiega przesuszeniu.", usage: "Aplikuj kilkukrotnie w ciągu dnia podczas ekspozycji na słońce." },
+                    { name: "Beach Defence Fluid", img: "item-sun-fluid.jpg", size: "150 ml", desc: "Fluid w spray'u chroniący włosy przed słońcem, solą oraz chloru. Wspaniale ułatwia rozczesywanie splątanych pasm.", usage: "Rozpylać na włosy wilgotne lub suche wielokrotnie w ciągu dnia." },
+                    { name: "Beach Defence Mask", img: "item-sun-mask.jpg", size: "150 ml", desc: "Odbudowująco-nawadniająca maska naprawcza. Leczy uszkodzenia wyrządzone przez słońce.", usage: "Nałożyć obficie na umyte szamponem Sun włosy, pozostawić na 3-5 minut." }
                 ]
             },
             {
@@ -591,10 +530,10 @@
                 subtitle: "Zagęszczenie i przeciw wypadaniu",
                 image: "prod-mass.jpg",
                 items: [
-                    { name: "Szampon Mass Solution", img: "item-mass-shampoo.jpg", size: "250 ml / 1000 ml", desc: "Zwiększający objętość i zagęszczający. Zmniejsza wypadanie włosów cienkich i słabych. Bogaty w naturalne składniki i kompleks aminokwasów pobudzający cebulki.", usage: "Stosuj do codziennego mycia przy problemach z wypadaniem włosów." },
-                    { name: "Odżywka Essential", img: "item-mass-essential.jpg", size: "150 ml", desc: "Energetyzująca odżywka, nie obciąża, można ją nakładać nawet od samej nasady (przy włosach przetłuszczających się). Odświeża i nawilża matowe pasma.", usage: "Nakładaj również przy skórze głowy. Zawiera eukaliptus i miętę." },
-                    { name: "Scalp Revitalizer", img: "item-mass-scalp.jpg", size: "150 ml", desc: "Innowacyjny zabieg w postaci płynu do skóry głowy. Redukuje kruszenie się, stymuluje mikrokrążenie, odżywia włosy od nasady po końce.", usage: "Stosuj do pielęgnacji codziennej przy włosach cienkich i łamliwych." },
-                    { name: "Essential Treatment", img: "item-mass-treatment.jpg", size: "100 ml", desc: "Intensywna, dwumiesięczna kuracja przeciw wypadaniu. Wzmacnia zakotwiczenie włosów w skórze, stymuluje wzrost nowych włosów i wspiera powłokę hydrolipidową.", usage: "Nakładać każdorazowo na noc na czystą skórę głowy (bez spłukiwania). Kuracja min. 2-3 miesiące." }
+                    { name: "Szampon Mass Solution", img: "item-mass-shampoo.jpg", size: "250 ml / 1000 ml", desc: "Zwiększający objętość i zagęszczający. Zmniejsza wypadanie włosów cienkich i słabych.", usage: "Stosuj do codziennego mycia przy problemach z wypadaniem włosów." },
+                    { name: "Odżywka Essential", img: "item-mass-essential.jpg", size: "150 ml", desc: "Energetyzująca odżywka, nie obciąża, można ją nakładać nawet od samej nasady. Odświeża i nawilża matowe pasma.", usage: "Nakładaj również przy skórze głowy. Zawiera eukaliptus i miętę." },
+                    { name: "Scalp Revitalizer", img: "item-mass-scalp.jpg", size: "150 ml", desc: "Płyn do skóry głowy. Redukuje kruszenie się, stymuluje mikrokrążenie, odżywia włosy od nasady.", usage: "Stosuj do pielęgnacji codziennej przy włosach cienkich i łamliwych." },
+                    { name: "Essential Treatment", img: "item-mass-treatment.jpg", size: "100 ml", desc: "Intensywna kuracja przeciw wypadaniu. Wzmacnia zakotwiczenie włosów w skórze, stymuluje wzrost nowych włosów.", usage: "Nakładać każdorazowo na noc na czystą skórę głowy (bez spłukiwania)." }
                 ]
             },
             {
@@ -603,8 +542,8 @@
                 subtitle: "Rekonstrukcja włosów uszkodzonych",
                 image: "prod-filler.jpg",
                 items: [
-                    { name: "Szampon Restorative", img: "item-filler-shampoo.jpg", size: "250 ml / 1000 ml", desc: "Odbudowujący szampon nawilżający. Idealny do podtrzymania efektów profesjonalnego zabiegu z salonu. Zawiera kolagen, keratynę i elastynę. Nie zawiera parabenów i siarczanów.", usage: "Codzienne mycie dla włosów silnie uwrażliwionych po koloryzacjach lub rozjaśnianiu." },
-                    { name: "Odżywka Restorative", img: "item-filler-conditioner.jpg", size: "150 ml", desc: "Głęboko nawilżająca odżywka, nadaje elastyczność i chroni zewnętrzną warstwę włosów. Przedłuża żywotność włókien kolagenowych we włosie.", usage: "Nakładać po umyciu szamponem Restorative, omijając nasadę głowy." }
+                    { name: "Szampon Restorative", img: "item-filler-shampoo.jpg", size: "250 ml / 1000 ml", desc: "Odbudowujący szampon nawilżający. Zawiera kolagen, keratynę i elastynę. Nie zawiera parabenów i siarczanów.", usage: "Codzienne mycie dla włosów silnie uwrażliwionych." },
+                    { name: "Odżywka Restorative", img: "item-filler-conditioner.jpg", size: "150 ml", desc: "Głęboko nawilżająca odżywka, nadaje elastyczność i chroni zewnętrzną warstwę włosów.", usage: "Nakładać po umyciu szamponem Restorative, omijając nasadę głowy." }
                 ]
             },
             {
@@ -613,18 +552,18 @@
                 subtitle: "Neutralizacja odcieni i chłodny blond",
                 image: "prod-blondy.jpg",
                 items: [
-                    { name: "Szampon Blondy Joy", img: "item-blondy-shampoo.jpg", size: "250 ml", desc: "Szampon do pielęgnacji domowej dedykowany dla włosów blond i rozjaśnianych. Niweluje żółte odcienie (ochładza kolor), równocześnie delikatnie nawilżając.", usage: "Stosuj zamiennie co drugie mycie ze standardowym szamponem Nashi." },
-                    { name: "Odżywka Blondy Joy", img: "item-blondy-conditioner.jpg", size: "150 ml", desc: "Odżywka z fioletowym pigmentem. Ochładza kolor blond, neutralizuje ciepłe tony i zapewnia piękny, perłowy blask bez wysuszania pasm.", usage: "Stosuj zawsze po użyciu szamponu Blondy Joy lub jako jedyny krok tonujący z innym szamponem." }
+                    { name: "Szampon Blondy Joy", img: "item-blondy-shampoo.jpg", size: "250 ml", desc: "Dedykowany dla włosów blond i rozjaśnianych. Niweluje żółte odcienie (ochładza kolor).", usage: "Stosuj zamiennie co drugie mycie ze standardowym szamponem Nashi." },
+                    { name: "Odżywka Blondy Joy", img: "item-blondy-conditioner.jpg", size: "150 ml", desc: "Z fioletowym pigmentem. Ochładza kolor blond i zapewnia piękny, perłowy blask bez wysuszania pasm.", usage: "Stosuj po użyciu szamponu Blondy Joy." }
                 ]
             },
             {
                 id: "armonia",
                 name: "Linia Armonia",
-                subtitle: "Dermatologiczna pielęgnacja skóry głowy",
+                subtitle: "Dermatologiczna pielęgnacja",
                 image: "prod-armonia.jpg",
                 items: [
-                    { name: "Szampon Armonia", img: "item-armonia-shampoo.jpg", size: "250 ml", desc: "Szampon do problematycznej skóry głowy, bogaty w naturalne składniki łagodzące i przeciwzapalne (ekstrakt z pokrzywy, granatu). Reguluje wydzielanie sebum.", usage: "Dla osób ze stanami zapalnymi, łupieżem lub nadmiernym przetłuszczaniem." },
-                    { name: "Armonia Scrub", img: "item-armonia-scrub.jpg", size: "150 ml", desc: "Dermatologiczny peeling skóry głowy zawierający naturalny pumeks z celulozą, liście z kory sosny. Delikatnie oczyszcza z nagromadzonego naskórka i stymuluje.", usage: "Wykonywać peeling raz na 10-14 dni przed nałożeniem szamponu." }
+                    { name: "Szampon Armonia", img: "item-armonia-shampoo.jpg", size: "250 ml", desc: "Szampon do problematycznej skóry głowy, bogaty w naturalne składniki łagodzące i przeciwzapalne.", usage: "Dla osób ze stanami zapalnymi, łupieżem lub nadmiernym przetłuszczaniem." },
+                    { name: "Armonia Scrub", img: "item-armonia-scrub.jpg", size: "150 ml", desc: "Peeling skóry głowy zawierający naturalny pumeks z celulozą. Delikatnie oczyszcza z nagromadzonego naskórka.", usage: "Wykonywać peeling raz na 10-14 dni przed nałożeniem szamponu." }
                 ]
             },
             {
@@ -633,19 +572,18 @@
                 subtitle: "Dla mężczyzn (Włosy, zarost, ciało)",
                 image: "prod-man.jpg",
                 items: [
-                    { name: "Man Daily Energizing", img: "item-man-shampoo.jpg", size: "250 ml", desc: "Zagęszczający szampon męski. Usuwa nadmiar sebum i pozostałości produktów do stylizacji. Zapewnia równowagę bariery hydrolipidowej. Wzbogacony ekstraktami z baobabu.", usage: "Do codziennego mycia męskich włosów." },
-                    { name: "Man Oil", img: "item-man-oil.jpg", size: "50 ml", desc: "Wielozadaniowy olej do brody, zarostu i włosów. Formuła nie przetłuszcza i wchłania się natychmiastowo, zostawiając miękki zarost o przepięknym zapachu.", usage: "Rozprowadź w dłoniach i wmasuj w czystą brodę lub zarost." },
-                    { name: "Man Balm", img: "item-man-balm.jpg", size: "100 ml", desc: "Delikatnie nawilżający balsam zapobiegający wrastaniu włosów po goleniu. Łagodzi podrażnienia i zaczerwienienia skóry.", usage: "Wmasować bezpośrednio po goleniu skóry twarzy." },
-                    { name: "Shower Gel 2w1", img: "item-man-shower.jpg", size: "250 ml", desc: "Żel pod prysznic przeznaczony specjalnie do oczyszczania skóry i włosów. Rewitalizuje, świetnie sprawdza się w torbie na siłownię.", usage: "Kompleksowa pielęgnacja pod prysznic (ciało + włosy)." },
-                    { name: "Man Cleanser", img: "item-man-cleanser.jpg", size: "150 ml", desc: "Łagodny środek myjący do twarzy. Tonizuje, usuwa zanieczyszczenia i nadmiar sebum, pozostawiając cerę matową.", usage: "Codzienne mycie skóry twarzy." },
-                    { name: "Man Shaving Clay", img: "item-man-clay.jpg", size: "150 ml", desc: "Krem z glinką do golenia. Bogaty w naturalne składniki wulkaniczne, gwarantuje doskonały poślizg ostrza i zapobiega skaleczeniom.", usage: "Nałożyć przed procesem golenia zarostu maszynką." }
+                    { name: "Man Daily Energizing", img: "item-man-shampoo.jpg", size: "250 ml", desc: "Zagęszczający szampon męski. Usuwa nadmiar sebum i pozostałości produktów do stylizacji.", usage: "Do codziennego mycia męskich włosów." },
+                    { name: "Man Oil", img: "item-man-oil.jpg", size: "50 ml", desc: "Olej do brody, zarostu i włosów. Nie przetłuszcza i wchłania się natychmiastowo.", usage: "Rozprowadź w dłoniach i wmasuj w czystą brodę lub zarost." },
+                    { name: "Man Balm", img: "item-man-balm.jpg", size: "100 ml", desc: "Delikatnie nawilżający balsam zapobiegający wrastaniu włosów po goleniu. Łagodzi podrażnienia.", usage: "Wmasować bezpośrednio po goleniu skóry twarzy." },
+                    { name: "Shower Gel 2w1", img: "item-man-shower.jpg", size: "250 ml", desc: "Żel pod prysznic przeznaczony do oczyszczania skóry i włosów. Rewitalizuje, świetny na siłownię.", usage: "Kompleksowa pielęgnacja pod prysznic." },
+                    { name: "Man Cleanser", img: "item-man-cleanser.jpg", size: "150 ml", desc: "Łagodny środek myjący do twarzy. Tonizuje, usuwa zanieczyszczenia i nadmiar sebum.", usage: "Codzienne mycie skóry twarzy." },
+                    { name: "Man Shaving Clay", img: "item-man-clay.jpg", size: "150 ml", desc: "Krem z glinką do golenia. Gwarantuje doskonały poślizg ostrza i zapobiega skaleczeniom.", usage: "Nałożyć przed procesem golenia zarostu maszynką." }
                 ]
             }
         ];
 
         // ================= FUNKCJE GENERUJĄCE HTML =================
-        
-        const getFallbackImg = (name) => `onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMzMzMiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5CcmFrPC90ZXh0Pjwvc3ZnPg=='"`;
+        const getFallbackImg = (name) => `onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMzMyMiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5CcmFrPC90ZXh0Pjwvc3ZnPg=='"`;
 
         function renderTreatments() {
             const container = document.getElementById('treatments-container');
@@ -656,7 +594,7 @@
                         <h3 class="treatment-title">${t.title}</h3>
                     </div>
                     <div class="treatment-meta">
-                        <span><svg style="width:16px;vertical-align:middle;margin-right:5px;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>${t.time}</span>
+                        <span style="display:flex; align-items:flex-start;"><svg style="width:16px;height:16px;vertical-align:middle;margin-right:6px;margin-top:2px;flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>${t.time}</span>
                         <span>Cena: ${t.price}</span>
                     </div>
                     <p class="treatment-desc">${t.desc}</p>
@@ -672,7 +610,7 @@
                     <img src="${line.image}" alt="${line.name}" class="product-line-img" ${getFallbackImg(line.image)}>
                     <div class="product-line-info">
                         <h3 class="product-line-title">${line.name}</h3>
-                        <p class="product-line-subtitle">${line.subtitle} &rarr; Zobacz produkty</p>
+                        <p class="product-line-subtitle">${line.subtitle}<br><span style="display:inline-block; margin-top:5px;">Zobacz produkty &rarr;</span></p>
                     </div>
                 </div>
             `).join('');
@@ -685,7 +623,6 @@
             
             if(!line) return;
 
-            // Wyświetlenie pojedynczego produktu (Ze zdjęciem obok opisu)
             let itemsHtml = line.items.map(item => `
                 <div class="product-item">
                     <img src="${item.img}" alt="${item.name}" class="product-item-img" ${getFallbackImg(item.img)}>
@@ -705,28 +642,30 @@
                 </div>
                 <div style="margin-top: 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px;">
                     <p style="margin-bottom: 15px;">Podoba Ci się ten produkt? Zapraszamy do zakupu</p>
-                    <a href="tel:+48888520223" class="btn btn-primary">Zadzwoń: 888 520 223</a>
+                    <a href="tel:+48888520223" class="btn btn-primary">
+                        <span class="btn-text-desktop">Zadzwoń: +48 888 520 223</span>
+                        <span class="btn-text-mobile">Zadzwoń</span>
+                    </a>
                 </div>
             `;
             
             modal.classList.add('active');
-            document.body.style.overflow = 'hidden'; 
-            
-            // Przesunięcie suwaka na samą górę okienka przy jego otwarciu
+            lenis.stop(); 
             content.scrollTop = 0;
         }
 
         function closeModal() {
             document.getElementById('product-modal').classList.remove('active');
-            document.body.style.overflow = 'auto';
+            lenis.start(); 
         }
 
-        // Zamykanie modala przy kliknięciu w zaciemnione tło
         document.getElementById('product-modal').addEventListener('click', function(e) {
-            if(e.target === this) closeModal();
+            if(e.target === this || e.target.classList.contains('modal-wrapper')) {
+                closeModal();
+            }
         });
 
-        // ================= INICJALIZACJA I ANIMACJE =================
+        // ================= INICJALIZACJA I OBSERVER =================
         document.addEventListener('DOMContentLoaded', () => {
             renderTreatments();
             renderProductLines();
