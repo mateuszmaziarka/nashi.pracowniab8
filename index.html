@@ -273,12 +273,57 @@
         /* ================= ANIMACJE ================= */
         .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* ================= PRELOADER (EKRAN ŁADOWANIA) ================= */
+        .preloader {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #050505; z-index: 99999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 0.8s cubic-bezier(0.8, 0, 0.2, 1), visibility 0.8s ease;
+        }
+        .preloader.hidden { opacity: 0; visibility: hidden; }
+        
+        .preloader-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1; }
+        
+        .preloader-content { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: -50px; }
+        .preloader-logo { height: 80px; object-fit: contain; margin-bottom: 5px; }
+        .preloader-line { width: 60px; height: 2px; background: var(--accent-gold); margin: 5px 0 10px; border-radius: 2px; }
+        .preloader-text { font-size: 3.5rem; color: #fff; letter-spacing: 2px; line-height: 1; margin: 0; }
+        
+        .preloader-bottom { position: absolute; bottom: 12%; width: 100%; max-width: 300px; text-align: center; }
+        .loader-percent { font-size: 1.4rem; font-weight: 300; color: var(--accent-gold); margin-bottom: 12px; font-variant-numeric: tabular-nums; }
+        .loader-bar-container { width: 100%; height: 2px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+        .loader-bar { height: 100%; width: 0%; background: var(--accent-gold); border-radius: 2px; }
+
+        @media (max-width: 600px) {
+            .preloader-logo { height: 60px; }
+            .preloader-text { font-size: 2.8rem; }
+        }
     </style>
     
     <!-- Biblioteka Lenis do smooth scrollingu -->
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
 </head>
 <body>
+
+    <!-- Ekran ładowania (Preloader) -->
+    <div id="preloader" class="preloader">
+        <div class="preloader-bg">
+            <div class="blob blob-1" style="opacity: 0.2; left: -20%; top: -20%;"></div>
+            <div class="blob blob-2" style="opacity: 0.15; right: -20%; bottom: -20%;"></div>
+        </div>
+        <div class="preloader-content">
+            <img src="nashi_logo.png" alt="Nashi" class="preloader-logo">
+            <div class="preloader-line"></div>
+            <p class="bebas-text preloader-text">Pracownia B8</p>
+        </div>
+        <div class="preloader-bottom">
+            <div class="loader-percent" id="loader-percent">0%</div>
+            <div class="loader-bar-container">
+                <div class="loader-bar" id="loader-bar"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- Animowane tło -->
     <div class="ambient-bg">
@@ -417,6 +462,9 @@
             smoothTouch: false 
         });
 
+        // WSTRZYMANIE SCROLLA NA CZAS ŁADOWANIA
+        lenis.stop(); 
+
         function raf(time) {
             lenis.raf(time);
             requestAnimationFrame(raf);
@@ -426,6 +474,63 @@
         function scrollToSection(id) {
             lenis.scrollTo(id, { offset: -80 }); 
         }
+
+        // ================= PROFESJONALNY PRELOADER =================
+        const preloader = document.getElementById('preloader');
+        const percentText = document.getElementById('loader-percent');
+        const bar = document.getElementById('loader-bar');
+        
+        let currentProgress = 0;
+        let targetProgress = 0;
+        const startTime = Date.now();
+        const minLoadTime = 1200; // Gwarantowane minimum 1.2 sekundy wyświetlania
+
+        const images = Array.from(document.images);
+        let imagesLoaded = 0;
+
+        function updateTarget() {
+            if (images.length === 0) {
+                targetProgress = 100;
+            } else {
+                targetProgress = (imagesLoaded / images.length) * 100;
+            }
+        }
+
+        images.forEach(img => {
+            if (img.complete) {
+                imagesLoaded++; updateTarget();
+            } else {
+                img.addEventListener('load', () => { imagesLoaded++; updateTarget(); });
+                img.addEventListener('error', () => { imagesLoaded++; updateTarget(); }); // Błędy też liczymy by pasek nie utknął
+            }
+        });
+
+        // Awaryjne wymuszenie 100% po załadowaniu całej zawartości
+        window.addEventListener('load', () => { targetProgress = 100; });
+        if (document.readyState === 'complete') { targetProgress = 100; }
+
+        function animatePreloader() {
+            // Płynna matematyczna interpolacja (pasek dogania realny wynik bez przeskakiwania)
+            currentProgress += (targetProgress - currentProgress) * 0.08; 
+            
+            if (currentProgress > 99.5) currentProgress = 100;
+            
+            percentText.innerText = Math.floor(currentProgress) + '%';
+            bar.style.width = currentProgress + '%';
+
+            if (currentProgress === 100) {
+                const elapsed = Date.now() - startTime;
+                const timeToWait = Math.max(0, minLoadTime - elapsed);
+                
+                setTimeout(() => {
+                    preloader.classList.add('hidden');
+                    lenis.start(); // ODBLOKOWANIE SCROLLA PO ZAŁADOWANIU
+                }, timeToWait);
+                return; // Koniec animacji
+            }
+            requestAnimationFrame(animatePreloader);
+        }
+        requestAnimationFrame(animatePreloader);
 
         // ================= MENU HAMBURGER =================
         const hamburgerBtn = document.getElementById('hamburger-btn');
