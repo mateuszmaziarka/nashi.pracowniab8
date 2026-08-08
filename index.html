@@ -176,8 +176,9 @@
         }
         
         .treatment-card { padding: 30px; } 
-        /* Zwiększona wysokość tylko dla obrazków ZABIEGÓW (z 200px na 280px) */
-        .treatment-img { width: 100%; height: 280px; border-radius: 16px; object-fit: cover; margin-bottom: 20px; background: rgba(255,255,255,0.02); }
+        /* Nowa sztywna ramka z wyśrodkowaniem dla ZABIEGÓW */
+        .treatment-img-frame { width: 100%; height: 280px; border-radius: 16px; margin-bottom: 20px; background: rgba(255,255,255,0.02); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .treatment-img-frame img { width: 100%; height: auto; display: block; }
         .treatment-header { margin-bottom: 15px; }
         .treatment-title { font-size: 1.4rem; color: #fff; margin-bottom: 5px; }
         
@@ -196,9 +197,11 @@
         .treatment-desc { flex-grow: 1; font-size: 0.95rem; margin-bottom: 25px; }
         .treatment-btn { width: 100%; text-align: center; }
 
-        .product-line-card { cursor: pointer; position: relative; }
-        .product-line-img { width: 100%; height: 350px; object-fit: cover; opacity: 0.6; transition: opacity 0.3s ease; }
-        .product-line-card:hover .product-line-img { opacity: 0.8; }
+        /* Nowa sztywna ramka dla LINII PRODUKTÓW */
+        .product-line-card { cursor: pointer; position: relative; overflow: hidden; border-radius: 24px; }
+        .product-line-frame { width: 100%; height: 350px; background: rgba(255,255,255,0.02); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .product-line-frame img { width: 100%; height: auto; opacity: 0.6; transition: opacity 0.3s ease; display: block; }
+        .product-line-card:hover .product-line-frame img { opacity: 0.8; }
         .product-line-info {
             position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px;
             background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
@@ -240,7 +243,9 @@
         }
         
         .product-item { display: flex; gap: 25px; margin-bottom: 40px; align-items: flex-start; }
-        .product-item-img { width: 140px; height: 180px; object-fit: cover; border-radius: 12px; background: rgba(255,255,255,0.02); flex-shrink: 0; border: 1px solid var(--glass-border); }
+        /* Sztywna ramka z wyśrodkowaniem w oknie */
+        .product-item-frame { width: 140px; height: 180px; flex-shrink: 0; border-radius: 12px; background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .product-item-frame img { width: 100%; height: auto; display: block; }
         .product-item-content { flex-grow: 1; }
         .product-item-title { font-size: 1.4rem; color: #fff; margin-bottom: 8px; }
         
@@ -259,8 +264,9 @@
             .product-item { display: flex; flex-direction: column; padding-bottom: 30px; }
             .product-item-content { display: contents; }
             .product-item-title { order: 1; margin-bottom: 15px; width: 100%; text-align: left; }
-            .product-item-img { order: 2; width: 100%; height: auto; aspect-ratio: 4/5; margin-bottom: 15px; }
-            .product-item-size { order: 3; margin-bottom: 10px; width: 100%; text-align: left;}
+            /* Zastąpienie img klasą ramki */
+            .product-item-frame { order: 2; width: 100%; height: auto; aspect-ratio: 4/5; margin-bottom: 15px; }
+            .product-item-meta { order: 3; margin-bottom: 10px; width: 100%; text-align: left;}
             .product-item-desc { order: 4; width: 100%; }
             .product-item-usage { order: 5; text-align: left; width: 100%; }
             
@@ -763,7 +769,9 @@
             const container = document.getElementById('treatments-container');
             container.innerHTML = treatments.map((t, index) => `
                 <div class="glass-panel glass-panel-hoverable treatment-card fade-up" style="transition-delay: ${index * 0.1}s">
-                    <img src="${t.img}" alt="${t.title}" class="treatment-img" ${getFallbackImg(t.img)}>
+                    <div class="treatment-img-frame">
+                        <img src="${t.img}" alt="${t.title}" ${getFallbackImg(t.img)}>
+                    </div>
                     <div class="treatment-header">
                         <h3 class="treatment-title">${t.title}</h3>
                     </div>
@@ -781,7 +789,9 @@
             const container = document.getElementById('products-lines-container');
             container.innerHTML = productsCatalog.map((line, index) => `
                 <div class="glass-panel glass-panel-hoverable product-line-card fade-up" onclick="openModal('${line.id}')" style="transition-delay: ${index * 0.1}s">
-                    <img src="${line.image}" alt="${line.name}" class="product-line-img" ${getFallbackImg(line.image)}>
+                    <div class="product-line-frame">
+                        <img src="${line.image}" alt="${line.name}" ${getFallbackImg(line.image)}>
+                    </div>
                     <div class="product-line-info">
                         <h3 class="product-line-title">${line.name}</h3>
                         <p class="product-line-subtitle">${line.subtitle}<br><span style="display:inline-block; margin-top:5px;">Zobacz produkty &rarr;</span></p>
@@ -799,7 +809,9 @@
 
             let itemsHtml = line.items.map(item => `
                 <div class="product-item">
-                    <img src="${item.img}" alt="${item.name}" class="product-item-img" ${getFallbackImg(item.img)}>
+                    <div class="product-item-frame">
+                        <img src="${item.img}" alt="${item.name}" ${getFallbackImg(item.img)}>
+                    </div>
                     <div class="product-item-content">
                         <h4 class="product-item-title">${item.name}</h4>
                         <div class="product-item-meta">
