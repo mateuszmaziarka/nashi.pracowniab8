@@ -98,7 +98,7 @@
 
         /* ================= NAV ================= */
         nav {
-            position: fixed; top: 0; width: 100%; padding: 20px 0; z-index: 100;
+            position: fixed; top: 0; width: 100%; padding: 10px 0; z-index: 100;
             background: rgba(5, 5, 5, 0.7); backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border);
         }
@@ -132,7 +132,7 @@
         }
 
         /* ================= HERO ================= */
-        .hero { height: 100vh; height: 100dvh; display: flex; align-items: center; position: relative; padding-top: 80px; box-sizing: border-box; }
+        .hero { display: flex; align-items: center; position: relative; padding-top: 80px; box-sizing: border-box; }
         .hero-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('hero-bg.jpg'); background-size: cover; background-position: center;
@@ -483,7 +483,13 @@
         let currentProgress = 0;
         let targetProgress = 0;
         const startTime = Date.now();
-        const minLoadTime = 1200; // Gwarantowane minimum 1.2 sekundy wyświetlania
+        const minLoadTime = 1500; // Gwarantowane minimum 1.5 sekundy wyświetlania
+
+        // Sztywne "zabetonowanie" wysokości ekranu startowego raz na zawsze
+        const heroSection = document.querySelector('.hero');
+        if (heroSection) {
+            heroSection.style.height = window.innerHeight + 'px';
+        }
 
         const images = Array.from(document.images);
         let imagesLoaded = 0;
