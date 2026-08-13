@@ -1,909 +1,2802 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nashi Argan - Pracownia B8 | Ekskluzywna Pielęgnacja Włosów</title>
-    <!-- Czcionki -->
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pracownia B8 | Salon Fryzjerski Rzeszów</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<!-- Lenis Smooth Scroll -->
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+<!-- GSAP & ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+  :root{
+    --bg: #fcfbfa;
+    --bottle-green: #1f3d2f;
+    --bottle-green-light: #2f5943;
+    --sand-gold: #cfa876;
+    --sand-gold-light: #e7d2ae;
+    --ink: #2b2b28;
+    --glass-bg: rgba(255,255,255,0.4);
+    --glass-bg-strong: rgba(255,255,255,0.55);
+    --glass-border: rgba(255,255,255,0.6);
+    --radius: 24px;
+  }
+
+  * { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+    -webkit-tap-highlight-color: transparent; 
+  }
+
+  a, button, summary, details {
+    outline: none !important;
+  }
+
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  img { max-width: 100%; display:block; }
+
+  h1,h2,h3 { font-family: 'Cormorant Garamond', serif; color: var(--bottle-green); font-weight: 600; }
+
+  a { text-decoration:none; color:inherit; }
+
+  .container{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  section{ padding: 120px 0; position: relative; }
+
+  .eyebrow{
+    font-family: 'Bebas Neue', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 6px; /* Zwiększony odstęp między literami */
+    font-size: 0.85rem; /* Minimalnie powiększone, bo Bebas jest optycznie węższy/mniejszy */
+    font-weight: 400; /* Bebas najlepiej wygląda bez dodatkowego pogrubienia */
+    color: var(--sand-gold);
+    margin-bottom: 14px;
+    display:block;
+  }
+
+  .section-heading{
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    letter-spacing: 1.5px; /* Delikatny odstęp dla poprawy czytelności */
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    margin-bottom: 20px;
+  }
+
+  .section-sub{
+    max-width: 620px;
+    color: #55554f;
+    font-size: 1.05rem;
+  }
+
+  .glass{
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 32px rgba(31,61,47,0.08);
+  }
+
+  /* NAV */
+  .navbar{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: transparent; 
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+      border-bottom: 1px solid transparent;
+      transition: background 0.6s ease, box-shadow 0.6s ease, backdrop-filter 0.6s ease, border-color 0.6s ease;
+    }
+
+  .navbar.scrolled{
+    background: var(--glass-bg);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px rgba(31,61,47,0.1);
+  }
+
+  .nav-inner{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 20px 24px;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    transition: padding 0.35s ease;
+  }
+
+  .navbar.scrolled .nav-inner{ padding: 14px 24px; }
+
+  .nav-logo{
+    position: relative; 
+    display: inline-block; /* KLUCZOWE: Nadaje logo dokładną szerokość */
+    line-height: 1;     
+    font-family: 'Bebas Neue', sans-serif;
+    text-transform: uppercase;
+    font-size: 2.8rem;
+    font-weight: 400;
+    color: #f5efe4;
+    letter-spacing: 2px;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.35);
+    transition: color 0.4s ease, text-shadow 0.4s ease, font-size 0.4s ease;
+  }
+
+  /* --- NAPRAWIONY KOD: Idealnie rozłożony napis --- */
+  .nav-sub {
+    position: absolute;
+    top: 96%; 
+    left: 0;
+    width: calc(100% - 2px); /* Idealnie zrównuje z prawą stroną "8", pomijając niewidzialną lukę */
+    display: flex;
+    justify-content: space-between; /* Matematycznie rozkłada litery na całą szerokość */
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.45em; /* Powiększone, wreszcie będzie czytelne! */
+    color: var(--bottle-green);
+    text-shadow: none !important;
     
-    <style>
-        /* ================= ZMIENNE I BAZA ================= */
-        :root {
-            --bg-color: #050505;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --text-main: #f0e9e1;
-            --text-muted: #a39c95;
-            --accent-gold: #c39a6b;
-        }
+    /* Ukryte na samej górze strony */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.5s;
+  }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Outfit', sans-serif;
-            -webkit-tap-highlight-color: transparent; /* Usuwa systemowe, niebieskie miganie przy kliknięciu na telefonach */
-        }
+  /* Płynne pokazanie napisu */
+  .navbar.scrolled .nav-sub,
+  .navbar.at-footer .nav-sub {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
 
-        /* Ukrycie standardowego suwaka na czas ładowania gładkiego scrolla */
-        html.lenis, html.lenis body { height: auto; }
-        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  .navbar.scrolled .nav-logo{ color: var(--bottle-green); text-shadow: none; font-size: 1.6rem; }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            overflow-x: hidden;
-            line-height: 1.6;
-            position: relative;
-        }
+  .nav-logo .logo-full,
+  .nav-logo .logo-short {
+    color: var(--sand-gold-light);
+    transition: color 0.4s ease;
+  }
+  .navbar.scrolled .nav-logo .logo-full,
+  .navbar.scrolled .nav-logo .logo-short {
+    color: var(--sand-gold);
+  }
 
-        .bebas-text { font-family: 'Bebas Neue', sans-serif; letter-spacing: 1.5px; }
+  /* --- Logika chowania/pokazywania odpowiednich wyrazów --- */
+  .nav-logo .text-scrolled,
+  .nav-logo .logo-short {
+    display: none; /* Domyślnie ukryte na samym zdjęciu (Hero) */
+  }
+  
+  .navbar.scrolled .nav-logo .text-top,
+  .navbar.at-footer .nav-logo .text-top,
+  .navbar.scrolled .nav-logo .logo-full,
+  .navbar.at-footer .nav-logo .logo-full {
+    display: none; /* Ukrywamy "Bernardyńska 8 Rzeszów" podczas scrolla i na stopce */
+  }
+  
+  .navbar.scrolled .nav-logo .text-scrolled,
+  .navbar.at-footer .nav-logo .text-scrolled,
+  .navbar.scrolled .nav-logo .logo-short,
+  .navbar.at-footer .nav-logo .logo-short {
+    display: inline; /* Pokazujemy "Pracownia B8" podczas scrolla i na stopce */
+  }
 
-        /* Płynne, ruszające się gradienty w tle */
-        .ambient-bg {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -1; overflow: hidden; background: #050505;
-        }
-        .blob {
-            position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.5;
-            animation: float 20s infinite ease-in-out alternate;
-        }
-        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(195,154,107,0.15) 0%, rgba(0,0,0,0) 70%); }
-        .blob-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(94,66,41,0.2) 0%, rgba(0,0,0,0) 70%); animation-delay: -10s; }
-        .blob-3 { top: 40%; left: 40%; width: 40vw; height: 40vw; background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 70%); animation-delay: -5s; }
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap: 34px;
+    list-style:none;
+  }
 
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(5%, 10%) scale(1.1); }
-        }
+  .nav-links a{
+    font-family: 'Bebas Neue', sans-serif;
+    text-transform: uppercase;
+    font-size: 1.25rem; /* Zwiększone, aby zachować czytelność nowej czcionki */
+    letter-spacing: 1.5px;
+    font-weight: 400;
+    color: #f0ece2;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+    transition: color 0.25s ease, text-shadow 0.4s ease;
+    position: relative;
+    padding-bottom: 3px;
+  }
 
-        /* ================= TYPOGRAFIA ================= */
-        h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
-        h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1; margin-bottom: 20px; font-weight: 800;}
-        h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 40px; text-align: center; }
-        p { color: var(--text-muted); font-weight: 300; }
-        
-        .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
-        .section-padding { padding: 100px 0; }
-        .highlight { color: var(--accent-gold); }
+  .navbar.scrolled .nav-links a{ color: var(--ink); text-shadow: none; }
 
-        /* ================= EFEKTY SZKŁA ================= */
-        .glass-panel {
-            background: var(--glass-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--glass-border); border-radius: 24px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s ease; overflow: hidden;
-        }
-        .glass-panel-hoverable:hover { transform: translateY(-8px); border-color: rgba(195, 154, 107, 0.3); }
+  .nav-links a::after{
+    content:'';
+    position:absolute;
+    left:0; bottom:0;
+    width:0;
+    height:1px;
+    background: var(--sand-gold-light);
+    transition: width 0.3s ease;
+  }
 
-        /* Przyciski */
-        .btn {
-            display: inline-flex; align-items: center; justify-content: center;
-            padding: 16px 32px; border-radius: 100px; font-size: 1.1rem;
-            font-weight: 400; text-decoration: none; transition: all 0.3s ease;
-            cursor: pointer; border: none; text-align: center;
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-        }
-        .btn-primary { background: rgba(195, 154, 107, 0.15); color: var(--accent-gold); border: 1px solid rgba(195, 154, 107, 0.3); box-shadow: 0 0 20px rgba(195, 154, 107, 0); }
-        .btn-primary:hover { background: rgba(195, 154, 107, 0.25); box-shadow: 0 0 30px rgba(195, 154, 107, 0.2); transform: scale(1.02); }
-        .btn-secondary { background: rgba(255, 255, 255, 0.05); color: var(--text-main); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); }
+  .navbar.scrolled .nav-links a::after{ background: var(--sand-gold); }
 
-        /* Napisy na przyciskach */
-        .btn-text-desktop { display: inline; }
-        .btn-text-mobile { display: none; }
-        @media (max-width: 600px) {
-            .btn-text-desktop { display: none; }
-            .btn-text-mobile { display: inline; }
-        }
+  .nav-links a:hover{ color: #ffffff; }
+  .navbar.scrolled .nav-links a:hover{ color: var(--bottle-green); }
+  .nav-links a:hover::after{ width:100%; }
 
-        /* ================= NAV ================= */
-        nav {
-            position: fixed; top: 0; width: 100%; padding: 7px 0; z-index: 100;
-            background: rgba(5, 5, 5, 0.7); backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border);
-        }
-        .nav-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo { display: flex; align-items: center; text-decoration: none; cursor: pointer; }
-        
-        /* Rozmiar PC (Przywrócony duży) */
-        .logo .bebas-text { font-size: 2.2rem; color: #fff; line-height: 1; margin-top: 4px; }
-        .logo span.separator { font-weight: 300; font-size: 1.5rem; color: #fff; margin: 0 12px; }
-        .logo img { height: 58px; object-fit: contain; }
-        
-        /* Rozmiar TELEFON (Idealnie pośrodku - krakowski targ) */
-        @media (max-width: 768px) {
-            .logo .bebas-text { font-size: 2.0rem; }
-            .logo span.separator { font-size: 1.35rem; margin: 0 10px; }
-            .logo img { height: 52px; }
-        }
-        
-        .nav-links { display: flex; align-items: center; }
-        .nav-links a { color: var(--text-main); text-decoration: none; margin-left: 30px; font-size: 0.95rem; transition: color 0.3s ease; cursor: pointer; }
-        .nav-links a:hover { color: var(--accent-gold); }
+  .nav-toggle{
+    display:none;
+    background:none;
+    border:none;
+    cursor:pointer;
+    z-index: 1002;
+    width: 28px;
+    height: 20px;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+  }
 
-        /* Menu Hamburger */
-        .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; z-index: 1001; }
-        .hamburger span { width: 25px; height: 2px; background: #fff; transition: all 0.3s ease; }
-        
-        @media (max-width: 768px) {
-            .hamburger { display: flex; }
-            .nav-links {
-                position: fixed; top: 0; right: -100%; width: 250px; height: 100vh;
-                background: rgba(10,10,10,0.95); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-                border-left: 1px solid var(--glass-border); flex-direction: column; justify-content: center; align-items: center;
-                gap: 40px; transition: right 0.4s ease; z-index: 1000;
-            }
-            .nav-links.active { right: 0; }
-            .nav-links a { margin: 0; font-size: 1.2rem; }
-            .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-            .hamburger.active span:nth-child(2) { opacity: 0; }
-            .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-        }
+  .nav-toggle span{
+    display:block;
+    width:100%;
+    height:2px;
+    background:#f5efe4;
+    border-radius:2px;
+    transition: transform 0.35s ease, opacity 0.35s ease, background 0.4s ease;
+  }
 
-        /* ================= HERO ================= */
-        .hero { display: flex; align-items: center; position: relative; padding-top: 80px; box-sizing: border-box; }
-        .hero-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('hero-bg.jpg'); background-size: cover; background-position: center;
-            opacity: 0.3; z-index: -1; mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-        }
-        .hero-content { max-width: 800px; text-align: left; }
-        .hero-buttons { display: flex; gap: 15px; margin-top: 40px; }
-        @media (max-width: 600px) { .hero-buttons { flex-direction: column; } }
+  .navbar.scrolled .nav-toggle span{ background: var(--bottle-green); }
 
-        /* ================= ABOUT ================= */
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-        .about-img { width: 100%; height: 500px; object-fit: cover; border-radius: 30px; border: 1px solid var(--glass-border); }
-        .about-text h3 { font-size: 2rem; margin-bottom: 20px; color: #fff; }
-        .about-text p { margin-bottom: 20px; font-size: 1.1rem; }
-        @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } .about-img { height: 350px; } }
+  .nav-toggle.active span:nth-child(1){ transform: translateY(9px) rotate(45deg); }
+  .nav-toggle.active span:nth-child(2){ opacity:0; }
+  .nav-toggle.active span:nth-child(3){ transform: translateY(-9px) rotate(-45deg); }
 
-        /* ================= ZABIEGI & PRODUKTY ================= */
-        .treatments-grid, .products-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-        }
-        .treatment-card, .product-line-card {
-            width: 100%;
-            max-width: 400px; 
-            flex: 1 1 320px; 
-            display: flex;
-            flex-direction: column;
-            padding: 0; 
-        }
-        
-        .treatment-card { padding: 30px; } 
-        /* Inteligentna ramka dla ZABIEGÓW (bez pustych przestrzeni, auto-kadrowanie) */
-        .treatment-img-frame { width: 100%; height: 280px; border-radius: 16px; margin-bottom: 20px; background: rgba(255,255,255,0.02); overflow: hidden; }
-        .treatment-img-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
-        .treatment-header { margin-bottom: 15px; }
-        .treatment-title { font-size: 1.4rem; color: #fff; margin-bottom: 5px; }
-        
-        /* Naprawa zawijania czasu i ceny w ZABIEGACH */
-        .treatment-meta {
-            display: flex; 
-            flex-wrap: wrap; /* Zezwolenie na przełamanie linii */
-            justify-content: space-between; 
-            gap: 12px; /* Dystans, gdy cena spadnie pod czas */
-            align-items: flex-start;
-            font-size: 0.9rem; color: var(--accent-gold); font-weight: 600; 
-            margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        .treatment-meta span { display: flex; align-items: center; }
-        
-        .treatment-desc { flex-grow: 1; font-size: 0.95rem; margin-bottom: 25px; }
-        .treatment-btn { width: 100%; text-align: center; }
+  .nav-overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+    z-index: 999;
+  }
 
-        /* Inteligentna ramka dla LINII PRODUKTÓW (bez ciemnego filtru) */
-        .product-line-card { cursor: pointer; position: relative; overflow: hidden; border-radius: 24px; }
-        .product-line-frame { width: 100%; height: 350px; background: rgba(255,255,255,0.02); overflow: hidden; }
-        .product-line-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0.8; display: block; }
-        /* Usunięto ściemnianie zdjęcia na hover - zostaje sam ruch i podświetlenie ramki karty */
-        .product-line-info {
-            position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-        }
-        .product-line-title { font-size: 1.8rem; color: #fff; }
-        .product-line-subtitle { color: var(--accent-gold); font-size: 0.9rem; margin-top: 5px; line-height: 1.5; }
-        
-        .phone-link { color: #b5ada5; text-decoration: none; font-weight: 600; transition: none; }
+  .nav-overlay.active{ opacity:1; visibility:visible; }
 
-        /* ================= MODAL Z PRODUKTAMI ================= */
-        .modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 1000;
-            display: none; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; padding: 20px;
-        }
-        .modal.active { display: flex; opacity: 1; }
-        
-        .modal-wrapper { position: relative; width: 100%; max-width: 900px; }
-        
-        .modal-content {
-            background: var(--bg-color); width: 100%; max-height: 90vh;
-            overflow-y: auto; padding: 50px 40px 40px; 
-            border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            -ms-overflow-style: none; scrollbar-width: none;
-            
-            /* Zablokowanie scrollowania strony pod spodem (Scroll Bleed) */
-            overscroll-behavior: none;
-            
-            /* NAPRAWA CZARNYCH EKRANÓW NA TELEFONACH (Akceleracja GPU) */
-            -webkit-overflow-scrolling: touch;
-            transform: translate3d(0, 0, 0);
-            backface-visibility: hidden;
-            
-            /* Wyłączenie zacinającego się filtru w scrollowanym kontenerze */
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
-        }
-        .modal-content::-webkit-scrollbar { display: none; }
-        .modal-content.no-hover:hover { transform: translate3d(0, 0, 0) !important; border-color: var(--glass-border) !important; }
+  /* LOADER */
+  .loader{
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @supports (height: 100svh){
+    .loader{ height: 100svh; }
+  }
 
-        .close-modal {
-            position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none;
-            color: #fff; width: 45px; height: 45px; border-radius: 50%; font-size: 1.5rem; cursor: pointer;
-            transition: 0.3s; z-index: 100; display: flex; justify-content: center; align-items: center;
-        }
-        .close-modal:hover { background: rgba(255,255,255,0.3); transform: scale(1.1); }
-        
-        .modal-line-title {
-            text-align: center; font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 30px;
-            border-bottom: 1px solid var(--glass-border); padding-bottom: 15px; 
-        }
-        
-        .product-item { display: flex; gap: 25px; margin-bottom: 40px; align-items: flex-start; }
-        /* Inteligentna ramka dla produktów w oknie */
-        .product-item-frame { width: 140px; height: 180px; flex-shrink: 0; border-radius: 12px; background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); overflow: hidden; }
-        .product-item-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
-        .product-item-content { flex-grow: 1; }
-        .product-item-title { font-size: 1.4rem; color: #fff; margin-bottom: 8px; }
-        
-        /* Nowy styl dla parametrów: Pojemność i Cena */
-        .product-item-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; }
-        .product-item-meta span { background: rgba(195, 154, 107, 0.1); border: 1px solid rgba(195, 154, 107, 0.3); padding: 4px 12px; border-radius: 100px; font-size: 0.85rem; color: var(--accent-gold); font-weight: 600; }
-        
-        .product-item-desc { margin-bottom: 15px; font-size: 0.95rem; }
-        .product-item-usage { font-size: 0.9rem; background: rgba(255,255,255,0.02); padding: 15px; border-radius: 12px; border-left: 2px solid var(--accent-gold);}
+  .loader-bg{
+    position: absolute;
+    inset: 0;
+    background: #0f1e17;
+    transition: opacity 0.8s ease;
+    z-index: 1;
+  }
 
-        @media (max-width: 600px) {
-            .modal-content { padding: 50px 20px 30px; max-height: 85vh; }
-            .modal-line-title { font-size: 1.8rem; margin-bottom: 20px; text-align: center; } 
-            .close-modal { top: 12px; right: 12px; width: 36px; height: 36px; font-size: 1.3rem; }
-            
-            .product-item { display: flex; flex-direction: column; padding-bottom: 30px; }
-            .product-item-content { display: contents; }
-            .product-item-title { order: 1; margin-bottom: 15px; width: 100%; text-align: left; }
-            /* Zastąpienie img klasą ramki */
-            .product-item-frame { order: 2; width: 100%; height: auto; aspect-ratio: 4/5; margin-bottom: 15px; }
-            .product-item-meta { order: 3; margin-bottom: 10px; width: 100%; text-align: left;}
-            .product-item-desc { order: 4; width: 100%; }
-            .product-item-usage { order: 5; text-align: left; width: 100%; }
-            
-            .product-item::after { content: ''; display: block; width: 100%; height: 1px; background: rgba(255, 255, 255, 0.1); order: 6; margin-top: 30px; }
-            .product-item:last-child::after { display: none; }
-        }
+  .loader-content{
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    padding: 0 24px;
+    margin-top: 8vh; /* <-- Dodane: przesuwa cały blok w dół */
+  }
 
-        /* ================= FOOTER ================= */
-        footer { border-top: 1px solid var(--glass-border); padding: 80px 0 40px; background: rgba(5,5,5,0.8); margin-top: 50px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 60px; }
-        .footer-col h4 { color: #fff; font-size: 1.2rem; margin-bottom: 20px; }
-        .footer-col p, .footer-col a { color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 10px; transition: 0.3s; }
-        .footer-col a:hover { color: var(--accent-gold); }
-        .footer-logo-img { height: 130px; max-width: 100%; object-fit: contain; }
-        .copyright { text-align: center; border-top: 1px solid var(--glass-border); padding-top: 30px; font-size: 0.85rem; color: var(--text-muted); }
+  .loader-bar{
+    position: fixed; /* Uniezależniamy pozycję od logo */
+    left: 50%;
+    top: 75vh; /* Ustawia pasek idealnie na 3/4 wysokości ekranu */
+    transform: translateX(-50%);
+    width: min(220px, 50vw);
+    height: 3px;
+    background: rgba(255,255,255,0.16);
+    border-radius: 4px;
+    overflow: hidden;
+    z-index: 2;
+    transition: opacity 0.8s ease;
+  }
 
-        /* Wyrównanie do środka na telefonach w stopce */
-        @media (max-width: 768px) {
-            .footer-col { text-align: center; }
-            .footer-col a, .footer-col p { margin-left: auto; margin-right: auto; }
-        }
+  .loader-bar-fill{
+    width: 0%;
+    height: 100%;
+    background: var(--sand-gold-light);
+    border-radius: 4px;
+    transition: width 0.1s linear;
+  }
 
-        /* ================= ANIMACJE ================= */
-        .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
-        .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .loader.hidden .loader-bg,
+  .loader.hidden .loader-bar {
+    opacity: 0;
+    pointer-events: none;
+  }
 
-        /* ================= PRELOADER (EKRAN ŁADOWANIA) ================= */
-        .preloader {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: #050505; z-index: 99999;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: opacity 0.8s cubic-bezier(0.8, 0, 0.2, 1), visibility 0.8s ease;
-        }
-        .preloader.hidden { opacity: 0; visibility: hidden; }
-        
-        .preloader-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1; }
-        
-        .preloader-content { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: -40px; }
-        .preloader-logo { height: 100px; object-fit: contain; margin: 0; }
-        .preloader-line { width: 60px; height: 2px; background: var(--accent-gold); margin: 15px 0 35px 0; border-radius: 2px; }
-        .preloader-text { font-size: 3.5rem; color: #fff; letter-spacing: 2px; line-height: 1; margin: 0; }
-        
-        .preloader-bottom { position: absolute; bottom: 12%; width: 100%; max-width: 300px; text-align: center; }
-        .loader-percent { font-size: 1.4rem; font-weight: 300; color: var(--accent-gold); margin-bottom: 12px; font-variant-numeric: tabular-nums; }
-        .loader-bar-container { width: 100%; height: 2px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
-        .loader-bar { height: 100%; width: 0%; background: var(--accent-gold); border-radius: 2px; }
+  .loader.hidden {
+    pointer-events: none;
+  }
 
-        @media (max-width: 600px) {
-            .preloader-content { margin-top: -90px; } /* Przesunięcie całej grupy lekko do góry na telefonach */
-            .preloader-logo { height: 80px; }
-            .preloader-text { font-size: 2.8rem; }
-        }
-    </style>
+  /* HERO */
+  .hero{
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+      linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+      url('hero-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align:center;
+  }
+
+  @supports (height: 100svh){
+    .hero{ height: 100svh; }
+  }
+
+  .hero-content{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    gap: 22px;
+    padding: 0 24px;
+    margin-top: 8vh; /* <-- Dodane: identyczne przesunięcie w dół co w loaderze */
+  }
+
+  .hero-kicker{
+    font-size: 0.78rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--sand-gold-light);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+
+  .hero-logo{
+    width: min(420px, 74vw);
+    height: auto;
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.35));
+  }
+
+  .hero-tagline{
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.05rem, 2vw, 1.4rem);
+    color: #f3efe6;
+    max-width: 520px;
+    line-height: 1.5;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.35);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+
+  .hero-content.animate .hero-kicker{ opacity:1; transform: translateY(0); transition-delay: 0.15s; }
+  .hero-content.animate .hero-tagline{ opacity:1; transform: translateY(0); transition-delay: 0.3s; }
+
+  .hero-nashi-partner {
+    margin-top: 32px; /* Więcej oddechu od głównego cytatu wyżej */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px; /* Lepszy, zrównoważony odstęp od logo */
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 1s ease, transform 1s ease;
+  }
+  
+  .hero-nashi-partner img {
+    width: clamp(85px, 12vw, 110px); /* Troszkę mniejsze logo, bardziej jak subtelny znaczek */
+    height: auto;
+    display: block;
+    opacity: 0.95; /* Delikatne wtapianie w tło */
+  }
+  
+  .hero-nashi-partner span {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.72rem; /* Znacznie mniejsze */
+    text-transform: uppercase; /* Wszystko z dużej litery */
+    letter-spacing: 4px; /* Mocne rozstrzelenie liter (Premium look) */
+    color: rgba(231, 210, 174, 0.85); /* Twój beżowy (sand-gold-light), lekko stonowany przezroczystością */
+    font-weight: 600;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5); /* Gwarantuje, że cienkie litery nie znikną na tle jasnych liści w tle */
+  }
+  
+  .hero-content.animate .hero-nashi-partner {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.45s;
+  }
+
+  .hero-scroll{
+    position:absolute;
+    bottom: 34px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 0.65rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    opacity: 0.75;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .hero-scroll.hide{
+    opacity: 0;
+    transform: translate(-50%, 14px);
+    pointer-events: none;
+  }
+
+  .hero-scroll .line{
+    width:1px;
+    height:20px;
+    background: rgba(255,255,255,0.55);
+    animation: scrollPulse 2.2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse{
+    0% { transform: scaleY(0.4); opacity:0.4; }
+    50% { transform: scaleY(1); opacity:1; }
+    100% { transform: scaleY(0.4); opacity:0.4; }
+  }
+
+  /* ABOUT */
+  .about-card{
+    /* padding usunięty stąd i przeniesiony do .about-content */
+    padding: 0;
+    max-width: 900px;
+    margin: 0 auto;
+    overflow: hidden; /* Kluczowe: docina rogi zdjęcia do zaokrągleń panelu glass */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-content {
+    padding: 60px;
+  }
+
+  .about-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  .about-card p{
+    margin-top: 18px;
+    color: #45453f;
+    font-size: 1.05rem;
+  }
+
+  .about-card p:first-of-type{ margin-top: 24px; }
+
+  .signature-line{
+    margin-top: 30px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--bottle-green);
+  }
+
+  
+  /* SERVICES */
+  .services-grid{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 50px;
+  }
+
+  .service-card{
+    padding: 36px 28px;
+    display:flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  .service-card:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(31,61,47,0.14);
+  }
+
+  .service-icon{
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    background: var(--bottle-green);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: var(--sand-gold-light);
+  }
+
+  .service-card h3{ font-size: 1.35rem; }
+
+  .service-card p{ font-size: 0.92rem; color: #5c5c55; }
+
+  .service-price{
+    margin-top: auto;
+    padding-top: 12px;
+    font-weight: 700;
+    color: var(--bottle-green);
+    font-size: 0.95rem;
+    border-top: 1px solid rgba(31,61,47,0.12);
+  }
+
+  /* PRICING */
+  .pricing-list{
+    margin-top: 50px;
+    display:flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .pricing-category{
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .pricing-category summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 26px 32px;
+    user-select: none;
+    outline: none;
+  }
+
+  .pricing-category summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .cat-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 14px;
+    background: var(--bottle-green);
+    color: var(--sand-gold-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+  }
+
+  .cat-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.55rem;
+    color: var(--bottle-green);
+    flex-grow: 1;
+  }
+
+  .cat-chevron {
+    display: inline-block;
+    width: 16px; 
+    height: 16px;
+    flex-shrink: 0; /* TO JEST KLUCZ - całkowicie blokuje zgniatanie przez tekst */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f3d2f' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 0.35s ease;
+  }
+
+  .pricing-category[open] .cat-chevron {
+    transform: rotate(180deg); /* Przy otwarciu po prostu odwracamy wektor o 180 stopni */
+  }
+
+  .pricing-body{
+    padding: 4px 32px 32px;
+    display:flex;
+    flex-direction: column;
+    gap: 26px;
+    border-top: 1px solid rgba(31,61,47,0.12);
+    padding-top: 26px;
+  }
+
+  .price-item-info h4{
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .price-item-info p{
+    font-size: 0.85rem;
+    color: #6b6b62;
+    margin-top: 4px;
+  }
+
+  .price-variants{
+    margin-top: 12px;
+    display:flex;
+    flex-direction: column;
+    padding-left: 20px;
+    border-left: 2px solid rgba(207, 168, 118, 0.4);
+  }
+
+  .variant-row{
+    display:flex;
+    align-items:baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(31,61,47,0.14);
+    font-size: 0.92rem;
+  }
+
+  .variant-row:last-child{ border-bottom: none; }
+
+  .variant-name{ color: #3d3d38; }
+
+  .variant-meta{
+    display: grid;
+    grid-template-columns: 1fr 75px 85px; /* Magia siatki: Kropki | Czas (75px) | Cena (85px) */
+    gap: 12px; /* Odstęp między kropkami, czasem a ceną */
+    align-items: baseline;
+    white-space: nowrap;
+    font-weight: 700;
+    color: var(--bottle-green);
+    font-size: 0.95rem;
+    text-align: right; /* Zrównuje wszystko ładnie do prawej krawędzi */
+  }
+
+  /* --- Kropki naprowadzające --- */
+  .variant-meta::before {
+    content: "";
+    border-bottom: 2px dotted rgba(31,61,47,0.25);
+    position: relative;
+    top: -4px; 
+    grid-column: 1; /* Sztywno przypisuje kropki do pierwszej kolumny */
+    grid-row: 1;
+  }
+
+  /* Ukrywamy kropki podpunktów, ale używamy transparent, by nie usuwać ich z siatki (zachowuje wyrównanie!) */
+  .price-variants .variant-meta::before {
+    border-bottom-color: transparent;
+  }
+
+  .variant-meta small{
+    grid-column: 2; /* Sztywno przypisuje czas do drugiej kolumny */
+    grid-row: 1;
+    font-weight: 500;
+    color: var(--sand-gold);
+    margin: 0; 
+  }
+
+  .pricing-cta{
+    text-align:center;
+    margin-top: 46px;
+  }
+
+  /* TEAM */
+  .team-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    margin-top: 50px;
+  }
+
+  .team-card{
+    padding: 40px;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    text-align:center;
+  }
+
+  .team-photo{
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 3px solid var(--sand-gold);
+    background: linear-gradient(135deg, #ece6dc, #d9cdb8);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: var(--bottle-green);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+  }
+
+  .team-card h3{ font-size: 1.6rem; margin-bottom: 4px; }
+
+  .team-role{
+    color: var(--sand-gold);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  .team-card p{ color: #55554f; font-size: 0.95rem; }
+
+  /* NASHI */
+  .nashi-section{
+    background: linear-gradient(180deg, rgba(31,61,47,0.04), rgba(207,168,118,0.06));
+  }
+
+  .nashi-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 50px;
+  }
+
+  .nashi-card{
+    padding: 0 0 32px 0;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .nashi-photo{
+    height: 220px;
+    width: 100%;
+    border-radius: 24px 24px 0 0;
+    overflow: hidden;
+  }
+
+  .nashi-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .nashi-card:hover .nashi-photo img {
+    transform: scale(1.05);
+  }
+
+  .nashi-card h3, .nashi-card p{ padding: 0 28px; }
+
+  .nashi-card h3{ margin-top: 22px; font-size: 1.3rem; }
+
+  .nashi-card p{ margin-top: 10px; color: #55554f; font-size: 0.92rem; flex-grow:1; }
+
+  .nashi-cta-wrap{
+    text-align:center;
+    margin-top: 46px;
+  }
+
+  /* BUTTONS */
+  .btn{
+    display:inline-block;
+    padding: 16px 36px;
+    background: var(--bottle-green);
+    color: #fdf9f2;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    border: none;
+    cursor:pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+
+  .btn:hover{
+    background: var(--bottle-green-light);
+    transform: translateY(-2px);
+  }
+
+  /* --- ANIMACJA PRZYCISKU BOOKSY --- */
+  .btn-booksy-anim {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-booksy-anim .btn-text {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  .btn-booksy-anim .btn-logo {
+    position: absolute;
+    width: 75px; /* Szerokość logo, możesz dostosować w razie potrzeby */
+    height: auto;
+    opacity: 0;
+    transform: scale(0.85);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none; /* Żeby obrazek nie blokował w kliknięciu */
+  }
+
+  .btn-booksy-anim.show-logo .btn-text {
+    opacity: 0;
+    transform: scale(0.95); /* Lekko "zapada się" do środka */
+  }
+
+  .btn-booksy-anim.show-logo .btn-logo {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .btn-outline{
+    background: transparent;
+    border: 1.5px solid var(--bottle-green);
+    color: var(--bottle-green);
+  }
+
+  .btn-outline:hover{
+    background: var(--bottle-green);
+    color: #fdf9f2;
+  }
+
+  /* DYNAMIC GALLERY - MASONRY, EXPAND & LIGHTBOX */
+  .gallery-wrapper {
+    position: relative;
+    overflow: hidden;
+    max-height: 1350px; /* Zmieniono z 420px: idealna wysokość na pełne 2 rzędy i gradient */
+    transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .gallery-wrapper.expanded {
+    max-height: 8000px; /* Rozwinięcie na maksymalną przestrzeń */
+  }
+
+  .gallery-expand-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 220px;
+    background: linear-gradient(to top, var(--bg) 20%, rgba(252, 251, 250, 0.85) 60%, transparent); /* Szybki, silny zanik gradientowy */
+    display: flex;
+    align-items: center; /* Trzyma przycisk wysoko na gradientowym polu */
+    justify-content: center;
+    z-index: 2;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+  .gallery-wrapper.expanded .gallery-expand-overlay {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .gallery-expand-btn {
+    padding: 14px 34px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--bottle-green);
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    box-shadow: 0 8px 32px rgba(31,61,47,0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+    transform: translateY(15px); /* Precyzyjna wysokość osadzenia na gradiencie */
+  }
+  .gallery-expand-btn:hover {
+    background: #fff;
+    transform: translateY(12px);
+  }
+
+  .lightbox-swipe-text {
+    display: none;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.6);
+    font-size: 0.85rem;
+    text-align: center;
+    width: 90%;
+    pointer-events: none;
+    z-index: 10001;
+    font-weight: 500;
+  }
+
+  .gallery-masonry {
+    column-count: 3;
+    column-gap: 20px;
+    margin-top: 50px;
+  }
+
+  .gallery-masonry-item {
+    break-inside: avoid;
+    margin-bottom: 20px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    border: 1px solid var(--glass-border);
+    cursor: zoom-in;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: var(--glass-bg);
+    padding: 0;
+    box-shadow: 0 4px 16px rgba(31,61,47,0.04);
+  }
+
+  .gallery-masonry-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: calc(var(--radius) - 1px);
+    transition: transform 0.4s ease;
+  }
+
+  .gallery-loader {
+    column-span: all;
+    text-align: center;
+    padding: 40px;
+    color: #6b6b63;
+    font-weight: 500;
+  }
+
+  /* LIGHTBOX MODAL */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    background: rgba(15,28,22,0.85); /* Wektor z var(--bottle-green) */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .lightbox:not([hidden]) {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .lightbox-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox-content img {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    user-select: none;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
+    color: #fff;
+    font-size: 1.5rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .lightbox-prev, .lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
+    color: #fff;
+    font-size: 2.5rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+    padding-bottom: 6px; 
+  }
+
+  .lightbox-prev { left: 24px; }
+  .lightbox-next { right: 24px; }
+
+  .lightbox-close:hover, .lightbox-close:focus,
+  .lightbox-prev:hover, .lightbox-next:hover,
+  .lightbox-prev:focus, .lightbox-next:focus {
+    background: var(--bottle-green);
+    transform: scale(1.05);
+    outline: none;
+  }
+  
+  .lightbox-prev:hover, .lightbox-next:hover,
+  .lightbox-prev:focus, .lightbox-next:focus {
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  /* FOOTER */
+  footer {
+    /* Ciągły, elegancki gradient na całej powierzchni stopki */
+    background: linear-gradient(to bottom, #2b523f 0%, var(--bottle-green) 100%);
+    color: #f2ede2;
+    padding: 90px 0 40px;
+    position: relative;
+    overflow: hidden; /* Przycina liście, żeby nie wychodziły poza obszar stopki */
+  }
+
+  /* Wyciągnięcie tekstu stopki nad liście */
+  footer .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Statyczne liście wewnątrz stopki */
+  .footer-leaf {
+    position: absolute;
+    bottom: -5%; /* Lekko opuszczone, by dół liścia zniknął za krawędzią ekranu */
+    max-width: 35vw;
+    height: auto;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6; /* Delikatnie zmniejszona widoczność, by lepiej stopiły się z gradientem */
+  }
+
+  .footer-leaf-left {
+    left: -2%;
+  }
+
+  .footer-leaf-right {
+    right: -2%;
+  }
+
+  @media (max-width: 760px) {
+    .footer-leaf {
+      max-width: 50vw;
+    }
+  }
+  .footer-grid{
+    display: grid;
+    /* 5 kolumn, by idealnie rozłożyć wszystko na równe wysokości i zlikwidować puste dziury */
+    grid-template-columns: 2.2fr 1.6fr 1.4fr 1fr 1.2fr; 
+    gap: 30px;
+  }
+
+  .footer-brand{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    letter-spacing: 2px;
+    color: #fff;
+    margin-bottom: 14px;
+  }
+
+  .footer-col h4{
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-size: 1.4rem;
+    color: var(--sand-gold-light);
+    margin-bottom: 18px;
+  }
+
+  .footer-col p, .footer-col a{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.15rem;
+    letter-spacing: 1px;
+    color: rgba(242,237,226,0.85);
+    margin-bottom: 8px;
+    display:block;
+  }
+
+  .social-icons-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 18px; /* Odstęp między ikonami */
+    margin-top: 14px;
+  }
+
+  /* Resetujemy domyślne style linków w stopce, żeby ikony leżały w rzędzie */
+  .footer-col a.social-icon {
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 44px; /* Wielkość ikony - możesz zmienić jeśli są za małe/za duże */
+    height: 44px;
+    transition: transform 0.2s ease; /* Tylko delikatne uniesienie przy najechaniu */
+  }
+
+  /* Dopasowanie obrazka do rozmiaru linku */
+  .footer-col a.social-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Gwarantuje, że obrazek nie zostanie ucięty ani rozciągnięty */
+    display: block;
+  }
+
+  /* Lekkie podbicie do góry po najechaniu myszką, żadnych zmian kolorów */
+  .footer-col a.social-icon:hover {
+    transform: translateY(-3px);
+  }
+
+  .footer-bottom{
+    font-family: 'Bebas Neue', sans-serif;
+    text-align:center;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(242,237,226,0.15);
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+    color: rgba(242,237,226,0.6);
+  }
+
+  /* --- NOWY KOD: Styl dla linku Regulamin --- */
+  .footer-link-regulamin {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: rgba(242,237,226,0.4); /* Delikatne podkreślenie */
+    text-underline-offset: 4px;
+    margin-left: 8px; /* Troszkę zwiększony odstęp, żeby linki się nie zlewały */
+    transition: color 0.3s ease, text-decoration-color 0.3s ease;
+    white-space: nowrap; /* Blokuje rozrywanie wyrazów (spacja jest bezpieczna) */
+    display: inline-block; /* Traktuje cały link jako nierozłączny klocek */
+  }
+
+  .footer-link-regulamin:hover {
+    color: #fff;
+    text-decoration-color: #fff;
+  }
+
+  /* WIDŻET MAPY W STOPCE */
+  .footer-map-wrapper {
+    width: 100%;
+    height: 320px;
+    margin-top: 50px;
+    margin-bottom: 60px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid rgba(242,237,226,0.15);
+    background: rgba(15,28,22,0.4);
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+  }
+  
+  .footer-map-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: none;
+  }
+
+  /* AKTYWNE LINKI KONTAKTOWE (Tel / Mail) */
+  .footer-col p .contact-link {
+    display: inline;
+    color: var(--sand-gold-light);
+    font-weight: 600;
+    margin-bottom: 0;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+  }
+
+  .footer-col p .contact-link:hover {
+    color: #fff;
+    text-shadow: 0 0 8px rgba(231, 210, 174, 0.4);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 980px){
+    .services-grid{ grid-template-columns: repeat(2, 1fr); }
+    .nashi-grid{ grid-template-columns: repeat(1, 1fr); max-width: 480px; margin-left:auto; margin-right:auto; }
+    .footer-grid{ grid-template-columns: repeat(3, 1fr); gap: 40px; } /* Zmienione na 3 kolumny by dopasować 5 elementów */
+    .gallery-masonry { column-count: 2; }
+  }
+
+  @media (max-width: 760px){
+    section{ padding: 80px 0; }
     
-    <!-- Biblioteka Lenis do smooth scrollingu -->
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+    /* --- NOWY UKŁAD CENNIKA NA TELEFONY --- */
+    .pricing-category summary { padding: 20px 20px; }
+    .cat-title { font-size: 1.4rem; }
+    .pricing-body { padding: 0px 20px 24px; }
+    .price-variants { padding-left: 12px; }
+    
+    .variant-row {
+      flex-direction: column; 
+      align-items: flex-start;
+      gap: 8px;
+      padding: 14px 0;
+    }
+    
+    .variant-meta {
+      display: grid; /* Używamy magii siatki również na telefonie */
+      grid-template-columns: 1fr auto; /* Lewa strona (czas) i prawa strona (cena) */
+      align-items: baseline;
+      width: 100%; 
+      font-size: 1.05rem;
+      text-align: right; /* Tekst ceny zostanie ściągnięty idealnie do prawej */
+    }
+    
+    .variant-meta::before {
+      display: none; 
+    }
+    
+    .variant-meta small {
+      grid-column: 1; /* Wymuszamy wrzucenie czasu do 1. kolumny (lewa krawędź) */
+      grid-row: 1;
+      text-align: left; /* Czas równamy do lewej */
+      margin: 0; /* Resetujemy wszelkie marginesy */
+      font-size: 0.95rem;
+    }
+    /* -------------------------------------- */
+
+    .nav-logo{ font-size: 2.2rem; }
+    .navbar.scrolled .nav-logo{ font-size: 1.6rem; }
+    
+    /* --- NOWY KOD: Bernardyńska 8 pomniejszona na telefonach o 25% względem Pracowni --- */
+    /* Rzeszów na telefonach wyraźnie mniejszy (zmniejszony o 45%) */
+    .nav-logo .logo-full { font-size: 0.85em; }
+
+    .nav-links{
+      position: fixed;
+      top: 0; left: 0;
+      height: 100vh;
+      width: min(78vw, 320px);
+      background: rgba(15,28,22,0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      flex-direction: column;
+      justify-content:center;
+      align-items:center;
+      gap: 34px;
+      transform: translateX(-100%);
+      visibility: hidden;
+      transition: transform 0.45s cubic-bezier(.77,0,.18,1), visibility 0s linear 0.45s;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-links.open{
+      transform: translateX(0);
+      visibility: visible;
+      transition: transform 0.45s cubic-bezier(.77,0,.18,1), visibility 0s linear 0s;
+    }
+    
+    .navbar.scrolled .nav-links.open a,
+    .navbar .nav-links.open a {
+      color: #f0ece2 !important;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.3) !important;
+    }
+    .navbar.scrolled .nav-links.open a:hover,
+    .navbar .nav-links.open a:hover {
+      color: #ffffff !important;
+    }
+    .navbar.scrolled .nav-links.open a::after,
+    .navbar .nav-links.open a::after {
+      background: var(--sand-gold-light) !important;
+    }
+    .navbar.scrolled .nav-toggle.active span,
+    .navbar .nav-toggle.active span {
+      background: #f5efe4 !important;
+    }
+
+    .nav-links a{ font-size: 1.6rem; }
+    .nav-toggle{ display:flex; }
+    .services-grid{ grid-template-columns: 1fr; }
+    .team-grid{ grid-template-columns: 1fr; }
+    .footer-grid{ grid-template-columns: 1fr; text-align:center; }
+    .social-icons-wrapper { justify-content: center; }
+    .about-content{ padding: 36px 24px; }
+    .hero-logo{ width: min(300px, 80vw); }
+    
+    .footer-map-wrapper {
+          height: 240px;
+          margin-top: 40px;
+          margin-bottom: 40px;
+        }
+
+
+    /* MOBILE GALLERY RESPONSIVE */
+    .gallery-masonry { 
+      column-count: auto; 
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .gallery-masonry-item {
+      aspect-ratio: 1 / 1;
+      margin-bottom: 0;
+    }
+    .gallery-masonry-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .gallery-wrapper {
+      max-height: 420px; /* Zmieniono z 170px: mieści idealnie 2 rzędy kwadratów + zarys trzeciego pod gradientem */
+    }
+    .gallery-wrapper.expanded {
+      max-height: 5000px; 
+    }
+    .gallery-expand-overlay {
+      height: 120px;
+      padding-bottom: 10px; /* Nieznacznie opuszcza przycisk na mniejszych ekranach */
+      background: linear-gradient(to top, var(--bg) 15%, rgba(252, 251, 250, 0.85) 65%, transparent);
+    }
+    .gallery-expand-btn {
+      transform: none; /* Resetuje desktopowe ułożenie */
+    }
+    .gallery-expand-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .lightbox-prev, .lightbox-next {
+      display: none !important;
+    }
+    .lightbox-swipe-text {
+      display: block;
+    }
+    .lightbox-close { top: 12px; right: 12px; width: 40px; height: 40px; font-size: 1.2rem; }
+  }
+  /* TOAST NOTIFICATION - KOMUNIKAT GALERII */
+  .gallery-toast {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translate(-50%, 80px); /* Ukryte poniżej ekranu */
+    opacity: 0;
+    visibility: hidden;
+    background: var(--glass-bg-strong); /* Użycie mocniejszego rozmycia z Twoich zmiennych */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    color: var(--bottle-green);
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 16px 32px;
+    border-radius: 30px;
+    box-shadow: 0 12px 40px rgba(31,61,47,0.15);
+    z-index: 10000;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Elegancki efekt sprężystości */
+    pointer-events: none;
+    text-align: center;
+    width: max-content;
+    max-width: 90vw;
+  }
+
+  .gallery-toast.show {
+    transform: translate(-50%, 0); /* Wyjazd do oryginalnej pozycji */
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* DEKORACYJNE LIŚCIE - PARALAKSA */
+  .parallax-leaf {
+    position: absolute;
+    max-width: 32vw;
+    height: auto;
+    pointer-events: none;
+    z-index: -1;
+  }
+  @media (max-width: 760px) {
+    .parallax-leaf {
+      max-width: 50vw;
+    }
+  }
+  
+  /* --- NOWY KOD: Pasek nawigacji przy stopce --- */
+  .navbar.at-footer {
+    background: #ffffff !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-bottom: 1px solid rgba(31,61,47,0.1) !important;
+    box-shadow: 0 8px 32px rgba(31,61,47,0.06) !important;
+  }
+
+  .navbar.at-footer .nav-inner {
+    padding: 20px 24px !important;
+  }
+
+  .navbar.at-footer .nav-logo {
+    font-size: 2.8rem !important;
+    color: var(--bottle-green) !important;
+    text-shadow: none !important;
+  }
+
+  .navbar.at-footer .nav-logo .logo-full,
+  .navbar.at-footer .nav-logo .logo-short {
+    color: var(--sand-gold) !important;
+  }
+
+  .navbar.at-footer .nav-links a {
+    font-size: 1.25rem !important;
+    color: var(--ink) !important;
+    text-shadow: none !important;
+  }
+
+  .navbar.at-footer .nav-links a:hover {
+    color: var(--bottle-green) !important;
+  }
+
+  .navbar.at-footer .nav-links a::after {
+    background: var(--sand-gold) !important;
+  }
+
+  .navbar.at-footer .nav-toggle span {
+    background: var(--bottle-green) !important;
+  }
+
+  @media (max-width: 760px) {
+    .navbar.at-footer .nav-logo {
+      font-size: 2.2rem !important;
+    }
+    .navbar.at-footer .nav-links.open a {
+      color: #f0ece2 !important;
+    }
+  }
+
+/* --- ELEGANKI BANER COOKIES --- */
+  .cookie-banner {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 99999;
+    background: rgba(15, 28, 22, 0.92); /* Głęboka zieleń dopasowana do marki */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(207, 168, 118, 0.3); /* Złota ramka */
+    border-radius: 20px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 440px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    
+    /* Animacja wyłaniania */
+    transform: translateY(30px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease, visibility 0.5s ease;
+  }
+
+  .cookie-banner.show {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .cookie-text {
+    font-size: 0.8rem;
+    color: #f0ece2;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .cookie-text a {
+    color: var(--sand-gold);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .cookie-text a:hover {
+    color: var(--sand-gold-light);
+    border-color: var(--sand-gold-light);
+  }
+
+  .cookie-btn {
+    background: var(--sand-gold);
+    color: var(--bottle-green);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.3s ease, transform 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .cookie-btn:hover {
+    background: var(--sand-gold-light);
+    transform: translateY(-2px);
+  }
+
+  /* Wersja mobilna - ultra dopasowana */
+  @media (max-width: 760px) {
+    .cookie-banner {
+      bottom: 16px;
+      left: 16px;
+      right: 16px;
+      max-width: none;
+      flex-direction: row; 
+      padding: 14px 16px;
+      gap: 12px;
+      border-radius: 16px;
+    }
+    .cookie-text {
+      font-size: 0.75rem;
+    }
+    .cookie-btn {
+      padding: 14px 20px; /* Duży obszar klikalny dla palca */
+      font-size: 0.8rem;
+    }
+  }
+</style>
 </head>
 <body>
 
-    <!-- Ekran ładowania (Preloader) -->
-    <div id="preloader" class="preloader">
-        <div class="preloader-bg">
-            <div class="blob blob-1" style="opacity: 0.2; left: -20%; top: -20%;"></div>
-            <div class="blob blob-2" style="opacity: 0.15; right: -20%; bottom: -20%;"></div>
-        </div>
-        <div class="preloader-content">
-            <img src="nashi_logo.png" alt="Nashi" class="preloader-logo">
-            <div class="preloader-line"></div>
-            <p class="bebas-text preloader-text">Pracownia B8</p>
-        </div>
-        <div class="preloader-bottom">
-            <div class="loader-percent" id="loader-percent">0%</div>
-            <div class="loader-bar-container">
-                <div class="loader-bar" id="loader-bar"></div>
+<!-- KONTENER NA DEKORACYJNE LIŚCIE -->
+<div id="parallax-leaves-wrapper" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1; pointer-events: none; overflow: hidden;">
+  <div id="parallax-leaves-layer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; will-change: transform;">
+    <!-- Liście lewa strona -->
+    <img src="l/LG1.png" class="parallax-leaf" style="top: 0; left: 0;" alt="">
+    <img src="l/LG2.png" class="parallax-leaf" style="top: 0; left: 0;" alt="">
+    <img src="l/LS1.png" class="parallax-leaf" style="top: 22%; left: 0;" alt="">
+    <img src="l/LS2.png" class="parallax-leaf" style="top: 68%; left: 0;" alt="">
+    
+    <!-- Liście prawa strona -->
+    <img src="l/PG1.png" class="parallax-leaf" style="top: 0; right: 0;" alt="">
+    <img src="l/PS1.png" class="parallax-leaf" style="top: 48%; right: 0;" alt="">
+  </div>
+</div>
+
+<div class="loader" id="loader">
+  <div class="loader-bg" id="loaderBg"></div>
+  <div class="loader-content">
+    <span class="hero-kicker" style="visibility:hidden; margin:0;">Rzeszów · FRYZJERSTWO</span>
+    
+    <!-- WRAPPER: trzyma pasek z pozycją absolutną idealnie pod logo -->
+    <div style="position: relative;">
+      <img src="logo.png" alt="Pracownia B8" class="hero-logo loader-logo">
+      
+      <!-- Pasek postępu przeniesiony tutaj -->
+      <div class="loader-bar" id="loaderBarWrapper">
+        <div class="loader-bar-fill" id="loaderFill"></div>
+      </div>
+    </div>
+
+    <p class="hero-tagline" style="visibility:hidden; margin:0;">Miejsce, gdzie luksus wiąże się z pasją i precyzją każdego cięcia.</p>
+    
+    <!-- DODANY NIEWIDZIALNY ELEMENT: wyrównuje środek ciężkości loadera ze stroną główną -->
+    <div class="hero-nashi-partner" style="visibility:hidden;">
+      <span>Salon partnerski</span>
+      <img src="nashi_logo.png" alt="">
+    </div>
+  </div>
+</div>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-inner container">
+    <a href="#top" class="nav-logo">
+      <span class="text-top"></span>
+      <span class="text-scrolled">PRACOWNIA </span>
+      <span class="logo-full"></span>
+      <span class="logo-short">B8</span>
+      <span class="nav-sub">
+        <span>F</span><span>R</span><span>Y</span><span>Z</span><span>J</span><span>E</span><span>R</span><span>S</span><span>T</span><span>W</span><span>O</span>
+      </span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#onas">O nas</a></li>
+      <li><a href="#uslugi">Usługi</a></li>
+      <li><a href="#voucher">Vouchery</a></li>
+      <li><a href="#zespol">Zespół</a></li>
+      <li><a href="#nashi">Nashi</a></li>
+      <li><a href="#galeria">Galeria</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Otwórz menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-overlay" id="navOverlay"></div>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-content" id="heroContent">
+    <span class="hero-kicker">BERNARDYŃSKA 8</span>
+    <img src="logo.png" alt="Pracownia B8 - FRYZJERSTWO" class="hero-logo">
+    <p class="hero-tagline">Przestrzeń stworzona dla Twoich włosów i Twojego relaksu.</p>
+    <div class="hero-nashi-partner">
+      <span>Salon partnerski</span>
+      <a href="https://nashi.pracowniab8.pl" title="Odwiedź dedykowaną stronę Nashi Argan" style="display: block; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <img src="nashi_logo.png" alt="Nashi Argan">
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll" id="heroScroll">
+    <span>Przewiń</span>
+    <div class="line"></div>
+  </div>
+</header>
+
+<!-- O NAS -->
+<section id="onas">
+  <div class="container">
+    <div class="glass about-card">
+      <!-- Kontener na tekst (przejmuje padding) -->
+      <div class="about-content">
+        <span class="eyebrow">Nasza historia</span>
+        <h2 class="section-heading">O Pracowni B8</h2>
+        <p>Pracownia B8 to miejsce stworzone z myślą o kobietach i mężczyznach, którzy cenią sobie precyzję, indywidualne podejście oraz najwyższą jakość usług fryzjerskich. Znajdziesz nas przy ul. Bernardyńskiej 8 w Rzeszowie — w kameralnym, starannie zaprojektowanym wnętrzu, w którym każdy detal ma znaczenie.</p>
+        <p>W Pracowni B8 czas płynie inaczej — to przestrzeń stworzona do relaksu, rozmowy i metamorfozy. Wierzymy, że dobra fryzura to nie tylko efekt wizualny, ale przede wszystkim pewność siebie, którą zabierasz ze sobą na co dzień.</p>
+        <p class="signature-line">— Zespół Pracowni B8, Rzeszów</p>
+      </div>
+      <!-- Zdjęcie "przyklejone" do dołu (podmień src na własne) -->
+      <img src="pracownia.jpg" alt="Wnętrze Pracowni B8" class="about-photo">
+    </div>
+  </div>
+</section>
+
+<!-- USŁUGI / CENNIK -->
+<section id="uslugi">
+  <div class="container">
+    <span class="eyebrow">Cennik</span>
+    <h2 class="section-heading">Nasze usługi</h2>
+    <p class="section-sub">Pełny cennik usług Pracowni B8. Ceny mogą się różnić w zależności od długości i gęstości włosów oraz nakładu pracy — dokładną wycenę otrzymasz podczas bezpłatnej konsultacji.</p>
+
+    <div class="pricing-list">
+      <!-- Kategorie cennika -->
+      <details class="glass pricing-category">
+        <summary>
+          <span class="cat-icon">✂</span>
+          <span class="cat-title">Strzyżenie</span>
+          <span class="cat-chevron"></span>
+        </summary>
+        <div class="accordion-content">
+          <div class="pricing-body">
+            <div class="price-item">
+              <div class="price-item-info">
+                <h4>Strzyżenie damskie</h4>
+                <p>Strzyżenie damskie włosów + podstawowa pielęgnacja</p>
+              </div>
+              <div class="price-variants">
+                <div class="variant-row"><span class="variant-name">Włosy Krótkie - Do Ucha</span><span class="variant-meta">120,00 zł <small>1h</small></span></div>
+                <div class="variant-row"><span class="variant-name">Włosy Średnie - Do Ramion</span><span class="variant-meta">140,00 zł <small>1h</small></span></div>
+                <div class="variant-row"><span class="variant-name">Włosy Długie - Niżej Ramion</span><span class="variant-meta">160,00 zł <small>1h</small></span></div>
+                <div class="variant-row"><span class="variant-name">Włosy Bardzo Długie - Niżej Łopatek</span><span class="variant-meta">180,00 zł <small>1h 30min</small></span></div>
+              </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Animowane tło -->
-    <div class="ambient-bg">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-    </div>
-
-    <!-- Nawigacja -->
-    <nav>
-        <div class="container nav-content">
-            <a href="https://pracowniab8.pl" class="logo">
-                <span class="bebas-text">Pracownia B8</span>
-                <span class="separator">|</span>
-                <img src="nashi_logo.png" alt="Nashi">
-            </a>
             
-            <button class="hamburger" id="hamburger-btn">
-                <span></span><span></span><span></span>
-            </button>
-
-            <div class="nav-links" id="nav-links">
-                <a onclick="scrollToSection('#o-marce')">O marce</a>
-                <a onclick="scrollToSection('#produkty')">Produkty domowe</a>
-                <a onclick="scrollToSection('#zabiegi')">Zabiegi w salonie</a>
-                <a onclick="scrollToSection('#kontakt')">Kontakt</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Sekcja Hero -->
-    <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="container">
-            <div class="hero-content fade-up">
-                <p style="color: var(--accent-gold); font-size: 1.2rem; font-weight: 600; margin-bottom: 15px; letter-spacing: 2px;">SALON PARTNERSKI NASHI</p>
-                <h1>Ekskluzywna<br>pielęgnacja<br>stworzona dla<br><span class="highlight">Twoich włosów.</span></h1>
-                <p style="font-size: 1.2rem; max-width: 600px; margin-top: 20px;">Odkryj włoską markę premium stworzoną z poszanowaniem natury.</p>
-                
-                <div class="hero-buttons">
-                    <a href="https://booksy.com/pl-pl/268448_fryzjerstwo-pracowniab8_fryzjer_10729_rzeszow" target="_blank" class="btn btn-primary">Umów wizytę w salonie</a>
-                    <a href="tel:+48888520223" class="btn btn-secondary">
-                        <span class="btn-text-desktop">Kup produkty - Zadzwoń 888 520 223</span>
-                        <span class="btn-text-mobile">Kup produkty - Zadzwoń</span>
-                    </a>
+            <div class="price-item">
+              <div class="variant-row" style="border-bottom: none; padding: 0;">
+                <div class="price-item-info">
+                  <h4>Strzyżenie męskie</h4>
                 </div>
+                <span class="variant-meta">80,00 zł <small>45min</small></span>
+              </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Sekcja O Nas -->
-    <section id="o-marce" class="section-padding">
-        <div class="container">
-            <div class="about-grid fade-up">
-                <div class="about-text">
-                    <h3>Kim jesteśmy?</h3>
-                    <p>Nashi Argan jest włoską marką premium, której serce – Akademia Nashi mieści się w Mediolanie. Nasze kosmetyki stworzyliśmy z myślą o kobietach poszukujących najlepszych rozwiązań pielęgnacyjnych do włosów.</p>
-                    <p>Nashi jest marką eko, tworzącą swoje kosmetyki przy użyciu energii pochodzącej ze źródeł odnawialnych, z poszanowaniem środowiska oraz korzystając z jego dobrodziejstw. Kosmetyki bogate są w naturalne, organiczne składniki, tj.: olej arganowy, lniany, olej makadamia, wyciąg z aloesu, kwasy tłuszczowe Omega 3 i 6.</p>
-                    <p><strong>Wszystkie produkty NIE ZAWIERAJĄ PARABENÓW, SIARCZANÓW I FOSFORANÓW.</strong></p>
+            
+            <div class="price-item">
+              <div class="variant-row" style="border-bottom: none; padding: 0;">
+                <div class="price-item-info">
+                  <h4>Strzyżenie męskie (maszynka)</h4>
                 </div>
-                <img src="about-img.jpg" alt="Pielęgnacja Nashi" class="about-img" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMzMyMiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5CcmFrIHpkasSZY2lhIGFib3V0LWltZy5qcGc8L3RleHQ+PC9zdmc+'">
+                <span class="variant-meta">60,00 zł <small>30min</small></span>
+              </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Sekcja Produktów -->
-    <section id="produkty" class="section-padding">
-        <div class="container">
-            <h2 class="fade-up">Kosmetyki do pielęgnacji domowej</h2>
-            <p class="fade-up" style="text-align: center; margin-top: -20px; margin-bottom: 50px;">Kliknij linię produktów, aby sprawdzić detale. Aby zakupić produkt, zadzwoń: <a href="tel:+48888520223" class="phone-link">888 520 223</a>.</p>
-            <div class="products-grid" id="products-lines-container"></div>
-        </div>
-    </section>
-
-    <!-- Sekcja Zabiegów -->
-    <section id="zabiegi" class="section-padding">
-        <div class="container">
-            <h2 class="fade-up">Zabiegi Nashi w salonie</h2>
-            <div class="treatments-grid" id="treatments-container"></div>
-        </div>
-    </section>
-
-    <!-- Modal Produktów -->
-    <div class="modal" id="product-modal">
-        <div class="modal-wrapper">
-            <button class="close-modal" onclick="closeModal()">&times;</button>
-            <div class="modal-content glass-panel no-hover" id="modal-content-body" data-lenis-prevent="true">
-                <!-- Zawartość JS wstrzykiwana poniżej -->
+            
+            <div class="price-item">
+              <div class="variant-row" style="border-bottom: none; padding: 0;">
+                <div class="price-item-info">
+                  <h4>Strzyżenie dziecka (chłopcy do 10 lat)</h4>
+                </div>
+                <span class="variant-meta">70,00 zł <small>30min</small></span>
+              </div>
             </div>
+            
+            <div class="price-item">
+              <div class="variant-row" style="border-bottom: none; padding: 0;">
+                <div class="price-item-info">
+                  <h4>Strzyżenie dziecka (dziewczynki do 10 lat)</h4>
+                </div>
+                <span class="variant-meta">70,00 zł <small>45min</small></span>
+              </div>
+            </div>
+            
+            <div class="price-item">
+              <div class="variant-row" style="border-bottom: none; padding: 0; align-items: flex-start;">
+                <div class="price-item-info">
+                  <h4>Strzyżenie grzywki</h4>
+                  <p>Podcięcie grzywki</p>
+                </div>
+                <span class="variant-meta" style="margin-top: 2px;">40,00 zł <small>15min</small></span>
+              </div>
+            </div>
+          </div>
         </div>
+      </details>
+
+      <details class="glass pricing-category">
+        <summary>
+          <span class="cat-icon">✾</span>
+          <span class="cat-title">Koloryzacja</span>
+          <span class="cat-chevron"></span>
+        </summary>
+        <div class="accordion-content">
+          <div class="pricing-body">
+            <div class="price-item">
+              <div class="price-item-info"><h4>Koloryzacja jednolita</h4></div>
+              <div class="price-variants">
+                <div class="variant-row"><span class="variant-name">Włosy Krótkie - Do Ucha+</span><span class="variant-meta">230,00 zł <small>2h</small></span></div>
+                <div class="variant-row"><span class="variant-name">Włosy Średnie - Do Ramion</span><span class="variant-meta">280,00 zł <small>2h 30min</small></span></div>
+                <div class="variant-row"><span class="variant-name">Włosy Długie - Niżej Ramion</span><span class="variant-meta">320,00 zł <small>2h 30min</small></span></div>
+              </div>
+            </div>
+            
+            <div class="price-item">
+              <div class="price-item-info"><h4>Koloryzacja z rozjaśnieniem</h4></div>
+              <div class="price-variants">
+                <div class="variant-row"><span class="variant-name">Włosy Krótkie - Do Ucha+</span><span class="variant-meta">320,00 zł <small>3h</small></span></div>
+                <div class="variant-row"><span class="variant-name">Włosy Średnie - Do Ramion</span><span class="variant-meta">400,00 zł <small>3h</small></span></div>
+                <div class="variant-row"><span class="variant-name">Włosy Długie - Niżej Ramion</span><span class="variant-meta">470,00 zł <small>3h 30min</small></span></div>
+              </div>
+            </div>
+            
+            <div class="price-item">
+              <div class="price-item-info"><h4>Baleyage / Pasemka / Refleksy</h4></div>
+              <div class="price-variants">
+                <div class="variant-row"><span class="variant-name">Włosy Krótkie</span><span class="variant-meta">280,00 zł <small>2h 30min</small></span></div>
+                <div class="variant-row"><span class="variant-name">Włosy Średnie - Do Ramion</span><span class="variant-meta">360,00 zł+ <small>3h 30min</small></span></div>
+                <div class="variant-row"><span class="variant-name">Włosy Długie - Niżej Ramion</span><span class="variant-meta">430,00 zł+ <small>3h 30min</small></span></div>
+                <div class="variant-row"><span class="variant-name">Włosy Bardzo Długie</span><span class="variant-meta">500,00 zł <small>5h</small></span></div>
+              </div>
+            </div>
+            
+            <div class="price-item">
+              <div class="price-item-info">
+                <h4>Tonowanie</h4>
+                <p>Odświeżenie lub nadanie odpowiedniego odcienia po zabiegach rozjaśniających</p>
+              </div>
+              <div class="price-variants">
+                <div class="variant-row"><span class="variant-name">Włosy Krótkie - Do Ucha+</span><span class="variant-meta">220,00 zł <small>1h 30min</small></span></div>
+                <div class="variant-row"><span class="variant-name">Włosy Średnie - Do Ramion</span><span class="variant-meta">250,00 zł <small>1h 30min</small></span></div>
+                <div class="variant-row"><span class="variant-name">Włosy Długie - Niżej Ramion</span><span class="variant-meta">270,00 zł <small>2h</small></span></div>
+              </div>
+            </div>
+            
+            <div class="price-item">
+              <div class="variant-row" style="border-bottom: none; padding: 0;">
+                <div class="price-item-info"><h4>Dekoloryzacja</h4></div>
+                <span class="variant-meta">500,00 zł+ <small>5h</small></span>
+              </div>
+            </div>
+            
+            <div class="price-item">
+              <div class="variant-row" style="border-bottom: none; padding: 0;">
+                <div class="price-item-info"><h4>Tuszowanie siwizny</h4></div>
+                <span class="variant-meta">80,00 zł <small>20min</small></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="glass pricing-category">
+        <summary>
+          <span class="cat-icon">✦</span>
+          <span class="cat-title">Stylizacja i upięcia</span>
+          <span class="cat-chevron"></span>
+        </summary>
+        <div class="accordion-content">
+          <div class="pricing-body">
+            <div class="price-item">
+              <div class="price-item-info">
+                <h4>Modelowanie na szczotce</h4>
+                <p>Mycie i modelowanie</p>
+              </div>
+              <div class="price-variants">
+                <div class="variant-row"><span class="variant-name">Włosy Krótkie</span><span class="variant-meta">90,00 zł <small>40min</small></span></div>
+                <div class="variant-row"><span class="variant-name">Włosy Średnie - Do Ramion</span><span class="variant-meta">110,00 zł <small>1h</small></span></div>
+                <div class="variant-row"><span class="variant-name">Włosy Długie - Niżej Ramion</span><span class="variant-meta">130,00 zł <small>1h</small></span></div>
+              </div>
+            </div>
+            
+            <div class="price-item">
+              <div class="price-item-info">
+                <h4>Modelowanie Fale / Loki</h4>
+                <p>Mycie i modelowanie</p>
+              </div>
+              <div class="price-variants">
+                <div class="variant-row"><span class="variant-name">Włosy Średnie - Do Ramion</span><span class="variant-meta">130,00 zł+ <small>1h</small></span></div>
+                <div class="variant-row"><span class="variant-name">Włosy Długie - Niżej Ramion</span><span class="variant-meta">170,00 zł+ <small>1h 30min</small></span></div>
+              </div>
+            </div>
+            
+            <div class="price-item">
+              <div class="price-item-info"><h4>Upięcia włosów</h4></div>
+              <div class="price-variants">
+                <div class="variant-row"><span class="variant-name">Włosy Średnie</span><span class="variant-meta">200,00 zł+ <small>2h</small></span></div>
+                <div class="variant-row"><span class="variant-name">Włosy Długie</span><span class="variant-meta">350,00 zł+ <small>2h 30min</small></span></div>
+              </div>
+            </div>
+            
+            <div class="price-item">
+              <div class="price-item-info"><h4>Upięcia ślubne</h4></div>
+              <div class="price-variants">
+                <div class="variant-row"><span class="variant-name">Włosy Średnie</span><span class="variant-meta">250,00 zł+ <small>2h 30min</small></span></div>
+                <div class="variant-row"><span class="variant-name">Włosy Długie</span><span class="variant-meta">350,00 zł+ <small>2h 30min</small></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="glass pricing-category">
+        <summary>
+          <span class="cat-icon">❋</span>
+          <span class="cat-title">Pielęgnacja i regeneracja</span>
+          <span class="cat-chevron"></span>
+        </summary>
+        <div class="accordion-content">
+          <div class="pricing-body">
+            <div class="price-item">
+              <div class="price-item-info">
+                <h4>Rytuał Piękna NASHI (SPA Pielęgnacyjne)</h4>
+              </div>
+              <div class="price-variants">
+                <div class="variant-row"><span class="variant-name">Włosy Krótkie</span><span class="variant-meta">110,00 zł <small>1h</small></span></div>
+                <div class="variant-row"><span class="variant-name">Włosy Długie</span><span class="variant-meta">160,00 zł <small>1h 30min</small></span></div>
+              </div>
+            </div>
+            
+            <div class="price-item">
+              <div class="variant-row" style="border-bottom: none; padding: 0;">
+                <div class="price-item-info"><h4>Pielęgnacja Bankietowa (Lifting Express)</h4></div>
+                <span class="variant-meta">120,00 zł <small>1h</small></span>
+              </div>
+            </div>
+            
+            <div class="price-item">
+              <div class="variant-row" style="border-bottom: none; padding: 0;">
+                <div class="price-item-info"><h4>Uszczelnienie łuski włosa</h4></div>
+                <span class="variant-meta">250,00 zł <small>1h 30min</small></span>
+              </div>
+            </div>
+            
+            <div class="price-item">
+              <div class="variant-row" style="border-bottom: none; padding: 0;">
+                <div class="price-item-info"><h4>3 etapowa rekonstrukcja włosów FILLER THERAPY</h4></div>
+                <span class="variant-meta">250,00 zł+ <small>1h 30min</small></span>
+              </div>
+            </div>
+            
+            <div class="price-item">
+              <div class="variant-row" style="border-bottom: none; padding: 0;">
+                <div class="price-item-info"><h4>Intensywna kuracja stymulująca (Essential Energy)</h4></div>
+                <span class="variant-meta">120,00 zł <small>1h 30min</small></span>
+              </div>
+            </div>
+            
+            <div class="price-item">
+              <div class="variant-row" style="border-bottom: none; padding: 0;">
+                <div class="price-item-info"><h4>Pielęgnacja dermatologiczna Armonia</h4></div>
+                <span class="variant-meta">120,00 zł+ <small>1h</small></span>
+              </div>
+            </div>
+            
+            <div class="price-item">
+              <div class="variant-row" style="border-bottom: none; padding: 0;">
+                <div class="price-item-info"><h4>Molekularna odbudowa włosów</h4></div>
+                <span class="variant-meta">200,00 zł+ <small>2h</small></span>
+              </div>
+            </div>
+            
+            <div class="price-item">
+              <div class="variant-row" style="border-bottom: none; padding: 0;">
+                <div class="price-item-info"><h4>Konsultacja fryzjerska</h4></div>
+                <span class="variant-meta">Darmowa <small>15min</small></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
     </div>
 
-    <!-- Footer -->
-    <footer id="kontakt">
-        <div class="container">
-            <div class="footer-grid fade-up">
-                <div class="footer-col">
-                    <a href="https://pracowniab8.pl" style="display: inline-block; margin-bottom: 20px;">
-                        <img src="logo.png" alt="Pracownia B8" class="footer-logo-img" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAiIGhlaWdodD0iMTAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZpbGw9IiNmZmYiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+QnJhayBsb2dvLnBuZzwvdGV4dD48L3N2Zz4='">
-                    </a>
-                    <p>Zaufaj profesjonalistom. Zadbamy o zdrowie i blask Twoich włosów w oparciu o ekskluzywne kosmetyki Nashi Argan.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Godziny otwarcia</h4>
-                    <p>Poniedziałek – Piątek: 10:00 – 18:00</p>
-                    <p>Sobota: 08:00 – 14:00</p>
-                    <p>Niedziela: Zamknięte</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Kontakt & Rezerwacja</h4>
-                    <a href="tel:+48888520223">Tel: +48 888 520 223</a>
-                    <a href="mailto:fryzjerstwo@pracowniab8.pl">E-mail: fryzjerstwo@pracowniab8.pl</a>
-                    <a href="https://booksy.com/pl-pl/268448_fryzjerstwo-pracowniab8_fryzjer_10729_rzeszow" target="_blank" style="color: var(--accent-gold); font-weight: 600; margin-top: 10px;">Zarezerwuj przez Booksy</a>
-                </div>
-                <div class="footer-col">
-                    <h4>Social Media</h4>
-                    <a href="https://www.instagram.com/pracownia_b8/" target="_blank">Instagram</a>
-                    <a href="https://www.facebook.com/profile.php?id=61568803359059" target="_blank">Facebook</a>
-                </div>
-            </div>
-            <div class="copyright">
-                &copy; <span id="current-year"></span> Pracownia B8. Autoryzowany salon partnerski Nashi Argan.
-            </div>
+    <div class="pricing-cta">
+      <a href="https://booksy.com/pl-pl/268448_fryzjerstwo-pracowniab8_fryzjer_10729_rzeszow" target="_blank" rel="noopener noreferrer" class="btn btn-booksy-anim" id="booksyBtn">
+        <span class="btn-text">Umów wizytę</span>
+        <img src="booksy.png" alt="Booksy" class="btn-logo">
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- VOUCHER PODARUNKOWY -->
+<section id="voucher">
+  <div class="container">
+    <div class="glass about-card" style="border: 2px solid var(--sand-gold-light);">
+      <div class="about-content" style="text-align: center; padding: 60px 24px;">
+        <span class="eyebrow">Pomysł na idealny prezent</span>
+        <h2 class="section-heading">Karta Podarunkowa</h2>
+        <p style="margin: 0 auto 20px; max-width: 600px;">
+          Podaruj bliskiej osobie chwilę relaksu i piękne włosy. Wybierz dowolną kwotę, 
+          zapłać wygodnie online, a elegancki voucher trafi 
+          natychmiast na podany e-mail – gotowy do wręczenia.
+        </p>
+
+        <!-- Akceptacja regulaminu z Checkboxem (bez tekstu błędu) -->
+        <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 24px;">
+          <label id="voucherTermsLabel" style="display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 0.9rem; color: #55554f; cursor: pointer; user-select: none;">
+            <input type="checkbox" id="acceptVoucherTerms" style="width: 18px; height: 18px; accent-color: var(--bottle-green); cursor: pointer;">
+            <span>Akceptuję <a href="regulamin.html" target="_blank" style="color: var(--bottle-green); text-decoration: underline;">Regulamin</a> sprzedaży voucherów</span>
+          </label>
         </div>
-    </footer>
 
-    <script>
-        // Automatyczny aktualny rok w stopce
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+        <!-- Przycisk z ID dodanym dla JavaScriptu -->
+        <a href="https://buy.stripe.com/3cI6oG6gPc4T16E8BI0Fi00" target="_blank" rel="noopener noreferrer" class="btn" id="buyVoucherBtn">
+          Kup Voucher Online
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // ================= SMOOTH SCROLLING (LENIS) =================
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-            smooth: true,
-            smoothTouch: false 
-        });
+<!-- SKRYPT: Logika blokady przycisku i animacji podskoczenia -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const acceptTermsCheckbox = document.getElementById("acceptVoucherTerms");
+    const buyVoucherBtn = document.getElementById("buyVoucherBtn");
+    const voucherTermsLabel = document.getElementById("voucherTermsLabel");
 
-        // WSTRZYMANIE SCROLLA NA CZAS ŁADOWANIA
-        lenis.stop(); 
-
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-
-        function scrollToSection(id) {
-            lenis.scrollTo(id, { offset: -80 }); 
-        }
-
-        // ================= PROFESJONALNY PRELOADER =================
-        const preloader = document.getElementById('preloader');
-        const percentText = document.getElementById('loader-percent');
-        const bar = document.getElementById('loader-bar');
+    buyVoucherBtn.addEventListener("click", (e) => {
+      // Jeśli checkbox NIE JEST zaznaczony
+      if (!acceptTermsCheckbox.checked) {
+        e.preventDefault(); // Zablokuj przejście do Stripe
         
-        let currentProgress = 0;
-        let targetProgress = 0;
-        const startTime = Date.now();
-        const minLoadTime = 1500; // Gwarantowane minimum 1.5 sekundy wyświetlania
-
-        // Sztywne "zabetonowanie" wysokości ekranu startowego raz na zawsze
-        const heroSection = document.querySelector('.hero');
-        if (heroSection) {
-            heroSection.style.height = window.innerHeight + 'px';
-        }
-
-        // 1. Pobieramy adresy zdjęć widocznych na stronie
-        let imagesToLoad = Array.from(document.images).map(img => img.src).filter(src => src);
-
-        let imagesLoaded = 0;
-        let totalImages = 0;
-
-        function updateTarget() {
-            if (totalImages === 0) {
-                targetProgress = 100;
-            } else {
-                targetProgress = (imagesLoaded / totalImages) * 100;
-            }
-        }
-
-        // 2. MAGIA: Opóźniamy pobieranie o ułamek sekundy, by przeglądarka zdążyła odczytać bazę produktów na dole pliku
-        setTimeout(() => {
-            productsCatalog.forEach(line => {
-                line.items.forEach(item => {
-                    if (item.img && !imagesToLoad.includes(item.img)) {
-                        imagesToLoad.push(item.img);
-                    }
-                });
-            });
-
-            totalImages = imagesToLoad.length;
-
-            if (totalImages === 0) {
-                updateTarget();
-                return;
-            }
-
-            // 3. Fizycznie zmuszamy przeglądarkę do pobrania każdego zdjęcia z listy do pamięci
-            imagesToLoad.forEach(src => {
-                const img = new Image();
-                img.onload = () => { imagesLoaded++; updateTarget(); };
-                img.onerror = () => { imagesLoaded++; updateTarget(); }; // Ignorujemy błędy
-                img.src = src; 
-            });
-        }, 0);
-
-        // Awaryjne wymuszenie 100% po załadowaniu całej zawartości
-        window.addEventListener('load', () => { targetProgress = 100; });
-        if (document.readyState === 'complete') { targetProgress = 100; }
-
-        function animatePreloader() {
-            // Płynna matematyczna interpolacja (pasek dogania realny wynik bez przeskakiwania)
-            currentProgress += (targetProgress - currentProgress) * 0.08; 
-            
-            if (currentProgress > 99.5) currentProgress = 100;
-            
-            percentText.innerText = Math.floor(currentProgress) + '%';
-            bar.style.width = currentProgress + '%';
-
-            if (currentProgress === 100) {
-                const elapsed = Date.now() - startTime;
-                const timeToWait = Math.max(0, minLoadTime - elapsed);
-                
-                setTimeout(() => {
-                    preloader.classList.add('hidden');
-                    lenis.start(); // ODBLOKOWANIE SCROLLA PO ZAŁADOWANIU
-                }, timeToWait);
-                return; // Koniec animacji
-            }
-            requestAnimationFrame(animatePreloader);
-        }
-        requestAnimationFrame(animatePreloader);
-
-        // ================= MENU HAMBURGER =================
-        const hamburgerBtn = document.getElementById('hamburger-btn');
-        const navLinks = document.getElementById('nav-links');
-        const navItems = navLinks.querySelectorAll('a');
-
-        hamburgerBtn.addEventListener('click', () => {
-            hamburgerBtn.classList.toggle('active');
-            navLinks.classList.toggle('active');
+        // Efekt: mocne, jednokrotne powiększenie (skok do przodu) bez ruchu w górę/dół
+        voucherTermsLabel.animate([
+          { transform: 'scale(1)' },
+          { transform: 'scale(1.2)', offset: 0.5 },
+          { transform: 'scale(1)' }
+        ], {
+          duration: 350,
+          easing: 'ease-in-out'
         });
+      }
+    });
+  });
+</script>
 
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                hamburgerBtn.classList.remove('active');
-                navLinks.classList.remove('active');
-            });
-        });
+<!-- ZESPÓŁ -->
+<section id="zespol">
+  <div class="container">
+    <span class="eyebrow">Ludzie Pracowni</span>
+    <h2 class="section-heading">Nasz zespół</h2>
+    <p class="section-sub">Poznaj stylistki, które zadbają o Twoje włosy z pasją i wieloletnim doświadczeniem.</p>
 
-        // ================= DANE: ZABIEGI =================
-        const treatments = [
-            {
-                title: "Rytuał Piękna NASHI (SPA Pielęgnacyjne)",
-                time: "Włosy Krótkie 1h / Włosy Długie 1h 30min",
-                price: "110 zł / 160 zł",
-                desc: "Pielęgnacja Classic Podstawowa z użyciem naturalnego olejku arganowego, lnianego i makadamia. Zabieg silnie nawilża, przywraca prawidłowy poziom nawodnienia, odżywia, regeneruje oraz zabezpiecza włosy.",
-                img: "zabieg-rytual.jpg"
-            },
-            {
-                title: "Pielęgnacja Bankietowa (Lifting Express)",
-                time: "1h",
-                price: "120 zł",
-                desc: "Ekspresowa rekonstrukcja ampułką Lifting Express. Intensywny zabieg nawilżająco-regenerujący. Idealny dla włosów uwrażliwionych, farbowanych. Gwarantuje niesamowity blask, miękkość i wygładzenie.",
-                img: "zabieg-bankietowa.jpg"
-            },
-            {
-                title: "Intensywna kuracja stymulująca (Essential Energy)",
-                time: "1h 30min",
-                price: "120 zł",
-                desc: "Seria stymulująca, energetyzująca i wzmacniająca włosy – przeciwdziałająca wypadaniu. Bogata w ekstrakty eteryczne, które pobudzają mikrokrążenie w skórze głowy i poprawiają zakotwiczenie cebulki.",
-                img: "zabieg-essential.jpg"
-            },
-            {
-                title: "3 etapowa rekonstrukcja FILLER THERAPY",
-                time: "1h 30min",
-                price: "250 zł",
-                desc: "Oparta na naturalnej keratynie, komórkach macierzystych Budlei, kolagenie i elastynie. Linia idealna dla klientek, których włosy łamią się i kruszą w wyniku zabiegów chemicznych.",
-                img: "zabieg-filler.jpg"
-            },
-            {
-                title: "Uszczelnienie łuski włosa (Laminacja)",
-                time: "1h 30min",
-                price: "250 zł",
-                desc: "Laminacja włosów z wykorzystaniem zaawansowanej technologii. Głęboko odbudowujący zabieg dla włosów mocno uwrażliwionych. Wypełnia strukturę włosa i całkowicie zamyka łuskę, dając efekt gładkiej tafli.",
-                img: "zabieg-uszczelnienie.jpg"
-            },
-            {
-                title: "Pielęgnacja dermatologiczna Armonia",
-                time: "1h",
-                price: "120 zł",
-                desc: "Dermatologiczna linia przeznaczona do problematycznej skóry głowy ze skłonnością do łupieżu i łojotoku. Z użyciem dogłębnie oczyszczającego peelingu, przywraca naturalną równowagę hydrolipidową.",
-                img: "zabieg-armonia.jpg"
-            },
-            {
-                title: "Molekularna odbudowa włosów (Keratynowe)",
-                time: "2h",
-                price: "200 zł",
-                desc: "Odbudowujący zabieg wygładzający dla włosów średnio i wysoko porowatych, z tendencją do puszenia. Wzbogacony o hydrolizowaną keratynę i aloes. Głęboka, długotrwała regeneracja.",
-                img: "zabieg-molekularna.jpg"
-            }
-        ];
+    <div class="team-grid">
+      <div class="glass team-card">
+        <div class="team-photo">Zdjęcie<br>Jadzi</div>
+        <h3>Jadzia</h3>
+        <div class="team-role">Stylistka Fryzur</div>
+        <p>Specjalizuje się w koloryzacji i technikach rozjaśniania włosów. Ceniona za cierpliwość, dokładność i umiejętność wydobycia z każdej fryzury tego, co najbardziej pasuje do klientki. Nieustannie podnosi kwalifikacje na branżowych szkoleniach.</p>
+      </div>
+      <div class="glass team-card">
+        <div class="team-photo">Zdjęcie<br>Ewy</div>
+        <h3>Ewa</h3>
+        <div class="team-role">Stylistka Fryzur</div>
+        <p>Mistrzyni precyzyjnych cięć i stylizacji okolicznościowych. Jej fryzury wyróżniają się lekkością i naturalnym ruchem. Uwielbia pracę z klientem indywidualnym oraz tworzenie fryzur ślubnych i wieczorowych.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        // ================= DANE: PRODUKTY =================
-        const productsCatalog = [
-            {
-                id: "classic",
-                name: "Classic",
-                subtitle: "Codzienna pielęgnacja i wygładzenie",
-                image: "prod-argan.jpg",
-                items: [
-                    { name: "Szampon Classic", img: "item-classic-shampoo.jpg", variants: ["200 ml - 100 zł", "500 ml - 199 zł"], desc: "Delikatnie oczyszczający szampon do codziennego stosowania, który przywraca włosom naturalny poziom nawilżenia. Doskonale zmywa zanieczyszczenia i pozostałości po stylizacji, przygotowując pasma do dalszej pielęgnacji.", usage: "Zalecane podwójne mycie. Wykonuj delikatny masaż głowy." },
-                    { name: "Odżywka Classic", img: "item-classic-conditioner.jpg", variants: ["200 ml - 100 zł", "500 ml - 199 zł"], desc: "Klasyczna odżywka wygładzająca, która natychmiastowo ułatwia rozczesywanie i chroni kolor włosów farbowanych. Zapewnia głębokie odżywienie i elastyczność, pozostawiając włosy lekkie i pełne blasku.", usage: "Nakładaj na umyte, odsączone ręcznikiem włosy, omijając nasadę." },
-                    { name: "Olej Arganowy", img: "item-classic-oil.jpg", variants: ["30 ml - 86 zł", "100 ml - 170 zł"], desc: "Organiczny olejek arganowy wzbogacony olejem lnianym, który błyskawicznie nawilża i rozświetla włosy bez ich obciążania. Skutecznie zabezpiecza końcówki przed rozdwajaniem, nadając fryzurze jedwabistą gładkość.", usage: "Nakładaj na wilgotne włosy po umyciu lub jako wykończenie na suche pasma." },
-                    { name: "Instant Mask", img: "item-classic-instant.jpg", variants: ["150 ml - 120 zł"], desc: "Błyskawiczna maska w sprayu bez spłukiwania, która pełni funkcję tarczy termoochronnej i zapobiega puszeniu się włosów. Idealnie sprawdza się do szybkiego rozplątywania pasm przed suszeniem, nadając im zdrowy wygląd.", usage: "Rozpyl na wilgotne, odsączone włosy przed modelowaniem." },
-                    { name: "Maska Deep Infusion", img: "item-classic-deep.jpg", variants: ["150 ml - 120 zł", "250 ml - 250 zł"], desc: "Intensywnie regenerująca maska stworzona z myślą o głębokiej odbudowie zniszczonych i przesuszonych włosów. Wnika głęboko w strukturę włosa, przywracając mu utraconą sprężystość oraz chroniąc przed uszkodzeniami mechanicznymi.", usage: "Stosuj raz w tygodniu, nakładaj na 5-10 minut po umyciu, dokładnie spłucz." },
-                    { name: "Mgiełka Love Hair Mist", img: "item-classic-mist.jpg", variants: ["20 ml - 100 zł"], desc: "Zmysłowy zapach do włosów w formie lekkiej mgiełki, który otula pasma kultowym, zmysłowym aromatem Nashi. Dyskretnie odświeża fryzurę w ciągu dnia, dodając jej subtelnego blasku i miękkości.", usage: "Rozpylaj na suche włosy w ciągu dnia według uznania." }
-                ]
-            },
-            {
-                id: "sun",
-                name: "Sun",
-                subtitle: "Ochrona, nawilżenie i filtry UV",
-                image: "prod-sun.jpg",
-                items: [
-                    { name: "Szampon Sun Defence", img: "item-sun-shampoo.jpg", variants: ["200 ml - 100 zł", "500 ml - 199 zł"], desc: "Ochronny szampon nawilżający wzbogacony filtrami UV oraz witaminami, idealny do stosowania latem. Skutecznie wypłukuje sól morską i chlor, chroniąc kolor włosów przed szkodliwym działaniem słońca.", usage: "Idealny na wakacje, po opalaniu oraz po wyjściu z basenu." },
-                    { name: "Odżywka Sun Conditioner", img: "item-sun-conditioner.jpg", variants: ["200 ml - 100 zł", "500 ml - 199 zł"], desc: "Kojąca odżywka po kąpielach słonecznych, która głęboko regeneruje przesuszone wiatrem i słońcem pasma. Przywraca włosom odpowiednią wilgotność i niesamowitą miękkość, ułatwiając ich bezproblemowe rozczesywanie.", usage: "Nakładaj po umyciu szamponem Sun, omijając nasadę głowy." },
-                    { name: "Olej Arganowy Sun", img: "item-sun-oil.jpg", variants: ["50 ml - 125 zł"], desc: "Niezbędne serum ochronne na plażę, które tworzy na włosach niewidzialną barierę przed promieniami słonecznymi. Zapobiega utracie wilgoci i kruszeniu się końcówek, gwarantując lśniącą i zdrową fryzurę.", usage: "Aplikuj kilkukrotnie w ciągu dnia podczas ekspozycji na słońce." },
-                    { name: "Beach Defence Fluid Instant", img: "item-sun-fluid.jpg", variants: ["150 ml - 140 zł"], desc: "Ochronny fluid w sprayu bez spłukiwania, który natychmiastowo rozplątuje włosy po wyjściu z wody. Skutecznie zabezpiecza strukturę włosa przed wysuszającym działaniem słońca, chloru oraz słonej wody.", usage: "Rozpylać na włosy wilgotne lub suche wielokrotnie w ciągu dnia." },
-                    { name: "Beach Defence Mask", img: "item-sun-mask.jpg", variants: ["150 ml - 130 zł"], desc: "Silnie odbudowująca maska naprawcza, stworzona specjalnie dla włosów zmęczonych intensywną ekspozycją na słońce. Głęboko odżywia i leczy mikrouszkodzenia, przywracając pasmom witalność oraz naturalny blask.", usage: "Nałożyć obficie na umyte szamponem Sun włosy, pozostawić na 3-5 minut." },
-                    { name: "After Sun Cream", img: "item-sun-after.jpg", variants: ["200 ml - 130 zł"], desc: "Regenerujący krem po opalaniu dla skóry ciała, który łagodzi podrażnienia i intensywnie nawadnia naskórek. Przedłuża trwałość letniej opalenizny, pozostawiając skórę miękką i pięknie pachnącą.", usage: "Wmasować w suchą skórę po kąpieli słonecznej." },
-                    { name: "Shower Gel Bronze Extender", img: "item-sun-shower.jpg", variants: ["300 ml - 120 zł"], desc: "Żel pod prysznic utrwalający opaleniznę, który delikatnie oczyszcza ciało po słonecznym dniu. Jego specjalna formuła nawilża skórę i pomaga zachować złocisty odcień na znacznie dłużej.", usage: "Stosować do mycia ciała podczas codziennego prysznica." },
-                    { name: "Tanning Sun Oil", img: "item-sun-tanning.jpg", variants: ["150 ml - 125 zł"], desc: "Przyspieszający opalanie olejek do ciała, który gwarantuje uzyskanie pięknej, równomiernej opalenizny. Nawilża skórę i nadaje jej satynowy połysk, chroniąc jednocześnie przed przesuszeniem.", usage: "Rozprowadzić na skórze przed ekspozycją na słońce." },
-                    { name: "Sun Care Spray SPF 30", img: "item-sun-spf30.jpg", variants: ["150 ml - 150 zł"], desc: "Nawilżający spray ochronny do ciała z wysokim filtrem SPF 30, zabezpieczający przed promieniami UVA i UVB. Ma lekką, nietłustą konsystencję, która błyskawicznie się wchłania i nie pozostawia białych śladów.", usage: "Aplikować na ciało przed wyjściem na słońce." },
-                    { name: "Sun Care Spray SPF 50", img: "item-sun-spf50.jpg", variants: ["100 ml - 130 zł"], desc: "Maksymalna ochrona przeciwsłoneczna w wygodnym sprayu, przeznaczona dla najbardziej wrażliwej na słońce skóry. Gwarantuje bezpieczeństwo i głębokie nawilżenie podczas intensywnych kąpieli słonecznych.", usage: "Aplikować na ciało przed wyjściem na słońce." }
-                ]
-            },
-            {
-                id: "mass",
-                name: "Mass Solution",
-                subtitle: "Zagęszczenie i objętość włosów",
-                image: "prod-mass.jpg",
-                items: [
-                    { name: "Szampon Mass Solution", img: "item-mass-shampoo.jpg", variants: ["250 ml - 115 zł"], desc: "Pogrubiający szampon rewitalizujący, stworzony specjalnie dla cienkich, słabych i skłonnych do wypadania włosów. Delikatnie oczyszcza skórę głowy, zwiększając objętość fryzury od samej nasady aż po końce.", usage: "Stosuj do codziennego mycia przy problemach z gęstością włosów." },
-                    { name: "Scalp Revitalizer", img: "item-mass-scalp.jpg", variants: ["100 ml - 145 zł"], desc: "Skoncentrowana wcierka pobudzająca mikrokrążenie w skórze głowy i odżywiająca cebulki włosowe. Regularnie stosowana redukuje kruszenie się pasm i aktywnie wspiera wzrost mocniejszych, grubszych włosów.", usage: "Wmasować w czystą skórę głowy po myciu, nie spłukiwać." }
-                ]
-            },
-            {
-                id: "filler",
-                name: "Filler Therapy",
-                subtitle: "Rekonstrukcja włosów zniszczonych",
-                image: "prod-filler.jpg",
-                items: [
-                    { name: "Szampon Restorative", img: "item-filler-shampoo.jpg", variants: ["250 ml - 115 zł"], desc: "Odbudowujący szampon nawilżający wzbogacony keratyną i kolagenem. Idealny do mycia i regeneracji włosów zniszczonych agresywnymi zabiegami chemicznymi.", usage: "Stosować do codziennego mycia przy silnie uwrażliwionych włosach." },
-                    { name: "Odżywka Restorative", img: "item-filler-conditioner.jpg", variants: ["150 ml - 120 zł"], desc: "Głęboko odbudowująca odżywka, która wspaniale przedłuża efekt zabiegów salonowych. Nadaje włosom wyjątkową elastyczność i mocno chroni je przed łamaniem.", usage: "Nałożyć na odsączone ręcznikiem włosy po umyciu szamponem Restorative." },
-                    { name: "Lifting Mask", img: "item-filler-mask.jpg", variants: ["100 ml - 220 zł"], desc: "Profesjonalna maska uszczelniająca, która niczym tarcza zamyka łuskę włosa. Przywraca pasmom idealną strukturę, miękkość, gładkość i niesamowity blask już po pierwszym użyciu.", usage: "Stosować jako kurację raz w tygodniu, trzymać na włosach minimum 5-10 minut." }
-                ]
-            },
-            {
-                id: "blondy",
-                name: "Blondy Joy",
-                subtitle: "Neutralizacja odcieni i chłodny blond",
-                image: "prod-blondy.jpg",
-                items: [
-                    { name: "Szampon Blondy Joy", img: "item-blondy-shampoo.jpg", variants: ["250 ml - 115 zł"], desc: "Neutralizujący szampon z fioletowym pigmentem, zaprojektowany do pielęgnacji włosów rozjaśnianych i siwych. Skutecznie ochładza kolor, usuwając niepożądane żółte refleksy i nadając pasmom perłowy blask.", usage: "Stosuj zamiennie co drugie mycie ze standardowym szamponem." },
-                    { name: "Odżywka Blondy Joy", img: "item-blondy-conditioner.jpg", variants: ["150 ml - 112 zł"], desc: "Tonująca odżywka intensywnie nawilżająca, która perfekcyjnie dopełnia proces ochładzania odcieni blond. Zamyka łuskę włosa, ułatwia rozczesywanie i gwarantuje lśniący, chłodny efekt bez przesuszania.", usage: "Stosuj zawsze po umyciu szamponem Blondy Joy." }
-                ]
-            },
-            {
-                id: "armonia",
-                name: "Armonia",
-                subtitle: "Dermatologiczna pielęgnacja skóry głowy",
-                image: "prod-armonia.jpg",
-                items: [
-                    { name: "Szampon Armonia", img: "item-armonia-shampoo.jpg", variants: ["250 ml - 115 zł"], desc: "Łagodzący szampon dermatologiczny, regulujący pracę gruczołów łojowych przy problematycznej skórze głowy. Zwalcza stany zapalne i łupież, przywracając naturalną równowagę bariery hydrolipidowej.", usage: "Stosować do mycia włosów przy swędzącej i przetłuszczającej się skórze." },
-                    { name: "Armonia Scrub", img: "item-armonia-scrub.jpg", variants: ["150 ml - 189 zł"], desc: "Złuszczający peeling z naturalnym pumeksem, który dogłębnie oczyszcza skórę głowy z martwego naskórka i nadmiaru sebum. Doskonale odświeża i stymuluje dotlenienie cebulek przed dalszą pielęgnacją.", usage: "Wykonywać peeling raz na 10-14 dni przed nałożeniem szamponu." },
-                    { name: "Scalp Detox Armonia", img: "item-armonia-detox.jpg", variants: ["50 ml - 149 zł"], desc: "Skoncentrowany detoks w płynie, który błyskawicznie redukuje podrażnienia i zaczerwienienia skóry głowy. Wykazuje silne działanie antyseptyczne i kojące, zapewniając długotrwałe uczucie ulgi i czystości.", usage: "Nakładać punktowo na problematyczne miejsca na skórze głowy." }
-                ]
-            },
-            {
-                id: "man",
-                name: "Man",
-                subtitle: "Kompleksowa pielęgnacja dla mężczyzn",
-                image: "prod-man.jpg",
-                items: [
-                    { name: "Shower Gel 2 w 1", img: "item-man-shower.jpg", variants: ["200 ml - 75 zł"], desc: "Praktyczny żel pod prysznic do mycia ciała i włosów, idealny do zabrania na siłownię lub w podróż. Orzeźwia, tonizuje i dogłębnie oczyszcza, dbając jednocześnie o odpowiednie nawilżenie męskiej skóry.", usage: "Kompleksowa pielęgnacja pod prysznic." },
-                    { name: "Szampon Man Daily Energizing", img: "item-man-shampoo.jpg", variants: ["250 ml - 115 zł"], desc: "Codzienny szampon energetyzujący dla mężczyzn, który skutecznie zmywa zanieczyszczenia i resztki kosmetyków do stylizacji. Pogrubia włókno włosa i wzmacnia je dzięki zawartości naturalnych ekstraktów z baobabu.", usage: "Do codziennego mycia męskich włosów." },
-                    { name: "Man Cleanser", img: "item-man-cleanser.jpg", variants: ["50 ml - 52 zł"], desc: "Oczyszczający żel do mycia twarzy, który usuwa nadmiar sebum i codzienne zanieczyszczenia z męskiej cery. Delikatnie matuje skórę i zapobiega powstawaniu niedoskonałości, przygotowując ją do zabiegu golenia.", usage: "Codzienne mycie skóry twarzy rano i wieczorem." },
-                    { name: "Man Balm", img: "item-man-balm.jpg", variants: ["100 ml - 78 zł"], desc: "Kojący balsam po goleniu i nawilżający krem do twarzy w jednym, lekkim kosmetyku. Skutecznie łagodzi podrażnienia po użyciu maszynki, zapobiegając wrastaniu włosków i nieprzyjemnym zaczerwienieniom.", usage: "Wmasować w skórę twarzy bezpośrednio po goleniu." },
-                    { name: "Man Oil", img: "item-man-oil.jpg", variants: ["50 ml - 89 zł"], desc: "Wielofunkcyjny, suchy olejek pielęgnacyjny przeznaczony do brody, zarostu i włosów. Błyskawicznie się wchłania, zmiękczając szorstkie włoski i nadając im zniewalający, męski zapach bez efektu przetłuszczenia.", usage: "Rozprowadź kilka kropel w dłoniach i wmasuj w czystą brodę." },
-                    { name: "Shower Oil", img: "item-man-showeroil.jpg", variants: ["250 ml - 90 zł"], desc: "Ekskluzywny olejek pod prysznic dla mężczyzn, który w kontakcie z wodą zamienia się w delikatną, myjącą emulsję. Intensywnie odżywia skórę, chroniąc ją przed przesuszeniem i pozostawiając na niej szlachetny aromat.", usage: "Wmasować w wilgotną skórę ciała podczas kąpieli." }
-                ]
-            },
-            {
-                id: "essential",
-                name: "Essential Energy",
-                subtitle: "Terapia stymulująca przeciw wypadaniu",
-                image: "prod-essential.jpg",
-                items: [
-                    { name: "Szampon Energy", img: "item-essential-shampoo.jpg", variants: ["200 ml - 100 zł", "500 ml - 199 zł"], desc: "Wzmacniający szampon energetyzujący, który pobudza mikrokrążenie w skórze głowy i zapobiega wypadaniu włosów. Bogaty w cenne aminokwasy, wzmacnia zakotwiczenie cebulek, nadając fryzurze witalność i gęstość.", usage: "Idealny na okresy wzmożonego osłabienia włosów." },
-                    { name: "Odżywka Essential", img: "item-essential-conditioner.jpg", variants: ["150 ml - 112 zł"], desc: "Nawilżająca odżywka bez obciążania, którą można bezpiecznie aplikować od samej nasady włosów. Zapewnia głębokie odżywienie, łatwe rozczesywanie oraz poczucie świeżości dzięki zawartości mięty i eukaliptusa.", usage: "Możesz delikatnie wmasować ją również w skórę głowy." },
-                    { name: "Essential Treatment", img: "item-essential-treatment.jpg", variants: ["100 ml - 230 zł"], desc: "Intensywna nocna kuracja bez spłukiwania, przeznaczona do walki z okresowym i przewlekłym wypadaniem włosów. Aktywnie stymuluje wzrost nowych pasm, wzmacniając barierę ochronną i dotleniając cebulki podczas snu.", usage: "Wmasuj na noc u nasady włosów. Nie spłukuj." },
-                    { name: "Ampułki Hair Energy", img: "item-essential-ampoules.jpg", variants: ["12 x 6 ml - 360 zł"], desc: "Uderzeniowa terapia w ampułkach, zawierająca maksymalne stężenie składników zapobiegających łysieniu. Błyskawicznie rewitalizuje uśpione mieszki włosowe, znacząco wydłużając fazę wzrostu i zagęszczając fryzurę.", usage: "Stosować zgodnie z zaleceniami na czystą skórę głowy." }
-                ]
-            },
-            {
-                id: "style",
-                name: "Stylizacja",
-                subtitle: "Profesjonalne utrwalenie i perfekcyjny kształt",
-                image: "prod-style.jpg",
-                items: [
-                    { name: "Style Volumizing Mousse", img: "item-style-mousse.jpg", variants: ["300 ml - 79 zł"], desc: "Lekka pianka dodająca spektakularnej objętości, która unosi włosy u nasady i pogrubia je na całej długości. Nie wysusza pasm i chroni je podczas stylizacji na gorąco, zapewniając elastyczne i mocne utrwalenie.", usage: "Wmasować w wilgotne włosy u nasady przed modelowaniem." },
-                    { name: "Style Soft Hair Spray", img: "item-style-softspray.jpg", variants: ["300 ml - 85 zł"], desc: "Delikatny lakier do elastycznego utrwalania, który pozwala zachować naturalny ruch i dynamikę stylizacji. Idealnie wygładza odstające kosmyki, nadając włosom jedwabiste wykończenie i ochronę przed wilgocią.", usage: "Rozpylać równomiernie do lekkiego utrwalenia na co dzień." },
-                    { name: "Style Hair Spray", img: "item-style-hairspray.jpg", variants: ["300 ml - 85 zł"], desc: "Profesjonalny lakier do włosów zapewniający mocne utrwalenie bez efektu usztywnienia czy sklejania pasm. Gwarantuje długotrwałą kontrolę nad fryzurą, dając się bardzo łatwo wyczesać na koniec dnia.", usage: "Rozpylać z odległości 20 cm na gotową fryzurę." },
-                    { name: "Style Curly Maker", img: "item-style-curly.jpg", variants: ["150 ml - 95 zł"], desc: "Definiujący krem do loków i fal, który podkreśla naturalny skręt i eliminuje problem uporczywego puszenia. Zapewnia sprężystość, głębokie nawilżenie oraz perfekcyjny kształt loków przez cały długi dzień.", usage: "Ugniatać w wilgotne włosy przed suszeniem z dyfuzorem." },
-                    { name: "Style Sea Salt", img: "item-style-seasalts.jpg", variants: ["200 ml - 95 zł"], desc: "Spray z solą morską stworzony do kreowania nonszalanckich, plażowych fal o stylowym, matowym wykończeniu. Dodaje włosom wyjątkowej tekstury i objętości, ułatwiając formowanie swobodnych stylizacji typu messy hair.", usage: "Rozpyl na wilgotne włosy i pozostaw do naturalnego wyschnięcia." },
-                    { name: "Matt Wax", img: "item-style-mattwax.jpg", variants: ["50 ml - 80 zł"], desc: "Modelujący wosk o matowym wykończeniu, idealny do kreatywnego rzeźbienia krótkich i średnich fryzur. Zapewnia silne, plastyczne utrwalenie, pozwalając na wielokrotną zmianę ułożenia włosów w ciągu dnia.", usage: "Rozetrzyj w dłoniach i nałóż na suche włosy." },
-                    { name: "Shine Wax", img: "item-style-shinewax.jpg", variants: ["50 ml - 80 zł"], desc: "Wosk mocno nabłyszczający, który wspaniale dyscyplinuje niesforne kosmyki i eksponuje detale eleganckiej fryzury. Gwarantuje bardzo mocne utrwalenie i lustrzany, zdrowy połysk, niezależnie od warunków pogodowych.", usage: "Nakładaj oszczędnie na suche włosy w celu wygładzenia." },
-                    { name: "Man Matt Wax", img: "item-style-manwax.jpg", variants: ["50 ml - 80 zł"], desc: "Męska pasta matująca przeznaczona do precyzyjnego układania i mocnej teksturyzacji niesfornych włosów. Oferuje całkowicie naturalny wygląd bez obciążania, skutecznie panując nad każdą męską stylizacją.", usage: "Nałóż niewielką ilość na dłonie i ułóż fryzurę." },
-                    { name: "Janeke Brush", img: "item-style-janeke.jpg", variants: ["1 szt. - 120 zł"], desc: "Profesjonalna, wentylowana szczotka do rozczesywania, która delikatnie masuje skórę głowy podczas codziennego czesania. Znacznie skraca czas suszenia suszarką i zapobiega łamaniu się włosów dzięki elastycznym igłom.", usage: "Idealna na mokre i suche włosy." },
-                    { name: "Paddle Brush", img: "item-style-paddle.jpg", variants: ["1 szt. - 110 zł"], desc: "Szeroka szczotka pneumatyczna, stworzona z myślą o wyjątkowo gładkim rozczesywaniu grubych i bardzo długich włosów. Jej ergonomiczny kształt i miękka poduszka minimalizują ciągnięcie, zapewniając pełen komfort.", usage: "Doskonała do wygładzania dużych partii włosów." }
-                ]
-            },
-            {
-                id: "others",
-                name: "Inne",
-                subtitle: "Luksusowa pielęgnacja ciała i zestawy",
-                image: "prod-others.jpg",
-                items: [
-                    { name: "Scented Hand Soap", img: "item-others-soap.jpg", variants: ["480 ml - 145 zł"], desc: "Luksusowe mydło do rąk o urzekającym zapachu Nashi, które delikatnie oczyszcza i pielęgnuje dłonie. Pozostawia skórę aksamitnie miękką, całkowicie pozbawioną nieprzyjemnego uczucia ściągnięcia po myciu.", usage: "Stosuj na mokre dłonie do codziennej higieny." },
-                    { name: "More Chance Hand Balm", img: "item-others-handbalm.jpg", variants: ["30 ml - 36 zł", "280 ml - 145 zł"], desc: "Odżywczy krem do rąk o bogatej formule, który błyskawicznie nawilża i głęboko regeneruje bardzo suchą skórę. Szybko się wchłania, tworząc na dłoniach niewidzialne rękawiczki ochronne o pięknym aromacie.", usage: "Wmasuj w dłonie w razie potrzeby, szczególnie po umyciu rąk." },
-                    { name: "Try Me Set: The 5 Best Sellers", img: "item-others-tryme.jpg", variants: ["Zestaw - 129 zł"], desc: "Ekskluzywny zestaw pięciu najbardziej kultowych produktów Nashi w bardzo poręcznych wersjach podróżnych. To idealny sposób na przetestowanie pełnego rytuału piękna lub doskonały pomysł na elegancki prezent.", usage: "Poznaj magię linii Nashi Classic w formacie mini." },
-                    { name: "Speedy Beauty Hair", img: "item-others-speedyhair.jpg", variants: ["Zestaw - 260 zł"], desc: "Kompaktowy zestaw ratunkowy do włosów, zapewniający w pełni profesjonalną pielęgnację w ekspresowym tempie. Doskonale sprawdza się w każdej podróży, gwarantując lśniące i zdrowe pasma niezależnie od panujących warunków.", usage: "Niezbędnik w każdej damskiej kosmetyczce podróżnej." },
-                    { name: "Speedy Beauty Hair & Body", img: "item-others-speedybody.jpg", variants: ["Zestaw - 260 zł"], desc: "Wszechstronny zestaw kosmetyków do kompleksowej, luksusowej pielęgnacji włosów oraz całego ciała w kompaktowym wydaniu. Łączy w sobie absolutnie wszystko, co niezbędne, by zachować świeżość i piękny wygląd z dala od domu.", usage: "Zabierz go ze sobą na każdy weekendowy wyjazd." }
-                ]
-            }
-        ];
+<!-- NASHI -->
+<section id="nashi" class="nashi-section">
+  <div class="container">
+    <span class="eyebrow">Kosmetyki premium</span>
+    <h2 class="section-heading">Ekskluzywna Pielęgnacja Nashi</h2>
+    <p class="section-sub">Odkryj najpopularniejsze linie włoskich kosmetyków Nashi Argan. Luksusowa pielęgnacja bogata w organiczne składniki, stworzona z poszanowaniem natury – dostępna w naszym salonie.</p>
 
-        // ================= FUNKCJE GENERUJĄCE HTML =================
-        const getFallbackImg = (name) => `onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMzMyMiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5CcmFrPC90ZXh0Pjwvc3ZnPg=='"`;
+    <div class="nashi-grid">
+      <div class="glass nashi-card">
+        <div class="nashi-photo">
+          <img src="prod-argan.jpg" alt="Nashi Classic">
+        </div>
+        <h3>Linia Classic</h3>
+        <p>Kultowa seria do codziennej pielęgnacji. Głęboko nawilża, wygładza i ułatwia rozczesywanie, otulając włosy zmysłowym, charakterystycznym zapachem Nashi.</p>
+      </div>
+      <div class="glass nashi-card">
+        <div class="nashi-photo">
+          <img src="prod-sun.jpg" alt="Nashi Sun">
+        </div>
+        <h3>Linia Sun</h3>
+        <p>Niezbędna ochrona przed promieniami UV, solą morską i chlorem. Przywraca wilgotność i miękkość włosom zmęczonym intensywną ekspozycją na słońce.</p>
+      </div>
+      <div class="glass nashi-card">
+        <div class="nashi-photo">
+          <img src="prod-filler.jpg" alt="Nashi Filler Therapy">
+        </div>
+        <h3>Filler Therapy</h3>
+        <p>Zaawansowana rekonstrukcja dla włosów zniszczonych zabiegami. Oparta na keratynie i kolagenie, przywraca pasmom elastyczność i naturalną siłę.</p>
+      </div>
+    </div>
 
-        function renderTreatments() {
-            const container = document.getElementById('treatments-container');
-            container.innerHTML = treatments.map((t, index) => `
-                <div class="glass-panel glass-panel-hoverable treatment-card fade-up" style="transition-delay: ${index * 0.1}s">
-                    <div class="treatment-img-frame">
-                        <img src="${t.img}" alt="${t.title}" ${getFallbackImg(t.img)}>
-                    </div>
-                    <div class="treatment-header">
-                        <h3 class="treatment-title">${t.title}</h3>
-                    </div>
-                    <div class="treatment-meta">
-                        <span style="display:flex; align-items:flex-start;"><svg style="width:16px;height:16px;vertical-align:middle;margin-right:6px;margin-top:2px;flex-shrink:0;" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>${t.time}</span>
-                        <span>Cena: ${t.price}</span>
-                    </div>
-                    <p class="treatment-desc">${t.desc}</p>
-                    <a href="https://booksy.com/pl-pl/268448_fryzjerstwo-pracowniab8_fryzjer_10729_rzeszow" target="_blank" class="btn btn-secondary treatment-btn">Zarezerwuj zabieg</a>
-                </div>
-            `).join('');
+    <div class="nashi-cta-wrap">
+      <a href="https://nashi.pracowniab8.pl" class="btn">Zobacz pełny katalog Nashi</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section id="galeria">
+  <div class="container">
+    <span class="eyebrow">Inspiracje</span>
+    <h2 class="section-heading">Galeria</h2>
+    <p class="section-sub">Zajrzyj do naszej pracowni i zobacz efekty naszej pracy.</p>
+
+    <div class="gallery-wrapper" id="galleryWrapper">
+      <div class="gallery-masonry" id="galleryMasonry" aria-live="polite">
+        <div class="gallery-loader" id="galleryLoader">Ładowanie zdjęć z galerii...</div>
+        <!-- Zdjęcia generowane automatycznie przez JavaScript -->
+      </div>
+      <div class="gallery-expand-overlay" id="galleryExpandOverlay">
+        <button class="gallery-expand-btn" id="galleryExpandBtn">Rozwiń galerię</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX GALERII (MODAL) -->
+<div id="galleryLightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Podgląd zdjęcia z galerii" hidden>
+  <button class="lightbox-close" id="lightboxClose" aria-label="Zamknij podgląd">✕</button>
+  <button class="lightbox-prev" id="lightboxPrev" aria-label="Poprzednie zdjęcie">‹</button>
+  <div class="lightbox-content">
+     <img id="lightboxImg" src="" alt="">
+  </div>
+  <button class="lightbox-next" id="lightboxNext" aria-label="Następne zdjęcie">›</button>
+  <div class="lightbox-swipe-text">Przesuń palcem w lewo lub w prawo, aby przeglądać galerię</div>
+
+
+</div>
+<!-- KOMUNIKAT GALERII (TOAST) -->
+<div id="galleryToast" class="gallery-toast">
+  Kliknij zdjęcie, aby je powiększyć
+</div>
+
+<!-- STOPKA -->
+<footer id="kontakt">
+  <img src="l/LD1.png" class="footer-leaf footer-leaf-left" alt="">
+  <img src="l/PD2.png" class="footer-leaf footer-leaf-right" alt="">
+  <div class="container">
+
+    <!-- TEKSTY I DANE KONTAKTOWE (NA GÓRZE) -->
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">Pracownia B8</div>
+        <p>Salon fryzjerski w sercu Rzeszowa. Pasja, precyzja i najwyższa jakość w każdym detalu.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <p>Tel: <a href="tel:+48888520223" class="contact-link">888 520 223</a></p>
+        <p>Email: <a href="mailto:fryzjerstwo@pracowniab8.pl" class="contact-link">fryzjerstwo@pracowniab8.pl</a></p>
+      </div>
+        
+      <div class="footer-col">
+        <h4>Godziny otwarcia</h4>
+        <p>Pon–Pt: 10:00–18:00</p>
+        <p>Sob: 08:00–14:00</p>
+        <p>Nd: Zamknięte</p>
+      </div>
+
+      <!-- OKRĄGŁE IKONY (BOOKSY, INSTAGRAM, FACEBOOK) -->
+      <div class="footer-col">
+        <h4>Odwiedź nas</h4>
+        <div class="social-icons-wrapper">
+          <!-- Booksy -->
+          <a class="social-icon" href="https://booksy.com/pl-pl/268448_fryzjerstwo-pracowniab8_fryzjer_10729_rzeszow" target="_blank" rel="noopener">
+            <img src="logo/b.png" alt="Booksy">
+          </a>
+          <!-- Instagram -->
+          <a class="social-icon" href="https://www.instagram.com/pracownia_b8/" target="_blank" rel="noopener">
+            <img src="logo/i.png" alt="Instagram">
+          </a>
+          <!-- Facebook -->
+          <a class="social-icon" href="https://www.facebook.com/profile.php?id=61568803359059" target="_blank" rel="noopener">
+            <img src="logo/f.png" alt="Facebook">
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Adres</h4>
+        <p>ul. Bernardyńska 8</p>
+        <p>35-069 Rzeszów</p>
+      </div>
+    </div>
+
+    <!-- MAPA GOOGLE POD TEKSTAMI -->
+    <div class="footer-map-wrapper">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2562.466338402162!2d22.00133650000001!3d50.0390843!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473cfbd6c14ab57f%3A0xa864a511fa896347!2sPracownia%20B8%20Fryzjerstwo!5e0!3m2!1spl!2spl!4v1784040185823!5m2!1spl!2spl" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="strict-origin-when-cross-origin">
+      </iframe>
+    </div>
+
+    <div class="footer-bottom">
+      &copy; <span id="currentYear"></span> Pracownia B8. Wszelkie prawa zastrzeżone. 
+      <a href="regulamin.pdf" class="footer-link-regulamin" target="_blank">Regulamin</a>
+      <a href="polityka-prywatnosci.html" class="footer-link-regulamin">Polityka prywatności</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Dynamiczny rocznik w stopce
+  document.getElementById('currentYear').textContent = new Date().getFullYear();
+  // Rejestracja wtyczki ScrollTrigger
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Animacja wyłaniania nagłówków i sekcji "O nas"
+  gsap.utils.toArray('.section-heading, .section-sub, .about-card').forEach(element => {
+    gsap.from(element, {
+      scrollTrigger: {
+        trigger: element,
+        start: "top 85%", // Animacja startuje, gdy góra elementu osiągnie 85% wysokości ekranu
+        toggleActions: "play none none reverse" // Wraca do stanu początkowego przy scrollowaniu w górę
+      },
+      y: 40,
+      opacity: 0,
+      duration: 1.2,
+      ease: "power3.out"
+    });
+  });
+
+  // Kaskadowe (stagger) wyłanianie kart w siatkach (Usługi, Zespół, Nashi)
+  const grids = ['.services-grid', '.team-grid', '.nashi-grid'];
+  grids.forEach(gridClass => {
+    const grid = document.querySelector(gridClass);
+    if (grid) {
+      const cards = grid.children;
+      gsap.from(cards, {
+        scrollTrigger: {
+          trigger: grid,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        },
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.15, // Opóźnienie między każdą kolejną kartą (efekt fali)
+        ease: "power3.out"
+      });
+    }
+  });
+  
+  // Inicjalizacja luksusowego Smooth Scroll (Lenis)
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true
+  });
+  
+  // Wstrzymanie scrolla na czas loadera
+  lenis.stop();
+
+  // --- LOGIKA PARALAKSY DLA LIŚCI ---
+  const leavesLayer = document.getElementById('parallax-leaves-layer');
+  
+  // Zmienna zapamiętująca szerokość ekranu
+  let lastWindowWidth = window.innerWidth;
+  // Flaga sprawdzająca, czy to pierwsze uruchomienie
+  let isFirstLeavesInit = true;
+  
+  function updateLeavesLayerHeight() {
+    if (!leavesLayer) return;
+    
+    const currentWidth = window.innerWidth;
+    
+    // BLOKADA SKAKANIA (ZAMROŻENIE LIŚCI):
+    // Jeśli to nie jest pierwsze ładowanie strony I szerokość ekranu 
+    // się nie zmieniła, przerywamy funkcję. Dzięki temu rozwijanie 
+    // galerii czy cennika nie zepsuje początkowego ułożenia liści.
+    if (!isFirstLeavesInit && currentWidth === lastWindowWidth) {
+      return; 
+    }
+    
+    isFirstLeavesInit = false;
+    lastWindowWidth = currentWidth;
+
+    const currentDocHeight = document.documentElement.scrollHeight;
+    const winHeight = window.innerHeight;
+    const maxScroll = Math.max(0, currentDocHeight - winHeight);
+    
+    // Ustawiamy wirtualną wysokość kontenera dla paralaksy
+    const layerHeight = winHeight + maxScroll * 0.5;
+    leavesLayer.style.height = `${layerHeight}px`;
+  }
+
+  let resizeTimeout;
+  
+  // Obserwator zmian na stronie (np. rozwinięcie akordeonu, galerii)
+  const resizeObserver = new ResizeObserver(() => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      updateLeavesLayerHeight();
+      ScrollTrigger.refresh(); // <--- TO NAPRAWIA PROBLEM! Oblicza na nowo wysokość dla stopki
+    }, 150);
+  });
+  resizeObserver.observe(document.body);
+
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      updateLeavesLayerHeight();
+      ScrollTrigger.refresh(); // Oblicza wysokość przy zmianie rozmiaru okna
+    }, 150);
+  });
+  // ----------------------------------
+
+  function raf(time) {
+    lenis.raf(time);
+    
+    // AKTUALIZACJA PARALLAX W GŁÓWNEJ PĘTLI ANIMACJI (Gwarancja płynności)
+    if (leavesLayer) {
+      const currentScroll = lenis.scroll || 0; 
+      leavesLayer.style.transform = `translate3d(0, -${currentScroll * 0.5}px, 0)`;
+    }
+
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+  const navbar = document.getElementById('navbar');
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  const navOverlay = document.getElementById('navOverlay');
+  const heroEl = document.getElementById('top');
+
+  const heroObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) navbar.classList.remove('scrolled');
+      else navbar.classList.add('scrolled');
+    });
+  }, { 
+    // Dodajemy ujemny margines na górze ekranu. 
+    // -100px oznacza, że zmiana koloru zajdzie w momencie, gdy dół zdjęcia 
+    // wjedzie pod pasek nawigacyjny.
+    rootMargin: "-100px 0px 0px 0px", 
+    threshold: 0 
+  });
+  heroObserver.observe(heroEl);
+  // --- NOWY KOD: Precyzyjny obserwator stopki (ScrollTrigger) ---
+  ScrollTrigger.create({
+    trigger: "footer",
+    start: "top 80px", // Aktywuje się DOKŁADNIE gdy góra stopki wjeżdża pod pasek (ok. 80px od góry ekranu)
+    onEnter: () => document.getElementById('navbar').classList.add('at-footer'),
+    onLeaveBack: () => document.getElementById('navbar').classList.remove('at-footer')
+  });
+  const openMenu = () => {
+    navLinks.classList.add('open');
+    navOverlay.classList.add('active');
+    navToggle.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+  const closeMenu = () => {
+    navLinks.classList.remove('open');
+    navOverlay.classList.remove('active');
+    navToggle.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  navOverlay.addEventListener('click', closeMenu);
+
+  // Gładkie przewijanie linków za pomocą Lenis
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      const targetEl = document.querySelector(targetId);
+      if (targetEl) {
+        lenis.scrollTo(targetEl);
+      }
+      closeMenu();
+    });
+  });
+
+  // Logika Loadera i animacji (optymalizacja ładowania)
+  const loader = document.getElementById('loader');
+  const loaderFill = document.getElementById('loaderFill');
+  const heroContent = document.getElementById('heroContent');
+  document.body.style.overflow = 'hidden';
+
+  let progress = 0;
+  let loaded = false;
+
+  function tickProgress(){
+    if (!loaded){
+      progress += (90 - progress) * 0.05 + 0.3;
+      if (progress > 90) progress = 90;
+      loaderFill.style.width = progress + '%';
+      requestAnimationFrame(tickProgress);
+    }
+  }
+  requestAnimationFrame(tickProgress);
+
+  // Wymuszony minimalny czas Loadera (1 sekunda) 
+  const minTimePromise = new Promise(resolve => setTimeout(resolve, 1000));
+  
+  // Loader wyłączy się błyskawicznie tylko po załadowaniu głównego drzewa strony
+  // bez oczekiwania na zdjęcia ze skryptu galerii
+  const windowLoadPromise = new Promise(resolve => {
+    if (document.readyState === 'complete') {
+      resolve();
+    } else {
+      window.addEventListener('load', resolve);
+    }
+  });
+
+  Promise.all([minTimePromise, windowLoadPromise]).then(() => {
+    loaded = true;
+    loaderFill.style.width = '100%';
+    
+    setTimeout(() => {
+      // Wyzwolenie przejścia Loadera w Hero
+      loader.classList.add('hidden');
+      document.body.style.overflow = '';
+      lenis.start(); 
+      // Inicjalne przeliczenie układu liści tuż po powrocie płynnego scrolla
+      updateLeavesLayerHeight();
+      
+      // Animacja tekstu
+      heroContent.classList.add('animate');
+      
+      // Całkowite ukrycie diva Loadera po zakończeniu CSS transition
+      setTimeout(() => {
+        loader.style.display = 'none';
+        
+        // ZAWIESZENIE ZDJĘĆ - DOPIERO TUTAJ ŁADUJEMY GALERIĘ W TLE
+        const galleryContainer = document.getElementById('galleryMasonry');
+        if(galleryContainer) {
+          loadGalleryImage(1);
         }
+      }, 850);
+    }, 400); 
+  });
 
-        function renderProductLines() {
-            const container = document.getElementById('products-lines-container');
-            container.innerHTML = productsCatalog.map((line, index) => `
-                <div class="glass-panel glass-panel-hoverable product-line-card fade-up" onclick="openModal('${line.id}')" style="transition-delay: ${index * 0.1}s">
-                    <div class="product-line-frame">
-                        <img src="${line.image}" alt="${line.name}" ${getFallbackImg(line.image)}>
-                    </div>
-                    <div class="product-line-info">
-                        <h3 class="product-line-title">${line.name}</h3>
-                        <p class="product-line-subtitle"><span style="display:inline-block; margin-bottom:5px;">Zobacz produkty &rarr;</span><br>${line.subtitle}</p>
-                    </div>
-                </div>
-            `).join('');
+  // Wskaźnik "Przewiń" znika płynnie
+  const heroScroll = document.getElementById('heroScroll');
+  let scrollStarted = false;
+  window.addEventListener('scroll', () => {
+    if (!scrollStarted && window.scrollY > 10){
+      scrollStarted = true;
+      setTimeout(() => heroScroll.classList.add('hide'), 500);
+    }
+  }, { passive: true });
+
+  // Płynny akordeon (Details & Summary Smooth Animation)
+  class SmoothDetails {
+    constructor(el) {
+      this.el = el;
+      this.summary = el.querySelector('summary');
+      this.content = el.querySelector('.accordion-content');
+      this.animation = null;
+      this.isClosing = false;
+      this.isExpanding = false;
+      this.summary.addEventListener('click', (e) => this.onClick(e));
+    }
+
+    onClick(e) {
+      e.preventDefault();
+      this.el.style.overflow = 'hidden';
+      if (this.isClosing || !this.el.open) {
+        this.open();
+      } else if (this.isExpanding || this.el.open) {
+        this.shrink();
+      }
+    }
+
+    shrink() {
+      this.isClosing = true;
+      const startHeight = `${this.el.offsetHeight}px`;
+      const endHeight = `${this.summary.offsetHeight}px`;
+      if (this.animation) this.animation.cancel();
+      this.animation = this.el.animate({ height: [startHeight, endHeight] }, { duration: 350, easing: 'ease-in-out' });
+      this.animation.onfinish = () => this.onAnimationFinish(false);
+      this.animation.oncancel = () => this.isClosing = false;
+    }
+
+    open() {
+      this.el.style.height = `${this.el.offsetHeight}px`;
+      this.el.open = true;
+      window.requestAnimationFrame(() => {
+        this.isExpanding = true;
+        const startHeight = `${this.el.offsetHeight}px`;
+        const endHeight = `${this.summary.offsetHeight + this.content.offsetHeight}px`;
+        if (this.animation) this.animation.cancel();
+        this.animation = this.el.animate({ height: [startHeight, endHeight] }, { duration: 350, easing: 'ease-in-out' });
+        this.animation.onfinish = () => this.onAnimationFinish(true);
+        this.animation.oncancel = () => this.isExpanding = false;
+      });
+    }
+
+    onAnimationFinish(open) {
+      this.el.open = open;
+      this.animation = null;
+      this.isClosing = false;
+      this.isExpanding = false;
+      this.el.style.height = this.el.style.overflow = '';
+    }
+  }
+
+  document.querySelectorAll('details.pricing-category').forEach((el) => {
+    new SmoothDetails(el);
+  });
+
+
+  // Zmienna globalna dla czasu komunikatu
+  let toastTimeout;
+
+  // Obsługa przycisku rozwijania galerii
+  const galleryExpandBtn = document.getElementById('galleryExpandBtn');
+  const galleryWrapper = document.getElementById('galleryWrapper');
+  const galleryToast = document.getElementById('galleryToast');
+
+  if (galleryExpandBtn && galleryWrapper) {
+    galleryExpandBtn.addEventListener('click', () => {
+      galleryWrapper.classList.add('expanded');
+      
+      if (galleryToast) {
+        galleryToast.classList.add('show');
+        
+        // Zapisujemy czas do zmiennej, żeby móc go później anulować
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          galleryToast.classList.remove('show');
+        }, 7800);
+      }
+    });
+  }
+
+  // --- LOGIKA GALERII (Dynamiczne ładowanie, Masonry & Lightbox) ---
+  const galleryLoader = document.getElementById('galleryLoader');
+  const galleryContainer = document.getElementById('galleryMasonry');
+  const lightbox = document.getElementById('galleryLightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const btnClose = document.getElementById('lightboxClose');
+  const btnPrev = document.getElementById('lightboxPrev');
+  const btnNext = document.getElementById('lightboxNext');
+
+  let galleryImages = [];
+  let currentImageIndex = 0;
+  let lastFocusedElement = null;
+
+  // Automatyczne sprawdzanie i dodawanie zdjęć (wywoływane PO zniknięciu loadera)
+  function loadGalleryImage(index) {
+    const imgPath = `galeria/${index}.jpeg`;
+    const img = new Image();
+    
+    img.onload = () => {
+      // Jeżeli wczytano pierwsze zdjęcie usuń napis "Ładowanie..."
+      if(index === 1 && galleryLoader) {
+        galleryLoader.style.display = 'none';
+      }
+      
+      galleryImages.push(imgPath);
+      const actualIndex = galleryImages.length - 1;
+
+      // Tworzenie dostępnego elementu kontenera
+      const btn = document.createElement('button');
+      btn.className = 'gallery-masonry-item';
+      btn.setAttribute('aria-label', `Powiększ zdjęcie z galerii nr ${index}`);
+      
+      const thumb = document.createElement('img');
+      thumb.src = imgPath;
+      thumb.alt = `Zdjęcie z galerii nr ${index}`;
+      thumb.loading = "lazy";
+      
+      btn.appendChild(thumb);
+      
+      // Event dla otwarcia Lightbox'a
+      btn.addEventListener('click', () => openLightbox(actualIndex, btn));
+      
+      galleryContainer.appendChild(btn);
+
+      // Spróbuj załadować następne zdjęcie w kolejce
+      loadGalleryImage(index + 1);
+    };
+
+    img.onerror = () => {
+      // Natrafiono na brak pliku (np. brak 12.jpeg) - koniec wyszukiwania
+      if(index === 1 && galleryLoader) {
+        galleryLoader.textContent = 'Brak zdjęć w galerii.';
+      }
+    };
+    
+    img.src = imgPath;
+  }
+
+  // Funkcje Lightboxa
+  function openLightbox(index, triggerElement) {
+    currentImageIndex = index;
+    lastFocusedElement = triggerElement || document.activeElement; 
+    
+    // BŁYSKAWICZNE CHOWANIE KOMUNIKATU (TOAST)
+    const galleryToast = document.getElementById('galleryToast');
+    if (galleryToast && galleryToast.classList.contains('show')) {
+      galleryToast.classList.remove('show');
+      clearTimeout(toastTimeout); // Zatrzymujemy 6-sekundowy zegar
+    }
+
+    updateLightboxImage();
+    lightbox.removeAttribute('hidden');
+    
+    // Zablokuj scrollowanie w tle przy otwartym modalu
+    if (typeof lenis !== 'undefined') lenis.stop();
+    document.body.style.overflow = 'hidden';
+    
+    // Ustawienie focusu
+    setTimeout(() => btnNext.focus(), 50);
+  }
+
+  function closeLightbox() {
+    lightbox.setAttribute('hidden', '');
+    
+    // Odblokuj scrollowanie
+    if (typeof lenis !== 'undefined') lenis.start();
+    document.body.style.overflow = '';
+    
+    // Przywróć focus
+    if (lastFocusedElement) {
+      lastFocusedElement.focus();
+    }
+  }
+
+  function showNext() {
+    if(galleryImages.length === 0) return;
+    currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+    updateLightboxImage();
+  }
+
+  function showPrev() {
+    if(galleryImages.length === 0) return;
+    currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+    updateLightboxImage();
+  }
+
+  function updateLightboxImage() {
+    lightboxImg.src = galleryImages[currentImageIndex];
+    lightboxImg.alt = `Powiększone zdjęcie z galerii nr ${currentImageIndex + 1}`;
+  }
+
+  // Listener'y przycisków
+  btnClose.addEventListener('click', closeLightbox);
+  btnNext.addEventListener('click', showNext);
+  btnPrev.addEventListener('click', showPrev);
+
+  // Zamykanie przez kliknięcie w tło
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
+      closeLightbox();
+    }
+  });
+
+  // Obsługa klawiatury i Focus Trap w Modalu
+  lightbox.addEventListener('keydown', (e) => {
+    if (lightbox.hasAttribute('hidden')) return;
+
+    const focusable = lightbox.querySelectorAll('button');
+    const firstFocusable = focusable[0];
+    const lastFocusable = focusable[focusable.length - 1];
+
+    switch(e.key) {
+      case 'Escape':
+        closeLightbox();
+        break;
+      case 'ArrowRight':
+        showNext();
+        break;
+      case 'ArrowLeft':
+        showPrev();
+        break;
+      case 'Tab':
+        if (e.shiftKey) {
+          if (document.activeElement === firstFocusable) {
+            e.preventDefault();
+            lastFocusable.focus();
+          }
+        } else {
+          if (document.activeElement === lastFocusable) {
+            e.preventDefault();
+            firstFocusable.focus();
+          }
         }
+        break;
+    }
+  });
 
-        function openModal(lineId) {
-            const modal = document.getElementById('product-modal');
-            const content = document.getElementById('modal-content-body');
-            const line = productsCatalog.find(l => l.id === lineId);
+  // Obsługa przeciągania (Swipe) dla urządzeń mobilnych
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  lightbox.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, {passive: true});
+
+  lightbox.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, {passive: true});
+
+  function handleSwipe() {
+    const threshold = 15; // Zmniejszony dystans - super czułe przesunięcie
+    if (touchEndX < touchStartX - threshold) {
+      showNext(); // Przesunięcie w lewo
+    }
+    if (touchEndX > touchStartX + threshold) {
+      showPrev(); // Przesunięcie w prawo
+    }
+  }
+
+  // --- LOGIKA ANIMACJI PRZYCISKU BOOKSY ---
+  const booksyBtn = document.getElementById('booksyBtn');
+  let isBooksyAnimActive = false;
+  let isBooksyVisible = false;
+  let booksyTimeouts = []; // Tablica zapamiętująca wszystkie odliczania czasu
+
+  // Funkcja awaryjnego zatrzymania: "zabija" odliczanie i przywraca stan początkowy
+  function killBooksyAnimation() {
+    booksyTimeouts.forEach(clearTimeout); // Czyści wszystkie timery z pamięci
+    booksyTimeouts = [];
+    if (booksyBtn) {
+      booksyBtn.classList.remove('show-logo'); // Wymusza pokazanie napisu "Umów wizytę"
+    }
+    isBooksyAnimActive = false; // Odblokowuje możliwość ponownego uruchomienia w przyszłości
+  }
+
+  // Obserwator monitorujący czy przycisk fizycznie znajduje się w kadrze
+  if (booksyBtn) {
+    const btnObserver = new IntersectionObserver((entries) => {
+      isBooksyVisible = entries[0].isIntersecting;
+      
+      // Jeśli przycisk zniknął (przez scroll lub rozwinięcie akordeonu) - wyłączamy wszystko natychmiast
+      if (!isBooksyVisible) {
+        killBooksyAnimation();
+      }
+    }, { threshold: 0.1 });
+    btnObserver.observe(booksyBtn);
+  }
+
+  function triggerBooksyAnimation() {
+    // Nie odpalaj jeśli jest zablokowane lub przycisku nie ma na ekranie
+    if (!booksyBtn || isBooksyAnimActive || !isBooksyVisible) return;
+    
+    isBooksyAnimActive = true; 
+
+    // Cykl 0: Czekamy 3 sekundy na napisie "Umów wizytę" zanim cokolwiek się stanie
+    let t0 = setTimeout(() => {
+      
+      // Cykl 1: Pokazanie obrazka Booksy
+      booksyBtn.classList.add('show-logo');
+      
+      let t1 = setTimeout(() => {
+        // Powrót do "Umów wizytę" (Obrazek znika po 2s)
+        booksyBtn.classList.remove('show-logo');
+        
+        let t2 = setTimeout(() => {
+          // Cykl 2: Ponowne pokazanie obrazka Booksy (Napis wisiał przez 4s)
+          booksyBtn.classList.add('show-logo');
+          
+          let t3 = setTimeout(() => {
+            // Ostateczny powrót do "Umów wizytę" (Obrazek znika po 2s)
+            booksyBtn.classList.remove('show-logo');
             
-            if(!line) return;
+            let t4 = setTimeout(() => {
+              // Zdejmujemy całkowitą blokadę (Twój zaplanowany odpoczynek 8s)
+              isBooksyAnimActive = false;
+            }, 7000); 
+            booksyTimeouts.push(t4);
 
-            let itemsHtml = line.items.map(item => `
-                <div class="product-item">
-                    <div class="product-item-frame">
-                        <img src="${item.img}" alt="${item.name}" ${getFallbackImg(item.img)}>
-                    </div>
-                    <div class="product-item-content">
-                        <h4 class="product-item-title">${item.name}</h4>
-                        <div class="product-item-meta">
-                            ${item.variants.map(v => `<span class="item-variant">${v}</span>`).join('')}
-                        </div>
-                        <p class="product-item-desc">${item.desc}</p>
-                        <p class="product-item-usage"><strong>Sposób użycia:</strong> ${item.usage}</p>
-                    </div>
-                </div>
-            `).join('');
+          }, 2600); // <--- CZAS: 2 sekundy (pokazywanie drugiego logo)
+          booksyTimeouts.push(t3);
 
-            content.innerHTML = `
-                <h2 class="modal-line-title">${line.name}</h2>
-                <div class="modal-items-list">
-                    ${itemsHtml}
-                </div>
-                <div style="margin-top: 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px;">
-                    <p style="margin-bottom: 15px;">Podoba Ci się ten produkt? Zapraszamy do zakupu</p>
-                    <a href="tel:+48888520223" class="btn btn-primary">
-                        <span class="btn-text-desktop">Zadzwoń: +48 888 520 223</span>
-                        <span class="btn-text-mobile">Zadzwoń</span>
-                    </a>
-                </div>
-            `;
-            
-            modal.classList.add('active');
-            lenis.stop(); 
-            content.scrollTop = 0;
-        }
+        }, 4200); // <--- CZAS: 4 sekundy (środkowa przerwa na czytanie tekstu)
+        booksyTimeouts.push(t2);
 
-        function closeModal() {
-            document.getElementById('product-modal').classList.remove('active');
-            lenis.start(); 
-        }
+      }, 2600); // <--- CZAS: 2 sekundy (pokazywanie pierwszego logo)
+      booksyTimeouts.push(t1);
 
-        document.getElementById('product-modal').addEventListener('click', function(e) {
-            if(e.target === this || e.target.classList.contains('modal-wrapper')) {
-                closeModal();
-            }
-        });
+    }, 1800); // <--- CZAS: 3 sekundy startowego oczekiwania (tekst "Umów wizytę")
+    booksyTimeouts.push(t0);
+  }
 
-        // ================= INICJALIZACJA I OBSERVER =================
-        document.addEventListener('DOMContentLoaded', () => {
-            renderTreatments();
-            renderProductLines();
+  // Odpalanie za każdym wykrytym ruchem kółka myszy lub pociągnięciem na telefonie
+  window.addEventListener('scroll', triggerBooksyAnimation, { passive: true });
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
+</script>
+<!-- BANER COOKIES -->
+<div id="cookieBanner" class="cookie-banner" role="dialog" aria-label="Informacja o plikach cookie">
+  <div class="cookie-text">
+    Używamy ciasteczek, aby strona działała idealnie i obsługiwała płatności. 
+    <a href="polityka-prywatnosci.html">Czytaj więcej</a>
+  </div>
+  <button id="acceptCookiesBtn" class="cookie-btn">Zamknij</button>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const cookieBanner = document.getElementById('cookieBanner');
+    const acceptBtn = document.getElementById('acceptCookiesBtn');
 
-            setTimeout(() => {
-                document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-            }, 100);
-        });
-    </script>
+    // Sprawdzamy, czy użytkownik już zaakceptował cookies
+    if (!localStorage.getItem('b8_cookies_accepted')) {
+      // Opóźniamy pokazanie o 1 sekundę, żeby nie atakować klienta od razu
+      setTimeout(() => {
+        cookieBanner.classList.add('show');
+      }, 200);
+    }
+
+    // Co się dzieje po kliknięciu
+    acceptBtn.addEventListener('click', () => {
+      // Płynne zniknięcie
+      cookieBanner.classList.remove('show');
+      // Zapisujemy wybór w pamięci przeglądarki
+      localStorage.setItem('b8_cookies_accepted', 'true');
+    });
+  });
+</script>
 </body>
 </html>
