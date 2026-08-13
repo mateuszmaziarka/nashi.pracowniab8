@@ -563,10 +563,6 @@
             });
         }, 0);
 
-        // NIEZAWODNY BEZPIECZNIK: Niezależnie od sytuacji wymuszamy załadowanie po max 3.5 sekundach! 
-        // Zapobiega zawieszeniu się na 0%
-        setTimeout(() => { targetProgress = 100; }, 3500);
-
         // Awaryjne wymuszenie 100% po załadowaniu całej zawartości
         window.addEventListener('load', () => { targetProgress = 100; });
         if (document.readyState === 'complete') { targetProgress = 100; }
