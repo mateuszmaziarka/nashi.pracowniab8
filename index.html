@@ -514,17 +514,8 @@
         // 1. Pobieramy adresy zdjęć widocznych na stronie
         let imagesToLoad = Array.from(document.images).map(img => img.src).filter(src => src);
 
-        // 2. MAGIA: Dodajemy do kolejki WSZYSTKIE ukryte zdjęcia produktów z okienek!
-        productsCatalog.forEach(line => {
-            line.items.forEach(item => {
-                if (item.img && !imagesToLoad.includes(item.img)) {
-                    imagesToLoad.push(item.img);
-                }
-            });
-        });
-
         let imagesLoaded = 0;
-        const totalImages = imagesToLoad.length;
+        let totalImages = 0;
 
         function updateTarget() {
             if (totalImages === 0) {
@@ -534,13 +525,31 @@
             }
         }
 
-        // 3. Fizycznie zmuszamy przeglądarkę do pobrania każdego zdjęcia z listy do pamięci telefonu (cache)
-        imagesToLoad.forEach(src => {
-            const img = new Image();
-            img.onload = () => { imagesLoaded++; updateTarget(); };
-            img.onerror = () => { imagesLoaded++; updateTarget(); }; // Ignorujemy błędy, by pasek nie utknął
-            img.src = src; // To polecenie rozpoczyna ciche pobieranie w tle
-        });
+        // 2. MAGIA: Opóźniamy pobieranie o ułamek sekundy, by przeglądarka zdążyła odczytać bazę produktów na dole pliku
+        setTimeout(() => {
+            productsCatalog.forEach(line => {
+                line.items.forEach(item => {
+                    if (item.img && !imagesToLoad.includes(item.img)) {
+                        imagesToLoad.push(item.img);
+                    }
+                });
+            });
+
+            totalImages = imagesToLoad.length;
+
+            if (totalImages === 0) {
+                updateTarget();
+                return;
+            }
+
+            // 3. Fizycznie zmuszamy przeglądarkę do pobrania każdego zdjęcia z listy do pamięci
+            imagesToLoad.forEach(src => {
+                const img = new Image();
+                img.onload = () => { imagesLoaded++; updateTarget(); };
+                img.onerror = () => { imagesLoaded++; updateTarget(); }; // Ignorujemy błędy
+                img.src = src; 
+            });
+        }, 0);
 
         // Awaryjne wymuszenie 100% po załadowaniu całej zawartości
         window.addEventListener('load', () => { targetProgress = 100; });
