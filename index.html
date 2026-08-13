@@ -210,7 +210,7 @@
         .product-line-title { font-size: 1.8rem; color: #fff; }
         .product-line-subtitle { color: var(--accent-gold); font-size: 0.9rem; margin-top: 5px; line-height: 1.5; }
         
-        .phone-link { color: #ffffff; text-decoration: none; font-weight: 600; transition: none; }
+        .phone-link { color: #b5ada5; text-decoration: none; font-weight: 600; transition: none; }
 
         /* ================= MODAL Z PRODUKTAMI ================= */
         .modal {
@@ -317,9 +317,9 @@
         
         .preloader-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1; }
         
-        .preloader-content { text-align: center; display: flex; flex-direction: column; align-items: center; margin-top: -50px; }
+        .preloader-content { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 0; }
         .preloader-logo { height: 120px; object-fit: contain; margin: 0; }
-        .preloader-line { width: 60px; height: 2px; background: var(--accent-gold); margin: 25px 0; border-radius: 2px; }
+        .preloader-line { width: 60px; height: 2px; background: var(--accent-gold); margin: 20px 0 30px 0; border-radius: 2px; }
         .preloader-text { font-size: 3.5rem; color: #fff; letter-spacing: 2px; line-height: 1; margin: 0; }
         
         .preloader-bottom { position: absolute; bottom: 12%; width: 100%; max-width: 300px; text-align: center; }
@@ -827,7 +827,7 @@
                     </div>
                     <div class="product-line-info">
                         <h3 class="product-line-title">${line.name}</h3>
-                        <p class="product-line-subtitle">${line.subtitle}<br><span style="display:inline-block; margin-top:5px;">Zobacz produkty &rarr;</span></p>
+                        <p class="product-line-subtitle"><span style="display:inline-block; margin-bottom:5px;">Zobacz produkty &rarr;</span><br>${line.subtitle}</p>
                     </div>
                 </div>
             `).join('');
