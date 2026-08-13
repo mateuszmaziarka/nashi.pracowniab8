@@ -511,24 +511,35 @@
             heroSection.style.height = window.innerHeight + 'px';
         }
 
-        const images = Array.from(document.images);
+        // 1. Pobieramy adresy zdjęć widocznych na stronie
+        let imagesToLoad = Array.from(document.images).map(img => img.src).filter(src => src);
+
+        // 2. MAGIA: Dodajemy do kolejki WSZYSTKIE ukryte zdjęcia produktów z okienek!
+        productsCatalog.forEach(line => {
+            line.items.forEach(item => {
+                if (item.img && !imagesToLoad.includes(item.img)) {
+                    imagesToLoad.push(item.img);
+                }
+            });
+        });
+
         let imagesLoaded = 0;
+        const totalImages = imagesToLoad.length;
 
         function updateTarget() {
-            if (images.length === 0) {
+            if (totalImages === 0) {
                 targetProgress = 100;
             } else {
-                targetProgress = (imagesLoaded / images.length) * 100;
+                targetProgress = (imagesLoaded / totalImages) * 100;
             }
         }
 
-        images.forEach(img => {
-            if (img.complete) {
-                imagesLoaded++; updateTarget();
-            } else {
-                img.addEventListener('load', () => { imagesLoaded++; updateTarget(); });
-                img.addEventListener('error', () => { imagesLoaded++; updateTarget(); }); // Błędy też liczymy by pasek nie utknął
-            }
+        // 3. Fizycznie zmuszamy przeglądarkę do pobrania każdego zdjęcia z listy do pamięci telefonu (cache)
+        imagesToLoad.forEach(src => {
+            const img = new Image();
+            img.onload = () => { imagesLoaded++; updateTarget(); };
+            img.onerror = () => { imagesLoaded++; updateTarget(); }; // Ignorujemy błędy, by pasek nie utknął
+            img.src = src; // To polecenie rozpoczyna ciche pobieranie w tle
         });
 
         // Awaryjne wymuszenie 100% po załadowaniu całej zawartości
