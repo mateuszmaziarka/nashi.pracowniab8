@@ -4,11 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nashi Argan - Pracownia B8 | Ekskluzywna Pielęgnacja Włosów</title>
-    <!-- Czcionki -->
+    <meta name="description" content="Odkryj luksusową pielęgnację Nashi Argan w Rzeszowie. Pracownia B8 to autoryzowany salon partnerski. Oferujemy zabiegi regeneracyjne i kosmetyki do domu.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nashi.pracowniab8.pl/"> <!-- Upewnij się, że to właściwy adres tej podstrony -->
+    <meta property="og:title" content="Nashi Argan - Pracownia B8 | Salon Partnerski Rzeszów">
+    <meta property="og:description" content="Ekskluzywne kosmetyki Nashi Argan dostępne w Rzeszowie. Zobacz katalog produktów i umów się na regenerujący Rytuał Piękna.">
+    <meta property="og:image" content="https://pracowniab8.pl/hero-bg.png"> 
+
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
-        /* ================= ZMIENNE I BAZA ================= */
         :root {
             --bg-color: #050505;
             --glass-bg: rgba(255, 255, 255, 0.03);
@@ -23,10 +31,9 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Outfit', sans-serif;
-            -webkit-tap-highlight-color: transparent; /* Usuwa systemowe, niebieskie miganie przy kliknięciu na telefonach */
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* Ukrycie standardowego suwaka na czas ładowania gładkiego scrolla */
         html.lenis, html.lenis body { height: auto; }
         .lenis.lenis-smooth { scroll-behavior: auto !important; }
 
@@ -40,7 +47,6 @@
 
         .bebas-text { font-family: 'Bebas Neue', sans-serif; letter-spacing: 1.5px; }
 
-        /* Płynne, ruszające się gradienty w tle */
         .ambient-bg {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -1; overflow: hidden; background: #050505;
@@ -58,7 +64,6 @@
             100% { transform: translate(5%, 10%) scale(1.1); }
         }
 
-        /* ================= TYPOGRAFIA ================= */
         h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
         h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1; margin-bottom: 20px; font-weight: 800;}
         h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 40px; text-align: center; }
@@ -68,7 +73,6 @@
         .section-padding { padding: 100px 0; }
         .highlight { color: var(--accent-gold); }
 
-        /* ================= EFEKTY SZKŁA ================= */
         .glass-panel {
             background: var(--glass-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--glass-border); border-radius: 24px; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
@@ -76,7 +80,6 @@
         }
         .glass-panel-hoverable:hover { transform: translateY(-8px); border-color: rgba(195, 154, 107, 0.3); }
 
-        /* Przyciski */
         .btn {
             display: inline-flex; align-items: center; justify-content: center;
             padding: 16px 32px; border-radius: 100px; font-size: 1.1rem;
@@ -89,7 +92,6 @@
         .btn-secondary { background: rgba(255, 255, 255, 0.05); color: var(--text-main); border: 1px solid rgba(255, 255, 255, 0.1); }
         .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); }
 
-        /* Napisy na przyciskach */
         .btn-text-desktop { display: inline; }
         .btn-text-mobile { display: none; }
         @media (max-width: 600px) {
@@ -97,7 +99,6 @@
             .btn-text-mobile { display: inline; }
         }
 
-        /* ================= NAV ================= */
         nav {
             position: fixed; top: 0; width: 100%; padding: 7px 0; z-index: 100;
             background: rgba(5, 5, 5, 0.7); backdrop-filter: blur(20px);
@@ -106,12 +107,10 @@
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
         .logo { display: flex; align-items: center; text-decoration: none; cursor: pointer; }
         
-        /* Rozmiar PC (Przywrócony duży) */
         .logo .bebas-text { font-size: 2.2rem; color: #fff; line-height: 1; margin-top: 4px; }
         .logo span.separator { font-weight: 300; font-size: 1.5rem; color: #fff; margin: 0 12px; }
         .logo img { height: 58px; object-fit: contain; }
         
-        /* Rozmiar TELEFON (Idealnie pośrodku - krakowski targ) */
         @media (max-width: 768px) {
             .logo .bebas-text { font-size: 2.0rem; }
             .logo span.separator { font-size: 1.35rem; margin: 0 10px; }
@@ -122,7 +121,6 @@
         .nav-links a { color: var(--text-main); text-decoration: none; margin-left: 30px; font-size: 0.95rem; transition: color 0.3s ease; cursor: pointer; }
         .nav-links a:hover { color: var(--accent-gold); }
 
-        /* Menu Hamburger */
         .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; z-index: 1001; }
         .hamburger span { width: 25px; height: 2px; background: #fff; transition: all 0.3s ease; }
         
@@ -141,7 +139,6 @@
             .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
         }
 
-        /* ================= HERO ================= */
         .hero { display: flex; align-items: center; position: relative; padding-top: 80px; box-sizing: border-box; }
         .hero-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -153,14 +150,12 @@
         .hero-buttons { display: flex; gap: 15px; margin-top: 40px; }
         @media (max-width: 600px) { .hero-buttons { flex-direction: column; } }
 
-        /* ================= ABOUT ================= */
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
         .about-img { width: 100%; height: 500px; object-fit: cover; border-radius: 30px; border: 1px solid var(--glass-border); }
         .about-text h3 { font-size: 2rem; margin-bottom: 20px; color: #fff; }
         .about-text p { margin-bottom: 20px; font-size: 1.1rem; }
         @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } .about-img { height: 350px; } }
 
-        /* ================= ZABIEGI & PRODUKTY ================= */
         .treatments-grid, .products-grid {
             display: flex;
             flex-wrap: wrap;
@@ -177,18 +172,16 @@
         }
         
         .treatment-card { padding: 30px; } 
-        /* Inteligentna ramka dla ZABIEGÓW (bez pustych przestrzeni, auto-kadrowanie) */
         .treatment-img-frame { width: 100%; height: 280px; border-radius: 16px; margin-bottom: 20px; background: rgba(255,255,255,0.02); overflow: hidden; }
         .treatment-img-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
         .treatment-header { margin-bottom: 15px; }
         .treatment-title { font-size: 1.4rem; color: #fff; margin-bottom: 5px; }
         
-        /* Naprawa zawijania czasu i ceny w ZABIEGACH */
         .treatment-meta {
             display: flex; 
-            flex-wrap: wrap; /* Zezwolenie na przełamanie linii */
+            flex-wrap: wrap;
             justify-content: space-between; 
-            gap: 12px; /* Dystans, gdy cena spadnie pod czas */
+            gap: 12px;
             align-items: flex-start;
             font-size: 0.9rem; color: var(--accent-gold); font-weight: 600; 
             margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -198,11 +191,9 @@
         .treatment-desc { flex-grow: 1; font-size: 0.95rem; margin-bottom: 25px; }
         .treatment-btn { width: 100%; text-align: center; }
 
-        /* Inteligentna ramka dla LINII PRODUKTÓW (bez ciemnego filtru) */
         .product-line-card { cursor: pointer; position: relative; overflow: hidden; border-radius: 24px; }
         .product-line-frame { width: 100%; height: 350px; background: rgba(255,255,255,0.02); overflow: hidden; }
         .product-line-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0.8; display: block; }
-        /* Usunięto ściemnianie zdjęcia na hover - zostaje sam ruch i podświetlenie ramki karty */
         .product-line-info {
             position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px;
             background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
@@ -212,7 +203,6 @@
         
         .phone-link { color: #b5ada5; text-decoration: none; font-weight: 600; transition: none; }
 
-        /* ================= MODAL Z PRODUKTAMI ================= */
         .modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8);
             backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 1000;
@@ -228,15 +218,12 @@
             border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             -ms-overflow-style: none; scrollbar-width: none;
             
-            /* Zablokowanie scrollowania strony pod spodem (Scroll Bleed) */
             overscroll-behavior: none;
             
-            /* NAPRAWA CZARNYCH EKRANÓW NA TELEFONACH (Akceleracja GPU) */
             -webkit-overflow-scrolling: touch;
             transform: translate3d(0, 0, 0);
             backface-visibility: hidden;
             
-            /* Wyłączenie zacinającego się filtru w scrollowanym kontenerze */
             backdrop-filter: none !important;
             -webkit-backdrop-filter: none !important;
         }
@@ -256,13 +243,11 @@
         }
         
         .product-item { display: flex; gap: 25px; margin-bottom: 40px; align-items: flex-start; }
-        /* Inteligentna ramka dla produktów w oknie */
         .product-item-frame { width: 140px; height: 180px; flex-shrink: 0; border-radius: 12px; background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); overflow: hidden; }
         .product-item-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
         .product-item-content { flex-grow: 1; }
         .product-item-title { font-size: 1.4rem; color: #fff; margin-bottom: 8px; }
-        
-        /* Nowy styl dla parametrów: Pojemność i Cena */
+
         .product-item-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; }
         .product-item-meta span { background: rgba(195, 154, 107, 0.1); border: 1px solid rgba(195, 154, 107, 0.3); padding: 4px 12px; border-radius: 100px; font-size: 0.85rem; color: var(--accent-gold); font-weight: 600; }
         
@@ -277,7 +262,6 @@
             .product-item { display: flex; flex-direction: column; padding-bottom: 30px; }
             .product-item-content { display: contents; }
             .product-item-title { order: 1; margin-bottom: 15px; width: 100%; text-align: left; }
-            /* Zastąpienie img klasą ramki */
             .product-item-frame { order: 2; width: 100%; height: auto; aspect-ratio: 4/5; margin-bottom: 15px; }
             .product-item-meta { order: 3; margin-bottom: 10px; width: 100%; text-align: left;}
             .product-item-desc { order: 4; width: 100%; }
@@ -287,7 +271,6 @@
             .product-item:last-child::after { display: none; }
         }
 
-        /* ================= FOOTER ================= */
         footer { border-top: 1px solid var(--glass-border); padding: 80px 0 40px; background: rgba(5,5,5,0.8); margin-top: 50px; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 60px; }
         .footer-col h4 { color: #fff; font-size: 1.2rem; margin-bottom: 20px; }
@@ -296,17 +279,14 @@
         .footer-logo-img { height: 130px; max-width: 100%; object-fit: contain; }
         .copyright { text-align: center; border-top: 1px solid var(--glass-border); padding-top: 30px; font-size: 0.85rem; color: var(--text-muted); }
 
-        /* Wyrównanie do środka na telefonach w stopce */
         @media (max-width: 768px) {
             .footer-col { text-align: center; }
             .footer-col a, .footer-col p { margin-left: auto; margin-right: auto; }
         }
 
-        /* ================= ANIMACJE ================= */
         .fade-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-        /* ================= PRELOADER (EKRAN ŁADOWANIA) ================= */
         .preloader {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: #050505; z-index: 99999;
@@ -328,18 +308,16 @@
         .loader-bar { height: 100%; width: 0%; background: var(--accent-gold); border-radius: 2px; }
 
         @media (max-width: 600px) {
-            .preloader-content { margin-top: -90px; } /* Przesunięcie całej grupy lekko do góry na telefonach */
+            .preloader-content { margin-top: -90px; }
             .preloader-logo { height: 80px; }
             .preloader-text { font-size: 2.8rem; }
         }
     </style>
     
-    <!-- Biblioteka Lenis do smooth scrollingu -->
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
 </head>
 <body>
 
-    <!-- Ekran ładowania (Preloader) -->
     <div id="preloader" class="preloader">
         <div class="preloader-bg">
             <div class="blob blob-1" style="opacity: 0.2; left: -20%; top: -20%;"></div>
@@ -358,14 +336,12 @@
         </div>
     </div>
 
-    <!-- Animowane tło -->
     <div class="ambient-bg">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
         <div class="blob blob-3"></div>
     </div>
 
-    <!-- Nawigacja -->
     <nav>
         <div class="container nav-content">
             <a href="https://pracowniab8.pl" class="logo">
@@ -387,7 +363,6 @@
         </div>
     </nav>
 
-    <!-- Sekcja Hero -->
     <section class="hero">
         <div class="hero-bg"></div>
         <div class="container">
@@ -407,7 +382,6 @@
         </div>
     </section>
 
-    <!-- Sekcja O Nas -->
     <section id="o-marce" class="section-padding">
         <div class="container">
             <div class="about-grid fade-up">
@@ -422,7 +396,6 @@
         </div>
     </section>
 
-    <!-- Sekcja Produktów -->
     <section id="produkty" class="section-padding">
         <div class="container">
             <h2 class="fade-up">Kosmetyki do pielęgnacji domowej</h2>
@@ -431,7 +404,6 @@
         </div>
     </section>
 
-    <!-- Sekcja Zabiegów -->
     <section id="zabiegi" class="section-padding">
         <div class="container">
             <h2 class="fade-up">Zabiegi Nashi w salonie</h2>
@@ -439,17 +411,14 @@
         </div>
     </section>
 
-    <!-- Modal Produktów -->
     <div class="modal" id="product-modal">
         <div class="modal-wrapper">
             <button class="close-modal" onclick="closeModal()">&times;</button>
             <div class="modal-content glass-panel no-hover" id="modal-content-body" data-lenis-prevent="true">
-                <!-- Zawartość JS wstrzykiwana poniżej -->
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
     <footer id="kontakt">
         <div class="container">
             <div class="footer-grid fade-up">
@@ -471,7 +440,6 @@
                     <a href="mailto:fryzjerstwo@pracowniab8.pl">E-mail: fryzjerstwo@pracowniab8.pl</a>
                     <a href="https://booksy.com/pl-pl/268448_fryzjerstwo-pracowniab8_fryzjer_10729_rzeszow" target="_blank" style="color: var(--accent-gold); font-weight: 600; margin-top: 10px;">Zarezerwuj przez Booksy</a>
                 </div>
-                <!-- DODANA KOLUMNA Z DANYMI FIRMY I LINKAMI PRAWNYMI -->
                 <div class="footer-col">
                     <h4>Dane firmy</h4>
                     <p style="margin-bottom: 2px;">Pracownia B8 Tomasz Szpunar</p>
@@ -490,10 +458,8 @@
     </footer>
 
     <script>
-        // Automatyczny aktualny rok w stopce
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        // ================= SMOOTH SCROLLING (LENIS) =================
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
@@ -501,7 +467,6 @@
             smoothTouch: false 
         });
 
-        // WSTRZYMANIE SCROLLA NA CZAS ŁADOWANIA
         lenis.stop(); 
 
         function raf(time) {
@@ -514,7 +479,6 @@
             lenis.scrollTo(id, { offset: -80 }); 
         }
 
-        // ================= PROFESJONALNY PRELOADER =================
         const preloader = document.getElementById('preloader');
         const percentText = document.getElementById('loader-percent');
         const bar = document.getElementById('loader-bar');
@@ -522,15 +486,13 @@
         let currentProgress = 0;
         let targetProgress = 0;
         const startTime = Date.now();
-        const minLoadTime = 1500; // Gwarantowane minimum 1.5 sekundy wyświetlania
+        const minLoadTime = 1500;
 
-        // Sztywne "zabetonowanie" wysokości ekranu startowego raz na zawsze
         const heroSection = document.querySelector('.hero');
         if (heroSection) {
             heroSection.style.height = window.innerHeight + 'px';
         }
 
-        // 1. Pobieramy adresy zdjęć widocznych na stronie
         let imagesToLoad = Array.from(document.images).map(img => img.src).filter(src => src);
 
         let imagesLoaded = 0;
@@ -544,7 +506,6 @@
             }
         }
 
-        // 2. MAGIA: Opóźniamy pobieranie o ułamek sekundy, by przeglądarka zdążyła odczytać bazę produktów na dole pliku
         setTimeout(() => {
             productsCatalog.forEach(line => {
                 line.items.forEach(item => {
@@ -561,21 +522,18 @@
                 return;
             }
 
-            // 3. Fizycznie zmuszamy przeglądarkę do pobrania każdego zdjęcia z listy do pamięci
             imagesToLoad.forEach(src => {
                 const img = new Image();
                 img.onload = () => { imagesLoaded++; updateTarget(); };
-                img.onerror = () => { imagesLoaded++; updateTarget(); }; // Ignorujemy błędy
+                img.onerror = () => { imagesLoaded++; updateTarget(); };
                 img.src = src; 
             });
         }, 0);
 
-        // Awaryjne wymuszenie 100% po załadowaniu całej zawartości
         window.addEventListener('load', () => { targetProgress = 100; });
         if (document.readyState === 'complete') { targetProgress = 100; }
 
         function animatePreloader() {
-            // Płynna matematyczna interpolacja (pasek dogania realny wynik bez przeskakiwania)
             currentProgress += (targetProgress - currentProgress) * 0.08; 
             
             if (currentProgress > 99.5) currentProgress = 100;
@@ -589,15 +547,14 @@
                 
                 setTimeout(() => {
                     preloader.classList.add('hidden');
-                    lenis.start(); // ODBLOKOWANIE SCROLLA PO ZAŁADOWANIU
+                    lenis.start();
                 }, timeToWait);
-                return; // Koniec animacji
+                return;
             }
             requestAnimationFrame(animatePreloader);
         }
         requestAnimationFrame(animatePreloader);
 
-        // ================= MENU HAMBURGER =================
         const hamburgerBtn = document.getElementById('hamburger-btn');
         const navLinks = document.getElementById('nav-links');
         const navItems = navLinks.querySelectorAll('a');
@@ -614,7 +571,6 @@
             });
         });
 
-        // ================= DANE: ZABIEGI =================
         const treatments = [
             {
                 title: "Rytuał Piękna NASHI (SPA Pielęgnacyjne)",
@@ -667,7 +623,6 @@
             }
         ];
 
-        // ================= DANE: PRODUKTY =================
         const productsCatalog = [
             {
                 id: "classic",
@@ -802,7 +757,6 @@
             }
         ];
 
-        // ================= FUNKCJE GENERUJĄCE HTML =================
         const getFallbackImg = (name) => `onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMzMyMiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZmlsbD0iI2ZmZiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5CcmFrPC90ZXh0Pjwvc3ZnPg=='"`;
 
         function renderTreatments() {
@@ -893,7 +847,6 @@
             }
         });
 
-        // ================= INICJALIZACJA I OBSERVER =================
         document.addEventListener('DOMContentLoaded', () => {
             renderTreatments();
             renderProductLines();
