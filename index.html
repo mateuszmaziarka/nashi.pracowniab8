@@ -157,6 +157,10 @@
         @media (max-width: 600px) { 
             .hero-buttons { flex-direction: column; gap: 12px; } 
             .hero-buttons .btn { font-size: 1rem; white-space: normal; padding: 14px 20px; }
+            .hero-buttons .voucher-btn { order: -1; background: none; border: none; padding: 0; margin-bottom: 8px; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; justify-content: flex-start; }
+            .hero-buttons .voucher-btn:hover { background: none; }
+            .voucher-link-mobile { color: var(--accent-gold); font-size: 1.1rem; font-weight: 400; border-bottom: 1px solid transparent; transition: all 0.3s ease; }
+            .hero-buttons .voucher-btn:hover .voucher-link-mobile { border-bottom-color: var(--accent-gold); opacity: 0.8; }
         }
 
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
@@ -386,7 +390,10 @@
                         <span class="btn-text-desktop">Zamów produkty - zadzwoń 888 520 223</span>
                         <span class="btn-text-mobile">Zamów produkty</span>
                     </a>
-                    <a href="https://pracowniab8.pl/#voucher" class="btn btn-secondary">Kup Voucher na usługi i produkty</a>
+                    <a href="https://pracowniab8.pl/#voucher" class="btn btn-secondary voucher-btn">
+                        <span class="btn-text-desktop">Kup Voucher na usługi i produkty</span>
+                        <span class="btn-text-mobile voucher-link-mobile">Kup Voucher na usługi i produkty &rarr;</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -409,7 +416,7 @@
     <section id="produkty" class="section-padding">
         <div class="container">
             <h2 class="fade-up">Kosmetyki do pielęgnacji domowej</h2>
-            <p class="fade-up" style="text-align: center; margin-top: -20px; margin-bottom: 50px;">Kliknij linię produktów, aby sprawdzić detale. Aby zakupić produkt, zadzwoń: <a href="tel:+48888520223" class="phone-link">888 520 223</a>.</p>
+            <p class="fade-up" style="text-align: center; margin-top: -20px; margin-bottom: 50px;">Aby zakupić produkt, zadzwoń: <a href="tel:+48888520223" class="phone-link">888 520 223</a>.</p>
             <div class="products-grid" id="products-lines-container"></div>
         </div>
     </section>
