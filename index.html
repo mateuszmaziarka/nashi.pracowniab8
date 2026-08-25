@@ -148,13 +148,7 @@
         }
         .hero-content { max-width: 800px; text-align: left; }
         .hero-buttons { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 40px; }
-        .voucher-link { display: inline-block; margin-top: 20px; color: var(--accent-gold); text-decoration: none; font-weight: 400; font-size: 1.1rem; border-bottom: 1px solid transparent; transition: all 0.3s ease; }
-        .voucher-link:hover { border-bottom-color: var(--accent-gold); opacity: 0.8; }
-        @media (max-width: 600px) { 
-            .hero-buttons { flex-direction: column; gap: 12px; } 
-            .btn { padding: 14px 24px; font-size: 1rem; }
-            .voucher-link { font-size: 1rem; }
-        }
+        @media (max-width: 600px) { .hero-buttons { flex-direction: column; } }
 
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
         .about-img { width: 100%; height: 500px; object-fit: cover; border-radius: 30px; border: 1px solid var(--glass-border); }
@@ -383,8 +377,8 @@
                         <span class="btn-text-desktop">Zamów produkty - zadzwoń 888 520 223</span>
                         <span class="btn-text-mobile">Zamów produkty</span>
                     </a>
+                    <a href="https://pracowniab8.pl/#voucher" class="btn btn-secondary">Kup Voucher na usługi i produkty</a>
                 </div>
-                <a href="https://pracowniab8.pl/#voucher" class="voucher-link">Kup Voucher na usługi i produkty &rarr;</a>
             </div>
         </div>
     </section>
