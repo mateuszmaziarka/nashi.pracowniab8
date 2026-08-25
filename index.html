@@ -147,21 +147,8 @@
             -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
         }
         .hero-content { max-width: 800px; text-align: left; }
-        .hero-buttons { display: flex; flex-wrap: nowrap; gap: 15px; margin-top: 40px; width: max-content; max-width: 100%; }
-        .hero-buttons .btn { padding: 14px 22px; font-size: 1.05rem; white-space: nowrap; }
-        
-        @media (max-width: 1100px) { 
-            .hero-buttons { flex-wrap: wrap; width: 100%; }
-        }
-        
-        @media (max-width: 600px) { 
-            .hero-buttons { flex-direction: column; gap: 12px; } 
-            .hero-buttons .btn { font-size: 1rem; white-space: normal; padding: 14px 20px; }
-            .hero-buttons .voucher-btn { order: -1; background: none; border: none; padding: 0; margin-bottom: 8px; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; justify-content: flex-start; }
-            .hero-buttons .voucher-btn:hover { background: none; }
-            .voucher-link-mobile { color: var(--accent-gold); font-size: 1.1rem; font-weight: 400; border-bottom: 1px solid transparent; transition: all 0.3s ease; }
-            .hero-buttons .voucher-btn:hover .voucher-link-mobile { border-bottom-color: var(--accent-gold); opacity: 0.8; }
-        }
+        .hero-buttons { display: flex; gap: 15px; margin-top: 40px; }
+        @media (max-width: 600px) { .hero-buttons { flex-direction: column; } }
 
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
         .about-img { width: 100%; height: 500px; object-fit: cover; border-radius: 30px; border: 1px solid var(--glass-border); }
@@ -371,6 +358,7 @@
                 <a onclick="scrollToSection('#o-marce')">O marce</a>
                 <a onclick="scrollToSection('#produkty')">Produkty domowe</a>
                 <a onclick="scrollToSection('#zabiegi')">Zabiegi w salonie</a>
+                <a href="https://pracowniab8.pl/#voucher">Vouchery</a>
                 <a onclick="scrollToSection('#kontakt')">Kontakt</a>
             </div>
         </div>
@@ -385,15 +373,11 @@
                 <p style="font-size: 1.2rem; max-width: 600px; margin-top: 20px;">Odkryj włoską markę premium stworzoną z poszanowaniem natury.</p>
                 
                 <div class="hero-buttons">
-                    <a href="https://booksy.com/pl-pl/268448_fryzjerstwo-pracowniab8_fryzjer_10729_rzeszow" target="_blank" class="btn btn-primary">Umów wizytę w salonie</a>
-                    <a onclick="scrollToSection('#produkty')" class="btn btn-secondary">
+                    <a href="tel:+48888520223" onclick="if(window.innerWidth > 600) { scrollToSection('#produkty'); return false; }" class="btn btn-primary">
                         <span class="btn-text-desktop">Zamów produkty - zadzwoń 888 520 223</span>
-                        <span class="btn-text-mobile">Zamów produkty</span>
+                        <span class="btn-text-mobile">Zamów produkty - zadzwoń</span>
                     </a>
-                    <a href="https://pracowniab8.pl/#voucher" class="btn btn-secondary voucher-btn">
-                        <span class="btn-text-desktop">Kup Voucher na usługi i produkty</span>
-                        <span class="btn-text-mobile voucher-link-mobile">Kup Voucher na usługi i produkty &rarr;</span>
-                    </a>
+                    <a href="https://pracowniab8.pl/#voucher" class="btn btn-secondary">Kup Voucher na usługi i produkty</a>
                 </div>
             </div>
         </div>
