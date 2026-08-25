@@ -147,13 +147,16 @@
             -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
         }
         .hero-content { max-width: 800px; text-align: left; }
-        .hero-buttons { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 40px; }
-        .voucher-link { display: inline-block; margin-top: 20px; color: var(--accent-gold); text-decoration: none; font-weight: 400; font-size: 1.1rem; border-bottom: 1px solid transparent; transition: all 0.3s ease; }
-        .voucher-link:hover { border-bottom-color: var(--accent-gold); opacity: 0.8; }
+        .hero-buttons { display: flex; flex-wrap: nowrap; gap: 15px; margin-top: 40px; width: max-content; max-width: 100%; }
+        .hero-buttons .btn { padding: 14px 22px; font-size: 1.05rem; white-space: nowrap; }
+        
+        @media (max-width: 1100px) { 
+            .hero-buttons { flex-wrap: wrap; width: 100%; }
+        }
+        
         @media (max-width: 600px) { 
             .hero-buttons { flex-direction: column; gap: 12px; } 
-            .btn { padding: 14px 24px; font-size: 1rem; }
-            .voucher-link { font-size: 1rem; }
+            .hero-buttons .btn { font-size: 1rem; white-space: normal; padding: 14px 20px; }
         }
 
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
