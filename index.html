@@ -105,13 +105,14 @@
             -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border);
         }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo { display: flex; align-items: center; text-decoration: none; cursor: pointer; }
+        .logo { display: flex; align-items: center; text-decoration: none; cursor: pointer; min-height: 58px; }
         
         .logo .bebas-text { font-size: 2.2rem; color: #fff; line-height: 1; margin-top: 4px; }
         .logo span.separator { font-weight: 300; font-size: 1.5rem; color: #fff; margin: 0 12px; }
         .logo img { height: 46px; object-fit: contain; }
         
         @media (max-width: 768px) {
+            .logo { min-height: 52px; }
             .logo .bebas-text { font-size: 2.0rem; }
             .logo span.separator { font-size: 1.35rem; margin: 0 10px; }
             .logo img { height: 40px; }
@@ -299,7 +300,7 @@
         
         .preloader-content { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: -40px; }
         .preloader-logo { height: 100px; object-fit: contain; margin: 0; }
-        .preloader-line { width: 60px; height: 2px; background: var(--accent-gold); margin: 15px 0 35px 0; border-radius: 2px; }
+        .preloader-line { width: 60px; height: 2px; background: var(--accent-gold); margin: 25px 0 25px 0; border-radius: 2px; }
         .preloader-text { font-size: 3.5rem; color: #fff; letter-spacing: 2px; line-height: 1; margin: 0; }
         
         .preloader-bottom { position: absolute; bottom: 12%; width: 100%; max-width: 300px; text-align: center; }
